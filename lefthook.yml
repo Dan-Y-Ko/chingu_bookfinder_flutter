@@ -3,11 +3,11 @@ pre-push:
   commands:
     tests:
       run: flutter test
-    linter:
-      run: flutter analyze
 
 pre-commit:
   commands:
     pretty:
       glob: "*.dart"
       run: flutter format {staged_files} && git add {staged_files}
+    linter:
+      run: flutter analyze
