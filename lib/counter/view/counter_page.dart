@@ -5,8 +5,6 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-// ignore_for_file: avoid_dynamic_calls
-
 import 'dart:convert';
 
 import 'package:chingu_bookfinder_flutter/counter/counter.dart';
@@ -30,6 +28,40 @@ class CounterPage extends StatelessWidget {
 class CounterView extends StatelessWidget {
   const CounterView({Key? key}) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Counter')),
+      body: const Center(child: CounterText()),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {},
+            child: const Icon(Icons.add),
+          ),
+          const SizedBox(height: 8),
+          FloatingActionButton(
+            onPressed: () => context.read<CounterCubit>().decrement(),
+            child: const Icon(Icons.remove),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CounterText extends StatefulWidget {
+  const CounterText({Key? key}) : super(key: key);
+
+  @override
+  State<CounterText> createState() => _CounterTextState();
+}
+
+class _CounterTextState extends State<CounterText> {
+  late Future<List<Book>> books;
+
   Future<List<Book>> getBooks() async {
     final url = Uri.parse(
       'https://www.googleapis.com/books/v1/volumes?q=harrypotter',
@@ -49,42 +81,32 @@ class CounterView extends StatelessWidget {
         )
         .toList();
 
-    print(books);
-
     return books;
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Counter')),
-      body: const Center(child: CounterText()),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: getBooks,
-            child: const Icon(Icons.add),
-          ),
-          const SizedBox(height: 8),
-          FloatingActionButton(
-            onPressed: () => context.read<CounterCubit>().decrement(),
-            child: const Icon(Icons.remove),
-          ),
-        ],
-      ),
-    );
-  }
-}
+  void initState() {
+    super.initState();
 
-class CounterText extends StatelessWidget {
-  const CounterText({Key? key}) : super(key: key);
+    books = getBooks();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final count = context.select((CounterCubit cubit) => cubit.state);
-    return Text('$count', style: theme.textTheme.headline1);
+    return FutureBuilder<List<Book>>(
+      future: books,
+      builder: (BuildContext context, AsyncSnapshot<List<Book>> snapshot) {
+        if (snapshot.hasData) {
+          return ListView.builder(
+            itemCount: snapshot.data!.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Text('${snapshot.data![index].volumeInfo!.title}');
+            },
+          );
+        }
+
+        return const Center(child: CircularProgressIndicator());
+      },
+    );
   }
 }
