@@ -8,11 +8,9 @@
 // ignore_for_file: avoid_dynamic_calls
 
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:chingu_bookfinder_flutter/counter/counter.dart';
 import 'package:chingu_bookfinder_flutter/counter/models/book.dart';
-import 'package:chingu_bookfinder_flutter/counter/models/post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
@@ -55,26 +53,6 @@ class CounterView extends StatelessWidget {
 
     return books;
   }
-
-  // Future<List<Post>> getPosts() async {
-  //   final url = Uri.parse(
-  //     'https://my-json-server.typicode.com/typicode/demo/posts',
-  //   );
-
-  //   final response = await http.get(url);
-
-  //   final responseJson = jsonDecode(response.body) as List;
-
-  //   final postsList = responseJson
-  //       .map<Post>(
-  //         (post) => Post.fromJson(post as Map<String, dynamic>),
-  //       )
-  //       .toList();
-
-  //   print(postsList);
-
-  //   return postsList;
-  // }
 
   @override
   Widget build(BuildContext context) {
