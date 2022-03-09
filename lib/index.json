@@ -1,0 +1,73 @@
+[
+    {
+"kind": "books#volume",
+"id": "lMM4jgEACAAJ",
+"etag": "QX6Dg0aBp3c",
+"selfLink": "https://www.googleapis.com/books/v1/volumes/lMM4jgEACAAJ",
+"volumeInfo": {
+"title": "Harry Potter Coloring Book",
+"authors": [
+"Inc. Scholastic"
+],
+"publisher": "Scholastic Incorporated",
+"publishedDate": "2015-11-10",
+"description": "Packed with stunning pieces of artwork from the Warner Bros. archive, this deluxe coloring book gives fans the chance to color in the vivid settings and beloved characters of J.K. Rowling's wizarding world. Containing intricate line drawings used in the making of the Harry Potter films, this coloring book includes fan-favorite scenes, creatures, and characters: from Dobby and baby Norbert to Quidditch games and the unforgettable final battle between Harry and Lord Voldemort. Unique and interactive, Harry Potter: The Official Coloring Book is a perfect collector's item for all fans of the blockbuster saga--whether it's for those who grew up with Harry, Ron, and Hermione, or those who are discovering the magic for the very first time.",
+"industryIdentifiers": [
+{
+"type": "ISBN_10",
+"identifier": "1338029991"
+},
+{
+"type": "ISBN_13",
+"identifier": "9781338029994"
+}
+],
+"readingModes": {
+"text": false,
+"image": false
+},
+"pageCount": 96,
+"printType": "BOOK",
+"categories": [
+"Juvenile Fiction"
+],
+"averageRating": 3,
+"ratingsCount": 2,
+"maturityRating": "NOT_MATURE",
+"allowAnonLogging": false,
+"contentVersion": "preview-1.0.0",
+"imageLinks": {
+"smallThumbnail": "http://books.google.com/books/content?id=lMM4jgEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+"thumbnail": "http://books.google.com/books/content?id=lMM4jgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+},
+"language": "en",
+"previewLink": "http://books.google.com/books?id=lMM4jgEACAAJ&dq=harry+potter&hl=&cd=1&source=gbs_api",
+"infoLink": "http://books.google.com/books?id=lMM4jgEACAAJ&dq=harry+potter&hl=&source=gbs_api",
+"canonicalVolumeLink": "https://books.google.com/books/about/Harry_Potter_Coloring_Book.html?hl=&id=lMM4jgEACAAJ"
+},
+"saleInfo": {
+"country": "US",
+"saleability": "NOT_FOR_SALE",
+"isEbook": false
+},
+"accessInfo": {
+"country": "US",
+"viewability": "NO_PAGES",
+"embeddable": false,
+"publicDomain": false,
+"textToSpeechPermission": "ALLOWED",
+"epub": {
+"isAvailable": false
+},
+"pdf": {
+"isAvailable": false
+},
+"webReaderLink": "http://play.google.com/books/reader?id=lMM4jgEACAAJ&hl=&printsec=frontcover&source=gbs_api",
+"accessViewStatus": "NONE",
+"quoteSharingAllowed": false
+},
+"searchInfo": {
+"textSnippet": "Filled with intricate illustrations and elaborate designs used in the making of the Harry Potter films, this book invites you to imbue the wizarding world with color in your own explorations of Hogwarts Castle, the Forbidden Forest, and ..."
+}
+}
+]

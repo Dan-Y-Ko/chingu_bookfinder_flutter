@@ -5,10 +5,17 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+// ignore_for_file: avoid_dynamic_calls
+
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:chingu_bookfinder_flutter/counter/counter.dart';
-import 'package:chingu_bookfinder_flutter/l10n/l10n.dart';
+import 'package:chingu_bookfinder_flutter/counter/models/book.dart';
+import 'package:chingu_bookfinder_flutter/counter/models/post.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
 
 class CounterPage extends StatelessWidget {
   const CounterPage({Key? key}) : super(key: key);
@@ -25,18 +32,61 @@ class CounterPage extends StatelessWidget {
 class CounterView extends StatelessWidget {
   const CounterView({Key? key}) : super(key: key);
 
+  Future<List<Book>> getBooks() async {
+    final url = Uri.parse(
+      'https://www.googleapis.com/books/v1/volumes?q=harrypotter',
+    );
+
+    final response = await http.get(
+      url,
+    );
+
+    final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
+
+    final booksList = responseJson['items'] as List;
+
+    final books = booksList
+        .map<Book>(
+          (book) => Book.fromJson(book as Map<String, dynamic>),
+        )
+        .toList();
+
+    print(books);
+
+    return books;
+  }
+
+  // Future<List<Post>> getPosts() async {
+  //   final url = Uri.parse(
+  //     'https://my-json-server.typicode.com/typicode/demo/posts',
+  //   );
+
+  //   final response = await http.get(url);
+
+  //   final responseJson = jsonDecode(response.body) as List;
+
+  //   final postsList = responseJson
+  //       .map<Post>(
+  //         (post) => Post.fromJson(post as Map<String, dynamic>),
+  //       )
+  //       .toList();
+
+  //   print(postsList);
+
+  //   return postsList;
+  // }
+
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.counterAppBarTitle)),
+      appBar: AppBar(title: const Text('Counter')),
       body: const Center(child: CounterText()),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           FloatingActionButton(
-            onPressed: () => context.read<CounterCubit>().increment(),
+            onPressed: getBooks,
             child: const Icon(Icons.add),
           ),
           const SizedBox(height: 8),
