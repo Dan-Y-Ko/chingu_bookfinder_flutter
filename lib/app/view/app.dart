@@ -5,8 +5,9 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-import 'package:chingu_bookfinder_flutter/counter/counter.dart';
+import 'package:chingu_bookfinder_flutter/book/view/book_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class App extends StatelessWidget {
@@ -15,6 +16,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
         colorScheme: ColorScheme.fromSwatch(
@@ -24,7 +26,7 @@ class App extends StatelessWidget {
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
       ],
-      home: const CounterPage(),
+      home: const BookPage(),
     );
   }
 }
