@@ -53,6 +53,7 @@ class _BookPageState extends State<BookPage> {
       backgroundColor: Colors.blueGrey[50],
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FutureBuilder<List<Book>>(
               future: books,
