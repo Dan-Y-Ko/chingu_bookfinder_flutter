@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:chingu_bookfinder_flutter/counter/models/book.dart';
+import 'package:chingu_bookfinder_flutter/counter/models/book_volume.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -13,6 +15,7 @@ class BookPage extends StatefulWidget {
 
 class _BookPageState extends State<BookPage> {
   late Future<List<Book>> books;
+  late Future<BookVolume> bookVolume;
 
   Future<List<Book>> getBooks() async {
     final url = Uri.parse(
@@ -36,11 +39,26 @@ class _BookPageState extends State<BookPage> {
     return books;
   }
 
+  Future<BookVolume> getBook() async {
+    final url = Uri.parse(
+      'https://www.googleapis.com/books/v1/volumes/lMM4jgEACAAJ',
+    );
+
+    final response = await http.get(
+      url,
+    );
+
+    final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
+
+    return BookVolume.fromJson(responseJson);
+  }
+
   @override
   void initState() {
     super.initState();
 
     books = getBooks();
+    bookVolume = getBook();
   }
 
   @override
@@ -55,6 +73,17 @@ class _BookPageState extends State<BookPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            FutureBuilder(
+              future: bookVolume,
+              builder:
+                  (BuildContext context, AsyncSnapshot<BookVolume> snapshot) {
+                if (snapshot.hasData) {
+                  return Text(snapshot.data!.volumeInfo!.title!);
+                }
+
+                return CircularProgressIndicator();
+              },
+            ),
             FutureBuilder<List<Book>>(
               future: books,
               builder:
