@@ -17,9 +17,17 @@ class _BookPageState extends State<BookPage> {
   late Future<List<Book>> books;
   late Future<BookVolume> bookVolume;
 
+  static const baseUrl = 'www.googleapis.com';
+
   Future<List<Book>> getBooks() async {
-    final url = Uri.parse(
-      'https://www.googleapis.com/books/v1/volumes?q=harrypotter',
+    // final url = Uri.parse(
+    //   'https://www.googleapis.com/books/v1/volumes?q=harrypotter',
+    // );
+
+    final url = Uri.https(
+      baseUrl,
+      '/books/v1/volumes',
+      <String, String>{'q': 'harrypotter'},
     );
 
     final response = await http.get(
