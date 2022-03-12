@@ -30,6 +30,10 @@ class _BookPageState extends State<BookPage> {
       url,
     );
 
+    // if (response.statusCode != 200) {
+    //   throw BookSearchRequestFailure();
+    // }
+
     final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
 
     final booksList = responseJson['items'] as List;

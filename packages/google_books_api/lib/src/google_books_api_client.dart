@@ -60,14 +60,14 @@ class GoogleBooksApiClient {
       url,
     );
 
-    if (response.statusCode != 200) {
+    if (response.statusCode == 404) {
+      throw BookVolumeNotFoundFailure();
+    }
+
+    if (response.statusCode != 200 && response.statusCode != 404) {
       throw BookVolumeRequestFailure();
     }
     final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
-
-    if (responseJson.isEmpty) {
-      throw BookVolumeNotFoundFailure();
-    }
 
     return BookVolume.fromJson(responseJson);
   }

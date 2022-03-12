@@ -224,5 +224,27 @@ void main() {
     });
   });
 
-  group('getBook', () {});
+  group('getBook', () {
+    const volume = 'kLAoswEACAAJ';
+
+    test('http request is called', () async {
+      final mockResponse = MockResponse();
+
+      when(() => mockResponse.statusCode).thenReturn(200);
+      when(() => mockResponse.body).thenReturn('{}');
+      when(() => httpClient.get(any())).thenAnswer((_) async => mockResponse);
+      try {
+        await googleBooksApiClient.getBook(volume);
+      } catch (_) {}
+
+      verify(
+        () => httpClient.get(
+          Uri.https(
+            'www.googleapis.com',
+            '/books/v1/volumes/$volume',
+          ),
+        ),
+      ).called(1);
+    });
+  });
 }
