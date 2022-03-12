@@ -138,12 +138,21 @@ void main() {
         }
       }
     ];
+
     final books = data
         .map<Book>(
           (dynamic book) => Book.fromJson(book as Map<String, dynamic>),
         )
         .toList();
 
+    expect(
+      books[0],
+      isA<Book>(),
+    );
+    expect(
+      books[1],
+      isA<Book>(),
+    );
     expect(books.length, greaterThan(0));
   });
 }
