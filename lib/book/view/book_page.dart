@@ -20,10 +20,6 @@ class _BookPageState extends State<BookPage> {
   static const _baseUrl = 'www.googleapis.com';
 
   Future<List<Book>> getBooks(String query) async {
-    // final url = Uri.parse(
-    //   'https://www.googleapis.com/books/v1/volumes?q=harrypotter',
-    // );
-
     final url = Uri.https(
       _baseUrl,
       '/books/v1/volumes',

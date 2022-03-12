@@ -145,14 +145,7 @@ void main() {
         )
         .toList();
 
+    expect(books, isA<List<Book>>());
     expect(books.length, greaterThan(0));
-    expect(
-      books[0],
-      isA<Book>(),
-    );
-    expect(
-      books[1],
-      isA<Book>(),
-    );
   });
 }
