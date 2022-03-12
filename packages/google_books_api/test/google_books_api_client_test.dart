@@ -246,5 +246,19 @@ void main() {
         ),
       ).called(1);
     });
+
+    test('throws BookVolumeRequestFailure on 500 response', () async {
+      final mockResponse = MockResponse();
+
+      when(() => mockResponse.statusCode).thenReturn(500);
+      when(() => httpClient.get(any())).thenAnswer((_) async => mockResponse);
+
+      expect(
+        () async => await googleBooksApiClient.getBook(volume),
+        throwsA(
+          isA<BookVolumeRequestFailure>(),
+        ),
+      );
+    });
   });
 }

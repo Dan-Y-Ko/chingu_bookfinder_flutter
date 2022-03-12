@@ -64,7 +64,7 @@ class GoogleBooksApiClient {
       throw BookVolumeNotFoundFailure();
     }
 
-    if (response.statusCode != 200 && response.statusCode != 404) {
+    if (response.statusCode == 500) {
       throw BookVolumeRequestFailure();
     }
     final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
