@@ -34,13 +34,15 @@ void main() {
     const query = 'mock-query';
 
     test('http request is called', () async {
-      final response = MockResponse();
-      when(() => response.statusCode).thenReturn(200);
-      when(() => response.body).thenReturn('[]');
-      when(() => httpClient.get(any())).thenAnswer((_) async => response);
+      final mockResponse = MockResponse();
+
+      when(() => mockResponse.statusCode).thenReturn(200);
+      when(() => mockResponse.body).thenReturn('[]');
+      when(() => httpClient.get(any())).thenAnswer((_) async => mockResponse);
       try {
         await googleBooksApiClient.getBooks(query);
       } catch (_) {}
+
       verify(
         () => httpClient.get(
           Uri.https(
@@ -54,6 +56,7 @@ void main() {
 
     test('returns books on valid response', () async {
       final mockResponse = MockResponse();
+
       when(() => mockResponse.statusCode).thenReturn(200);
       when(() => mockResponse.body).thenReturn(
         '''{
@@ -194,8 +197,8 @@ void main() {
       }''',
       );
       when(() => httpClient.get(any())).thenAnswer((_) async => mockResponse);
-
       final response = await googleBooksApiClient.getBooks(query);
+
       expect(
         response,
         isA<List<Book>>(),
@@ -205,5 +208,21 @@ void main() {
         greaterThan(0),
       );
     });
+
+    test('throws BookSearchRequestFailure on non-200 response', () async {
+      final mockResponse = MockResponse();
+
+      when(() => mockResponse.statusCode).thenReturn(400);
+      when(() => httpClient.get(any())).thenAnswer((_) async => mockResponse);
+
+      expect(
+        () async => await googleBooksApiClient.getBooks(query),
+        throwsA(
+          isA<BookSearchRequestFailure>(),
+        ),
+      );
+    });
   });
+
+  group('getBook', () {});
 }

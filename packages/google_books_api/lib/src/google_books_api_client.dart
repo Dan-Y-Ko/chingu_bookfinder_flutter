@@ -41,10 +41,6 @@ class GoogleBooksApiClient {
 
     final booksList = responseJson['items'] as List;
 
-    if (booksList.isEmpty) {
-      throw BookNotFoundFailure();
-    }
-
     final books = booksList
         .map<Book>(
           (dynamic book) => Book.fromJson(book as Map<String, dynamic>),
