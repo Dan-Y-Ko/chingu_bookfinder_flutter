@@ -20,7 +20,7 @@ class GoogleBooksApiClient {
   }) : _httpClient = httpClient ?? http.Client();
 
   final http.Client _httpClient;
-  static const _baseUrl = 'https://www.googleapis.com';
+  static const _baseUrl = 'www.googleapis.com';
 
   Future<List<Book>> getBooks(String query) async {
     final url = Uri.https(

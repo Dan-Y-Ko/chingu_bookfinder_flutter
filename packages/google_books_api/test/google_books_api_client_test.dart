@@ -29,4 +29,27 @@ void main() {
       expect(GoogleBooksApiClient(), isNotNull);
     });
   });
+
+  group('getBooks', () {
+    const query = 'mock-query';
+
+    test('makes correct http request', () async {
+      final response = MockResponse();
+      when(() => response.statusCode).thenReturn(200);
+      when(() => response.body).thenReturn('[]');
+      when(() => httpClient.get(any())).thenAnswer((_) async => response);
+      try {
+        await googleBooksApiClient.getBooks(query);
+      } catch (_) {}
+      verify(
+        () => httpClient.get(
+          Uri.https(
+            'www.googleapis.com',
+            '/books/v1/volumes',
+            <String, String>{'q': query},
+          ),
+        ),
+      ).called(1);
+    });
+  });
 }
