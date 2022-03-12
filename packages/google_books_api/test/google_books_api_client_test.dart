@@ -260,5 +260,20 @@ void main() {
         ),
       );
     });
+
+    test('throws BookVolumeNotFoundFailure when volume not found', () async {
+      final mockResponse = MockResponse();
+
+      when(() => mockResponse.statusCode).thenReturn(404);
+      when(() => mockResponse.body).thenReturn('{}');
+      when(() => httpClient.get(any())).thenAnswer((_) async => mockResponse);
+
+      expect(
+        () async => await googleBooksApiClient.getBook(volume),
+        throwsA(
+          isA<BookVolumeNotFoundFailure>(),
+        ),
+      );
+    });
   });
 }
