@@ -7,6 +7,12 @@ import 'package:http/http.dart' as http;
 import './custom_api_exception.dart';
 
 class BaseApi {
+  BaseApi({
+    http.Client? httpClient,
+  }) : _httpClient = httpClient ?? http.Client();
+
+  final http.Client _httpClient;
+
   Future<dynamic> get(
     String baseUrl,
     String url,
@@ -18,10 +24,10 @@ class BaseApi {
       final fullUrl = Uri.https(
         baseUrl,
         '$url',
-        <String, String>{'query': '$query'},
+        query,
       );
 
-      final response = await http.get(fullUrl);
+      final response = await _httpClient.get(fullUrl);
 
       responseJson = _returnResponse(response);
     } on SocketException {

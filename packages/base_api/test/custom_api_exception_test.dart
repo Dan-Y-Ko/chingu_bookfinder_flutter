@@ -1,4 +1,4 @@
-import 'package:base_api/src/custom_api_exception.dart';
+import 'package:base_api/base_api.dart';
 import 'package:test/test.dart';
 
 void main() {

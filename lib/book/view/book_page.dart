@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:base_api/base_api.dart';
 import 'package:chingu_bookfinder_flutter/counter/models/book.dart';
 import 'package:chingu_bookfinder_flutter/counter/models/book_volume.dart';
 import 'package:flutter/material.dart';
@@ -16,35 +17,54 @@ class BookPage extends StatefulWidget {
 class _BookPageState extends State<BookPage> {
   late Future<List<Book>> books;
   late Future<BookVolume> bookVolume;
+  late BaseApi baseApi;
 
   static const _baseUrl = 'www.googleapis.com';
 
   Future<List<Book>> getBooks(String query) async {
-    final url = Uri.https(
-      _baseUrl,
-      '/books/v1/volumes',
-      <String, String>{'q': query},
-    );
+    // final url = Uri.https(
+    //   _baseUrl,
+    //   '/books/v1/volumes',
+    //   <String, String>{'q': query},
+    // );
 
-    final response = await http.get(
-      url,
-    );
+    // final response = await http.get(
+    //   url,
+    // );
 
-    // if (response.statusCode != 200) {
-    //   throw BookSearchRequestFailure();
-    // }
+    try {
+      final responseJson = await baseApi
+              .get('www.googleapis.com', '/books/v1/volumes', {'q': query})
+          as Map<String, dynamic>;
 
-    final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
+      final booksList = responseJson['items'] as List;
 
-    final booksList = responseJson['items'] as List;
+      final books = booksList
+          .map<Book>(
+            (dynamic book) => Book.fromJson(book as Map<String, dynamic>),
+          )
+          .toList();
 
-    final books = booksList
-        .map<Book>(
-          (dynamic book) => Book.fromJson(book as Map<String, dynamic>),
-        )
-        .toList();
+      return books;
+    } catch (e) {
+      print(e);
+      throw Exception(e);
+    }
 
-    return books;
+    // final dynamic responseJson = await baseApi
+    //     .get('www.googleapis.com', '/books/v1/volumes', {'q': query});
+
+    // final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
+
+    // final booksList = responseJson['items'] as List;
+
+    // final books = booksList
+    //     .map<Book>(
+    //       (dynamic book) => Book.fromJson(book as Map<String, dynamic>),
+    //     )
+    //     .toList();
+
+    // return books;
   }
 
   Future<BookVolume> getBook() async {
@@ -65,6 +85,7 @@ class _BookPageState extends State<BookPage> {
   void initState() {
     super.initState();
 
+    baseApi = BaseApi();
     books = getBooks('harrypotter');
     bookVolume = getBook();
   }
@@ -89,7 +110,7 @@ class _BookPageState extends State<BookPage> {
                   return Text(snapshot.data!.volumeInfo!.title!);
                 }
 
-                return CircularProgressIndicator();
+                return const SizedBox();
               },
             ),
             FutureBuilder<List<Book>>(
