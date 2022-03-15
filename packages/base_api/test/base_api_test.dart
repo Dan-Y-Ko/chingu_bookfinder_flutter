@@ -134,6 +134,23 @@ void main() {
           ),
         );
       });
+
+      test('returns FetchDataException on any other status code', () {
+        final mockResponse = MockResponse();
+
+        when(() => mockResponse.statusCode).thenReturn(500);
+        when(() => mockResponse.body).thenReturn('');
+        when(() => httpClient.get(any())).thenAnswer(
+          (_) async => mockResponse,
+        );
+
+        expect(
+          () async => await baseApi.get(baseUrl, url, query),
+          throwsA(
+            isA<FetchDataException>(),
+          ),
+        );
+      });
     });
   });
 }
