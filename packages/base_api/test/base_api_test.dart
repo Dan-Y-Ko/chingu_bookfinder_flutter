@@ -117,6 +117,23 @@ void main() {
           ),
         );
       });
+
+      test('returns UnauthorizedException on 403 status code', () {
+        final mockResponse = MockResponse();
+
+        when(() => mockResponse.statusCode).thenReturn(403);
+        when(() => mockResponse.body).thenReturn('');
+        when(() => httpClient.get(any())).thenAnswer(
+          (_) async => mockResponse,
+        );
+
+        expect(
+          () async => await baseApi.get(baseUrl, url, query),
+          throwsA(
+            isA<UnauthorizedException>(),
+          ),
+        );
+      });
     });
   });
 }
