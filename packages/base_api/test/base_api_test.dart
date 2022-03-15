@@ -33,31 +33,9 @@ void main() {
     });
 
     group('get request', () {
-      const baseUrl = 'www.googleapis.com';
-      const url = '/books/v1/volumes';
+      const baseUrl = 'www.mockapi.com';
+      const url = '/mock';
       const query = {'q': 'mock-query'};
-
-      test('http request is called', () async {
-        final mockResponse = MockResponse();
-
-        when(() => mockResponse.statusCode).thenReturn(200);
-        when(() => mockResponse.body).thenReturn('[]');
-        when(() => httpClient.get(any())).thenAnswer((_) async => mockResponse);
-
-        try {
-          await baseApi.get(baseUrl, url, query);
-        } catch (_) {}
-
-        verify(
-          () => httpClient.get(
-            Uri.https(
-              'www.googleapis.com',
-              '/books/v1/volumes',
-              query,
-            ),
-          ),
-        ).called(1);
-      });
 
       test('returns properly decoded json', () async {
         final mockResponse = MockResponse();
@@ -80,8 +58,11 @@ void main() {
           (_) async => mockResponse,
         );
 
-        final response =
-            await baseApi.get(baseUrl, url, query) as Map<String, dynamic>;
+        final response = await baseApi.get(
+          baseUrl,
+          url,
+          query,
+        ) as Map<String, dynamic>;
 
         expect(response, isA<Map<String, dynamic>>());
       });
