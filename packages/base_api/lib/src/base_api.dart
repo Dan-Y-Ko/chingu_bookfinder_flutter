@@ -1,4 +1,10 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
+
+import './custom_api_exception.dart';
 
 class BaseApi {
   Future<dynamic> get(
@@ -22,5 +28,22 @@ class BaseApi {
       throw FetchDataException('No Internet connection');
     }
     return responseJson;
+  }
+
+  dynamic _returnResponse(http.Response response) {
+    switch (response.statusCode) {
+      case 200:
+        return jsonDecode(response.body) as Map<String, dynamic>;
+      case 400:
+        throw BadRequestException(response.body.toString());
+      case 401:
+      case 403:
+        throw UnauthorizedException(response.body.toString());
+      case 500:
+      default:
+        throw FetchDataException(
+            '''Error occured while Communication with Server with StatusCode : 
+          ${response.statusCode}''');
+    }
   }
 }
