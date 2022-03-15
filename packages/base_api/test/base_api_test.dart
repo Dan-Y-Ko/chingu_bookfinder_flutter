@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
@@ -83,6 +85,22 @@ void main() {
         expect(response, isA<Map<String, dynamic>>());
       });
 
+      test('returns fetch data exception on socket exception', () async {
+        when(() => httpClient.get(any())).thenThrow(
+          const SocketException(
+            'No Internet connection',
+          ),
+        );
+
+        expect(
+          () => baseApi.get(baseUrl, url, query),
+          throwsA(
+            isA<FetchDataException>(),
+          ),
+        );
+      });
+
+      test('', () {});
       test('', () {});
     });
   });
