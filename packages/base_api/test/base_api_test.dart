@@ -43,14 +43,7 @@ void main() {
         when(() => mockResponse.statusCode).thenReturn(200);
         when(() => mockResponse.body).thenReturn('''
           {
-            "items": [
-              {
-                "test": "test"
-              },
-              {
-                "another test": "another test"
-              }
-            ]
+            "testkey": "testvalue"
           }
           ''');
 
