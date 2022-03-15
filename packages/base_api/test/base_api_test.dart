@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
+
 import 'package:base_api/base_api.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
@@ -85,7 +86,7 @@ void main() {
         expect(response, isA<Map<String, dynamic>>());
       });
 
-      test('returns fetch data exception on socket exception', () async {
+      test('returns fetch data exception on socket exception', () {
         when(() => httpClient.get(any())).thenThrow(
           const SocketException(
             'No Internet connection',
@@ -93,15 +94,29 @@ void main() {
         );
 
         expect(
-          () => baseApi.get(baseUrl, url, query),
+          () async => await baseApi.get(baseUrl, url, query),
           throwsA(
             isA<FetchDataException>(),
           ),
         );
       });
 
-      test('', () {});
-      test('', () {});
+      test('returns BadRequestException on 400 status code', () {
+        final mockResponse = MockResponse();
+
+        when(() => mockResponse.statusCode).thenReturn(400);
+        when(() => mockResponse.body).thenReturn('');
+        when(() => httpClient.get(any())).thenAnswer(
+          (_) async => mockResponse,
+        );
+
+        expect(
+          () async => await baseApi.get(baseUrl, url, query),
+          throwsA(
+            isA<BadRequestException>(),
+          ),
+        );
+      });
     });
   });
 }
