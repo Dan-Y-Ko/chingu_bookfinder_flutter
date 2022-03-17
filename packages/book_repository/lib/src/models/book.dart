@@ -21,7 +21,7 @@ class Book extends Equatable {
   List<Object> get props => [id, volumeInfo];
 
   @override
-  String toString() => toJson().toString();
+  bool get stringify => true;
 }
 
 @JsonSerializable()
@@ -52,7 +52,7 @@ class VolumeInfo extends Equatable {
       [authors, description, imageLinks, publisher, title];
 
   @override
-  String toString() => toJson().toString();
+  bool get stringify => true;
 }
 
 @JsonSerializable()
