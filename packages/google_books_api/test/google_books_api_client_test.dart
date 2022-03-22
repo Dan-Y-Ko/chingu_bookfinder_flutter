@@ -176,12 +176,23 @@ void main() {
         ]
       }''',
       );
-      when(() => baseApi.get(any(), any(), any())).thenAnswer(
+      //     type 'MockResponse' is not a subtype of type 'Map<String, dynamic>' in type cast
+      // package:google_books_api/src/google_books_api_client.dart 22:7  GoogleBooksApiClient.getBooks
+      // when(() => baseApi.get(any(), any(), any())).thenAnswer(
+      //   (_) async => mockResponse,
+      // );
+
+      // type 'Null' is not a subtype of type 'Future<dynamic>'
+      // package:base_api/src/base_api.dart 16:19                         MockBaseApi.get
+      // package:google_books_api/src/google_books_api_client.dart 18:41  GoogleBooksApiClient.getBooks
+      // test/google_books_api_client_test.dart 195:51                    main.<fn>.<fn>
+      // test/google_books_api_client_test.dart 37:45                     main.<fn>.<fn>                    main.<fn>.<fn>
+      when(() => baseApi.get(
+              'www.googleapis.com', '/books/v1/volumes', {'q': 'harrypotter'}))
+          .thenAnswer(
         (_) async => mockResponse,
       );
       final response = await googleBooksApiClient.getBooks('');
-
-      throwOnMissingStub(baseApi);
 
       // expect(
       //   response,

@@ -15,25 +15,21 @@ class GoogleBooksApiClient {
   static const _url = '/books/v1/volumes';
 
   Future<List<Book>> getBooks(String query) async {
-    try {
-      final responseJson = await _baseApi.get(
-        _baseUrl,
-        _url,
-        {'q': query},
-      ) as Map<String, dynamic>;
+    final responseJson = await _baseApi.get(
+      _baseUrl,
+      _url,
+      {'q': query},
+    ) as Map<String, dynamic>;
 
-      final booksList = responseJson['items'] as List;
+    final booksList = responseJson['items'] as List;
 
-      final books = booksList
-          .map<Book>(
-            (dynamic book) => Book.fromJson(book as Map<String, dynamic>),
-          )
-          .toList();
+    final books = booksList
+        .map<Book>(
+          (dynamic book) => Book.fromJson(book as Map<String, dynamic>),
+        )
+        .toList();
 
-      return books;
-    } catch (e) {
-      return Future.error(e);
-    }
+    return books;
   }
 
   Future<BookVolume> getBook(String volume) async {
