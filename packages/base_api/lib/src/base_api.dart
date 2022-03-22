@@ -16,7 +16,7 @@ class BaseApi {
   Future<dynamic> get(
     String baseUrl,
     String url,
-    Map<String, String> query,
+    Map<String, String>? query,
   ) async {
     dynamic responseJson;
 

@@ -3,9 +3,10 @@ import 'dart:developer';
 
 import 'package:base_api/base_api.dart';
 // import 'package:chingu_bookfinder_flutter/counter/models/book.dart';
-import 'package:chingu_bookfinder_flutter/counter/models/book_volume.dart';
+// import 'package:chingu_bookfinder_flutter/counter/models/book_volume.dart';
 import 'package:flutter/material.dart';
 import 'package:google_books_api/google_books_api.dart';
+import 'package:google_books_api/src/models/book_volume.dart';
 import 'package:http/http.dart' as http;
 
 class BookPage extends StatefulWidget {
@@ -26,53 +27,15 @@ class _BookPageState extends State<BookPage> {
 
   Future<List<Book>> getBooks(String query) async {
     try {
-      // final responseJson = await baseApi
-      //         .get('www.googleapis.com', '/books/v1/volumes', {'q': query})
-      //     as Map<String, dynamic>;
-
-      // final booksList = responseJson['items'] as List;
-
-      // final books = booksList
-      //     .map<Book>(
-      //       (dynamic book) => Book.fromJson(book as Map<String, dynamic>),
-      //     )
-      //     .toList();
-
-      // return books;
       return await googleBooksApiClient.getBooks('harrypotter');
     } catch (e) {
       print(e);
       throw Exception(e);
     }
-
-    // final dynamic responseJson = await baseApi
-    //     .get('www.googleapis.com', '/books/v1/volumes', {'q': query});
-
-    // final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
-
-    // final booksList = responseJson['items'] as List;
-
-    // final books = booksList
-    //     .map<Book>(
-    //       (dynamic book) => Book.fromJson(book as Map<String, dynamic>),
-    //     )
-    //     .toList();
-
-    // return books;
   }
 
   Future<BookVolume> getBook() async {
-    final url = Uri.parse(
-      'https://www.googleapis.com/books/v1/volumes/lMM4jgEACAAJ',
-    );
-
-    final response = await http.get(
-      url,
-    );
-
-    final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
-
-    return BookVolume.fromJson(responseJson);
+    return googleBooksApiClient.getBook('lMM4jgEACAAJ');
   }
 
   @override
