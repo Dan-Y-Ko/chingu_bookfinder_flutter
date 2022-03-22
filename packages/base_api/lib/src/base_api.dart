@@ -41,10 +41,10 @@ class BaseApi {
       case 200:
         return jsonDecode(response.body) as Map<String, dynamic>;
       case 400:
-        throw BadRequestException(response.body.toString());
+        throw BadRequestException(response.body);
       case 401:
       case 403:
-        throw UnauthorizedException(response.body.toString());
+        throw UnauthorizedException(response.body);
       case 500:
       default:
         throw FetchDataException(

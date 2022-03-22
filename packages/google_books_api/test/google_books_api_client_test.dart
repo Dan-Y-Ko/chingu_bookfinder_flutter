@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:base_api/base_api.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
@@ -32,8 +35,6 @@ void main() {
   });
 
   group('getBooks', () {
-    // const url = 'www.testurl.com/testurl';
-
     test('returns books on valid response', () async {
       final mockResponse = MockResponse();
 
@@ -177,23 +178,21 @@ void main() {
       }''',
       );
 
-      //     type 'MockResponse' is not a subtype of type 'Map<String, dynamic>' in type cast
-      // package:google_books_api/src/google_books_api_client.dart 22:7  GoogleBooksApiClient.getBooks
       when(() => baseApi.get(
               'www.googleapis.com', '/books/v1/volumes', {'q': 'harrypotter'}))
           .thenAnswer(
-        (_) async => mockResponse,
+        (_) async => jsonDecode(mockResponse.body),
       );
-      final response = await googleBooksApiClient.getBooks('harrypotter');
+      final actual = await googleBooksApiClient.getBooks('harrypotter');
 
-      // expect(
-      //   response,
-      //   isA<List<Book>>(),
-      // );
-      // expect(
-      //   response.length,
-      //   greaterThan(0),
-      // );
+      expect(
+        actual,
+        isA<List<Book>>(),
+      );
+      expect(
+        actual.length,
+        greaterThan(0),
+      );
     });
 
     //   test('throws BookSearchRequestFailure on non-200 response', () async {
