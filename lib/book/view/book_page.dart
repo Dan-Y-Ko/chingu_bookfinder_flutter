@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:base_api/base_api.dart';
-import 'package:chingu_bookfinder_flutter/counter/models/book.dart';
+// import 'package:chingu_bookfinder_flutter/counter/models/book.dart';
 import 'package:chingu_bookfinder_flutter/counter/models/book_volume.dart';
 import 'package:flutter/material.dart';
+import 'package:google_books_api/google_books_api.dart';
 import 'package:http/http.dart' as http;
 
 class BookPage extends StatefulWidget {
@@ -17,35 +18,28 @@ class BookPage extends StatefulWidget {
 class _BookPageState extends State<BookPage> {
   late Future<List<Book>> books;
   late Future<BookVolume> bookVolume;
-  late BaseApi baseApi;
+  late GoogleBooksApiClient googleBooksApiClient;
+
+  BaseApi baseApi = BaseApi();
 
   static const _baseUrl = 'www.googleapis.com';
 
   Future<List<Book>> getBooks(String query) async {
-    // final url = Uri.https(
-    //   _baseUrl,
-    //   '/books/v1/volumes',
-    //   <String, String>{'q': query},
-    // );
-
-    // final response = await http.get(
-    //   url,
-    // );
-
     try {
-      final responseJson = await baseApi
-              .get('www.googleapis.com', '/books/v1/volumes', {'q': query})
-          as Map<String, dynamic>;
+      // final responseJson = await baseApi
+      //         .get('www.googleapis.com', '/books/v1/volumes', {'q': query})
+      //     as Map<String, dynamic>;
 
-      final booksList = responseJson['items'] as List;
+      // final booksList = responseJson['items'] as List;
 
-      final books = booksList
-          .map<Book>(
-            (dynamic book) => Book.fromJson(book as Map<String, dynamic>),
-          )
-          .toList();
+      // final books = booksList
+      //     .map<Book>(
+      //       (dynamic book) => Book.fromJson(book as Map<String, dynamic>),
+      //     )
+      //     .toList();
 
-      return books;
+      // return books;
+      return await googleBooksApiClient.getBooks('harrypotter');
     } catch (e) {
       print(e);
       throw Exception(e);
@@ -85,7 +79,7 @@ class _BookPageState extends State<BookPage> {
   void initState() {
     super.initState();
 
-    baseApi = BaseApi();
+    googleBooksApiClient = GoogleBooksApiClient();
     books = getBooks('harrypotter');
     bookVolume = getBook();
   }

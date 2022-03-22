@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:base_api/base_api.dart';
 import 'package:http/http.dart' as http;
 
 import '../google_books_api.dart';
@@ -22,22 +23,12 @@ class GoogleBooksApiClient {
   final http.Client _httpClient;
   static const _baseUrl = 'www.googleapis.com';
 
+  BaseApi baseApi = BaseApi();
+
   Future<List<Book>> getBooks(String query) async {
-    final url = Uri.https(
-      _baseUrl,
-      '/books/v1/volumes',
-      <String, String>{'q': query},
-    );
-
-    final response = await _httpClient.get(
-      url,
-    );
-
-    if (response.statusCode != 200) {
-      throw BookSearchRequestFailure();
-    }
-
-    final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
+    final responseJson = await baseApi
+            .get('www.googleapis.com', '/books/v1/volumes', {'q': query})
+        as Map<String, dynamic>;
 
     final booksList = responseJson['items'] as List;
 

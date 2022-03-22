@@ -67,19 +67,6 @@ void main() {
       },
     ];
 
-    var testBook = const Book(
-      id: '1',
-      volumeInfo: VolumeInfo(
-        authors: ['test1', 'test2'],
-        description: 'test description',
-        imageLinks: ImageLinks(
-          thumbnail:
-              'http://books.google.com/books/content?id=kLAoswEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api',
-        ),
-        publisher: 'test publisher',
-        title: 'test book',
-      ),
-    );
     test('Given book json data, data is properly parsed into book model', () {
       final books = data
           .map<Book>(
