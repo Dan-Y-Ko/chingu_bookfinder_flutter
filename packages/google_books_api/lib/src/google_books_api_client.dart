@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:base_api/base_api.dart';
-import 'package:http/http.dart' as http;
 
 import '../google_books_api.dart';
 import './models/book_volume.dart';
