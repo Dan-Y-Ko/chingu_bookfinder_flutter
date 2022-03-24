@@ -49,11 +49,15 @@ class GoogleBooksApiClient {
         _baseUrl,
         '$_url/$volume',
         {},
-      ) as Map<String, dynamic>;
+      ) as http.Response;
 
-      return BookVolume.fromJson(response);
-    } catch (e) {
-      return Future.error(e);
+      final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
+
+      return BookVolume.fromJson(responseJson);
+    } on SocketException {
+      rethrow;
+    } on AppException {
+      rethrow;
     }
   }
 }
