@@ -37,7 +37,7 @@ void main() {
       const url = '/mock';
       const query = {'q': 'mock-query'};
 
-      test('returns properly decoded json', () async {
+      test('makes correct http request', () async {
         final mockResponse = MockResponse();
 
         when(() => mockResponse.statusCode).thenReturn(200);
@@ -51,16 +51,18 @@ void main() {
           (_) async => mockResponse,
         );
 
-        final response = await baseApi.get(
-          baseUrl,
-          url,
-          query,
-        ) as Map<String, dynamic>;
+        try {
+          await baseApi.get(baseUrl, url, query);
+        } catch (_) {}
 
-        expect(response, isA<Map<String, dynamic>>());
+        verify(
+          () => httpClient.get(
+            Uri.https(baseUrl, url, query),
+          ),
+        ).called(1);
       });
 
-      test('returns fetch data exception on socket exception', () {
+      test('throws app exception on socket exception', () {
         when(() => httpClient.get(any())).thenThrow(
           const SocketException(
             'No Internet connection',
@@ -70,46 +72,12 @@ void main() {
         expect(
           () async => await baseApi.get(baseUrl, url, query),
           throwsA(
-            isA<FetchDataException>(),
+            isA<AppException>(),
           ),
         );
       });
 
-      test('returns BadRequestException on 400 status code', () {
-        final mockResponse = MockResponse();
-
-        when(() => mockResponse.statusCode).thenReturn(400);
-        when(() => mockResponse.body).thenReturn('');
-        when(() => httpClient.get(any())).thenAnswer(
-          (_) async => mockResponse,
-        );
-
-        expect(
-          () async => await baseApi.get(baseUrl, url, query),
-          throwsA(
-            isA<BadRequestException>(),
-          ),
-        );
-      });
-
-      test('returns UnauthorizedException on 403 status code', () {
-        final mockResponse = MockResponse();
-
-        when(() => mockResponse.statusCode).thenReturn(403);
-        when(() => mockResponse.body).thenReturn('');
-        when(() => httpClient.get(any())).thenAnswer(
-          (_) async => mockResponse,
-        );
-
-        expect(
-          () async => await baseApi.get(baseUrl, url, query),
-          throwsA(
-            isA<UnauthorizedException>(),
-          ),
-        );
-      });
-
-      test('returns FetchDataException on any other status code', () {
+      test('throws app exception on any non-200 status code response', () {
         final mockResponse = MockResponse();
 
         when(() => mockResponse.statusCode).thenReturn(500);
@@ -121,7 +89,7 @@ void main() {
         expect(
           () async => await baseApi.get(baseUrl, url, query),
           throwsA(
-            isA<FetchDataException>(),
+            isA<AppException>(),
           ),
         );
       });

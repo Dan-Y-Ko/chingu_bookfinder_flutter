@@ -31,8 +31,9 @@ class BaseApi {
 
       responseJson = _returnResponse(response);
     } on SocketException {
-      throw FetchDataException('No Internet connection');
+      throw AppException('No Internet connection');
     }
+
     return responseJson;
   }
 
@@ -41,15 +42,17 @@ class BaseApi {
       case 200:
         return response;
       case 400:
-        throw BadRequestException(response.body);
+        throw AppException('Status Code: 400 Bad Request made');
       case 401:
+        throw AppException('Status Code: 401 Unauhtorized');
       case 403:
-        throw UnauthorizedException(response.body);
-      case 500:
+        throw AppException('Status Code: 403 Unauhtorized');
+      case 404:
+        throw AppException('Status Code: 404 Resource not found');
       default:
-        throw FetchDataException(
-            '''Error occured while Communication with Server with StatusCode : 
-          ${response.statusCode}''');
+        throw AppException(
+          'Status Code: ${response.statusCode}. Something went wrong',
+        );
     }
   }
 }
