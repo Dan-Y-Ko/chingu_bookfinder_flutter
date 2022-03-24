@@ -38,7 +38,6 @@ void main() {
     test('returns books on valid response', () async {
       final mockResponse = MockResponse();
 
-      when(() => mockResponse.statusCode).thenReturn(200);
       when(() => mockResponse.body).thenReturn(
         '''{
         "items": [
@@ -181,7 +180,7 @@ void main() {
       when(() => baseApi.get(
               'www.googleapis.com', '/books/v1/volumes', {'q': 'harrypotter'}))
           .thenAnswer(
-        (_) async => jsonDecode(mockResponse.body),
+        (_) async => mockResponse,
       );
       final actual = await googleBooksApiClient.getBooks('harrypotter');
 
@@ -195,23 +194,23 @@ void main() {
       );
     });
 
-    test('throws BadRequestException on 400 response', () async {
-      final mockResponse = MockResponse();
+    // test('throws BadRequestException on 400 response', () async {
+    //   final mockResponse = MockResponse();
 
-      when(() => mockResponse.statusCode).thenReturn(400);
-      when(() => baseApi.get(
-              'www.googleapis.com', '/books/v1/volumes', {'q': 'harrypotter'}))
-          .thenAnswer((_) async => jsonDecode(mockResponse.body));
+    //   when(() => mockResponse.statusCode).thenReturn(400);
+    //   when(() => baseApi.get(
+    //           'www.googleapis.com', '/books/v1/volumes', {'q': 'harrypotter'}))
+    //       .thenAnswer((_) async => jsonDecode(mockResponse.body));
 
-      final response = await googleBooksApiClient.getBooks('');
+    //   final response = await googleBooksApiClient.getBooks('');
 
-      // expect(
-      //   () async => await googleBooksApiClient.getBooks(query),
-      //   throwsA(
-      //     isA<BookSearchRequestFailure>(),
-      //   ),
-      // );
-    });
+    // expect(
+    //   () async => await googleBooksApiClient.getBooks(query),
+    //   throwsA(
+    //     isA<BookSearchRequestFailure>(),
+    //   ),
+    // );
+    // });
     // });
 
     // group('getBook', () {
