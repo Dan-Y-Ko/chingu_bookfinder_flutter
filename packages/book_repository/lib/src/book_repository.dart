@@ -12,17 +12,20 @@ class BookRepository {
   Future<List<Book>> getBooks(String query) async {
     final books = await _googleBooksApiClient.getBooks(query);
 
-    return books
+    final bookList = books
         .map(
           (book) => Book(
             id: book.id!,
-            thumbnail: book.volumeInfo!.imageLinks!.thumbnail!,
-            authors: book.volumeInfo!.authors!,
-            description: book.volumeInfo!.description!,
-            publisher: book.volumeInfo!.publisher!,
-            title: book.volumeInfo!.title!,
+            thumbnail: book.volumeInfo?.imageLinks?.thumbnail ??
+                'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png',
+            authors: book.volumeInfo?.authors ?? [],
+            description: book.volumeInfo?.description ?? '',
+            publisher: book.volumeInfo?.publisher ?? '',
+            title: book.volumeInfo?.title ?? '',
           ),
         )
         .toList();
+
+    return bookList;
   }
 }

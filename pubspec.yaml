@@ -10,6 +10,8 @@ dependencies:
   base_api:
     path: ./packages/base_api
   bloc: ^8.0.3
+  book_repository:
+    path: ./packages/book_repository
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1

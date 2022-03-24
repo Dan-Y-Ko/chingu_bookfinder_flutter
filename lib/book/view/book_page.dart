@@ -1,13 +1,5 @@
-import 'dart:convert';
-import 'dart:developer';
-
-import 'package:base_api/base_api.dart';
-// import 'package:chingu_bookfinder_flutter/counter/models/book.dart';
-// import 'package:chingu_bookfinder_flutter/counter/models/book_volume.dart';
+import 'package:book_repository/book_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:google_books_api/google_books_api.dart';
-import 'package:google_books_api/src/models/book_volume.dart';
-import 'package:http/http.dart' as http;
 
 class BookPage extends StatefulWidget {
   const BookPage({Key? key}) : super(key: key);
@@ -18,33 +10,17 @@ class BookPage extends StatefulWidget {
 
 class _BookPageState extends State<BookPage> {
   late Future<List<Book>> books;
-  late Future<BookVolume> bookVolume;
-  late GoogleBooksApiClient googleBooksApiClient;
-
-  BaseApi baseApi = BaseApi();
-
-  static const _baseUrl = 'www.googleapis.com';
+  late BookRepository bookRepository;
 
   Future<List<Book>> getBooks(String query) async {
-    try {
-      return await googleBooksApiClient.getBooks('harrypotter');
-    } catch (e) {
-      print(e);
-      throw Exception(e);
-    }
-  }
-
-  Future<BookVolume> getBook() async {
-    return googleBooksApiClient.getBook('lMM4jgEACAAJ');
+    return bookRepository.getBooks(query);
   }
 
   @override
   void initState() {
     super.initState();
-
-    googleBooksApiClient = GoogleBooksApiClient();
+    bookRepository = BookRepository();
     books = getBooks('harrypotter');
-    bookVolume = getBook();
   }
 
   @override
@@ -59,17 +35,6 @@ class _BookPageState extends State<BookPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FutureBuilder(
-              future: bookVolume,
-              builder:
-                  (BuildContext context, AsyncSnapshot<BookVolume> snapshot) {
-                if (snapshot.hasData) {
-                  return Text(snapshot.data!.volumeInfo!.title!);
-                }
-
-                return const SizedBox();
-              },
-            ),
             FutureBuilder<List<Book>>(
               future: books,
               builder:
@@ -80,9 +45,9 @@ class _BookPageState extends State<BookPage> {
                     child: ListView.builder(
                       itemCount: snapshot.data!.length,
                       itemBuilder: (BuildContext context, int index) {
-                        final snap = snapshot.data![index].volumeInfo!;
-                        const placeholderImage =
-                            'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png';
+                        final snap = snapshot.data![index];
+
+                        print(books);
 
                         return Padding(
                           padding: const EdgeInsets.all(8),
@@ -94,8 +59,7 @@ class _BookPageState extends State<BookPage> {
                                   SizedBox(
                                     width: 150,
                                     child: Image.network(
-                                      snap.imageLinks?.thumbnail ??
-                                          placeholderImage,
+                                      snap.thumbnail,
                                       fit: BoxFit.fill,
                                     ),
                                   ),
@@ -109,13 +73,13 @@ class _BookPageState extends State<BookPage> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            snap.title ?? 'No Title',
+                                            snap.title,
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                           Text(
-                                            'By: ${snap.authors?[0]}',
+                                            'By: ${snap.authors[0]}',
                                           ),
                                           Text(
                                             'Published by: ${snap.publisher}',

@@ -19,12 +19,9 @@ class Book extends Equatable {
   Map<String, dynamic> toJson() => _$BookToJson(this);
 
   final String id;
-  @JsonKey(defaultValue: '')
   final String thumbnail;
-  @JsonKey(defaultValue: [''])
   final List<String> authors;
   final String description;
-  @JsonKey(defaultValue: '')
   final String publisher;
   final String title;
 
