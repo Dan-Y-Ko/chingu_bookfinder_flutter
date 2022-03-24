@@ -9,9 +9,20 @@ class BookRepository {
 
   final GoogleBooksApiClient _googleBooksApiClient;
 
-  // Future<Book> getBooks(String query) async {
-  //   final books = await _googleBooksApiClient.getBooks(query);
+  Future<List<Book>> getBooks(String query) async {
+    final books = await _googleBooksApiClient.getBooks(query);
 
-  //   books.map((book) => Book())
-  // }
+    return books
+        .map(
+          (book) => Book(
+            id: book.id!,
+            thumbnail: book.volumeInfo!.imageLinks!.thumbnail!,
+            authors: book.volumeInfo!.authors!,
+            description: book.volumeInfo!.description!,
+            publisher: book.volumeInfo!.publisher!,
+            title: book.volumeInfo!.title!,
+          ),
+        )
+        .toList();
+  }
 }
