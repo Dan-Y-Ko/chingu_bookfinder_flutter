@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:http/http.dart' as http;
 import 'package:base_api/base_api.dart';
 
 import '../google_books_api.dart';
@@ -15,21 +17,27 @@ class GoogleBooksApiClient {
   static const _url = '/books/v1/volumes';
 
   Future<List<Book>> getBooks(String query) async {
-    final responseJson = await _baseApi.get(
-      _baseUrl,
-      _url,
-      {'q': query},
-    ) as Map<String, dynamic>;
+    try {
+      final response = await _baseApi.get(
+        _baseUrl,
+        _url,
+        {'q': query},
+      ) as http.Response;
 
-    final booksList = responseJson['items'] as List;
+      final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
 
-    final books = booksList
-        .map<Book>(
-          (dynamic book) => Book.fromJson(book as Map<String, dynamic>),
-        )
-        .toList();
+      final booksList = responseJson['items'] as List;
 
-    return books;
+      final books = booksList
+          .map<Book>(
+            (dynamic book) => Book.fromJson(book as Map<String, dynamic>),
+          )
+          .toList();
+
+      return books;
+    } catch (e) {
+      return Future.error(e);
+    }
   }
 
   Future<BookVolume> getBook(String volume) async {

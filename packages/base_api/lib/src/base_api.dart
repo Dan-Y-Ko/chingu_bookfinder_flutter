@@ -39,7 +39,7 @@ class BaseApi {
   dynamic _returnResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:
-        return jsonDecode(response.body) as Map<String, dynamic>;
+        return response;
       case 400:
         throw BadRequestException(response.body);
       case 401:

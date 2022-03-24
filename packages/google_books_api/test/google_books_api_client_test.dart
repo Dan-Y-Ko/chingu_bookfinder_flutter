@@ -195,19 +195,23 @@ void main() {
       );
     });
 
-    //   test('throws BookSearchRequestFailure on non-200 response', () async {
-    //     final mockResponse = MockResponse();
+    test('throws BadRequestException on 400 response', () async {
+      final mockResponse = MockResponse();
 
-    //     when(() => mockResponse.statusCode).thenReturn(400);
-    //     when(() => httpClient.get(any())).thenAnswer((_) async => mockResponse);
+      when(() => mockResponse.statusCode).thenReturn(400);
+      when(() => baseApi.get(
+              'www.googleapis.com', '/books/v1/volumes', {'q': 'harrypotter'}))
+          .thenAnswer((_) async => jsonDecode(mockResponse.body));
 
-    //     expect(
-    //       () async => await googleBooksApiClient.getBooks(query),
-    //       throwsA(
-    //         isA<BookSearchRequestFailure>(),
-    //       ),
-    //     );
-    //   });
+      final response = await googleBooksApiClient.getBooks('');
+
+      // expect(
+      //   () async => await googleBooksApiClient.getBooks(query),
+      //   throwsA(
+      //     isA<BookSearchRequestFailure>(),
+      //   ),
+      // );
+    });
     // });
 
     // group('getBook', () {
