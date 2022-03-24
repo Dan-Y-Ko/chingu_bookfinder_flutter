@@ -1,6 +1,7 @@
 name: google_books_api
 description: A Dart API Client for the Google Books API.
 version: 1.0.0+1
+publish_to: none
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
