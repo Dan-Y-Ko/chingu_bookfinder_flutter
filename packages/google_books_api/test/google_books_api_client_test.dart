@@ -254,20 +254,19 @@ void main() {
       );
     });
 
-    // test('throws BookVolumeNotFoundFailure when volume not found', () async {
-    //   final mockResponse = MockResponse();
+    test('properly throws socket exception when no internet connection',
+        () async {
+      when(
+        () => baseApi.get(_baseUrl, _url, {}),
+      ).thenThrow(
+        AppException('No Internet connection'),
+      );
 
-    //   when(() => mockResponse.statusCode).thenReturn(404);
-    //   when(() => mockResponse.body).thenReturn('{}');
-    //   when(() => httpClient.get(any())).thenAnswer((_) async => mockResponse);
-
-    //   expect(
-    //     () async => await googleBooksApiClient.getBook(volume),
-    //     throwsA(
-    //       isA<BookVolumeNotFoundFailure>(),
-    //     ),
-    //   );
-    // });
+      expect(
+        () async => await googleBooksApiClient.getBook(_volume),
+        throwsA(isA<AppException>()),
+      );
+    });
 
     // test('returns book on valid response', () async {
     //   final mockResponse = MockResponse();
