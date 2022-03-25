@@ -1,3 +1,4 @@
+import 'package:base_api/base_api.dart' show AppException;
 import 'package:google_books_api/google_books_api.dart' as google_books_api;
 import 'package:test/test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -58,6 +59,19 @@ void main() {
               title: 'Harry Potter and the Cursed Child',
             )
           ],
+        );
+      });
+
+      test('properly throws when there is exception', () {
+        when(() => _googleBooksApiClient.getBooks(any())).thenThrow(
+          AppException('No Internet Connection'),
+        );
+
+        expect(
+          () async => _bookRepository.getBooks(''),
+          throwsA(
+            isA<AppException>(),
+          ),
         );
       });
     });
