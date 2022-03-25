@@ -1,25 +1,28 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'book.g.dart';
+part 'book_detail.g.dart';
 
 @JsonSerializable()
-class Book extends Equatable {
-  const Book({
+class BookDetail extends Equatable {
+  const BookDetail({
     required this.id,
     required this.thumbnail,
     required this.authors,
+    required this.description,
     required this.publisher,
     required this.title,
   });
 
-  factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);
+  factory BookDetail.fromJson(Map<String, dynamic> json) =>
+      _$BookDetailFromJson(json);
 
-  Map<String, dynamic> toJson() => _$BookToJson(this);
+  Map<String, dynamic> toJson() => _$BookDetailToJson(this);
 
   final String id;
   final String thumbnail;
   final List<String> authors;
+  final String description;
   final String publisher;
   final String title;
 
@@ -28,6 +31,7 @@ class Book extends Equatable {
         id,
         thumbnail,
         authors,
+        description,
         publisher,
         title,
       ];

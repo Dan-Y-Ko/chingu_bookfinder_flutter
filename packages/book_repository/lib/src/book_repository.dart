@@ -19,7 +19,6 @@ class BookRepository {
             thumbnail: book.volumeInfo?.imageLinks?.thumbnail ??
                 'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png',
             authors: book.volumeInfo?.authors ?? [],
-            description: book.volumeInfo?.description ?? '',
             publisher: book.volumeInfo?.publisher ?? '',
             title: book.volumeInfo?.title ?? '',
           ),
