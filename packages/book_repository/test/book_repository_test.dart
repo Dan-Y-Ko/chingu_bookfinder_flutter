@@ -26,7 +26,7 @@ void main() {
 
     group('constructor', () {
       test('instantiates internal GoogleApiClient when not injected', () {
-        expect(google_books_api.GoogleBooksApiClient(), isNotNull);
+        expect(BookRepository(), isNotNull);
       });
     });
 
