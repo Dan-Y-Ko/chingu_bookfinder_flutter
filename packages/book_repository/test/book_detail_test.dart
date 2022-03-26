@@ -36,7 +36,7 @@ void main() {
     test('toString returns expected string', () {
       expect(
         _bookDetail.toString(),
-        'BookDetail(kLAoswEACAAJ, http://books.google.com/books/content?id=kLAoswEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api, [J. K. Rowling, Jack Thorne, John Tiffany], some description, Sphere, Harry Potter and the Cursed Child)',
+        'BookDetail(id: kLAoswEACAAJ, thumbnail: http://books.google.com/books/content?id=kLAoswEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api, authors: [J. K. Rowling, Jack Thorne, John Tiffany], description: some description, publisher: Sphere, title: Harry Potter and the Cursed Child)',
       );
     });
   });

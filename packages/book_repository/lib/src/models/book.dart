@@ -25,5 +25,7 @@ class Book extends Equatable {
       ];
 
   @override
-  bool get stringify => true;
+  String toString() {
+    return 'Book(id: $id, thumbnail: $thumbnail, authors: $authors, publisher: $publisher, title: $title)';
+  }
 }
