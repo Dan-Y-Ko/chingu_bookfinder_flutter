@@ -10,6 +10,7 @@ class BookPage extends StatefulWidget {
 
 class _BookPageState extends State<BookPage> {
   late Future<List<Book>> books;
+  late Future<BookDetail> book;
   late BookRepository bookRepository;
 
   Future<List<Book>> getBooks(String query) async {
@@ -21,6 +22,7 @@ class _BookPageState extends State<BookPage> {
     super.initState();
     bookRepository = BookRepository();
     books = getBooks('harrypotter');
+    book = bookRepository.getBook('kLAoswEACAAJ');
   }
 
   @override
@@ -35,6 +37,17 @@ class _BookPageState extends State<BookPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            FutureBuilder(
+              future: book,
+              builder:
+                  (BuildContext context, AsyncSnapshot<BookDetail> snapshot) {
+                if (snapshot.hasData) {
+                  return Text(snapshot.data!.title);
+                }
+
+                return const SizedBox();
+              },
+            ),
             FutureBuilder<List<Book>>(
               future: books,
               builder:

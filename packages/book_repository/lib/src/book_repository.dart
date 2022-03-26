@@ -16,15 +16,29 @@ class BookRepository {
         .map(
           (book) => Book(
             id: book.id!,
-            thumbnail: book.volumeInfo?.imageLinks?.thumbnail ??
+            thumbnail: book.volumeInfo!.imageLinks?.thumbnail ??
                 'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png',
-            authors: book.volumeInfo?.authors ?? [],
-            publisher: book.volumeInfo?.publisher ?? '',
-            title: book.volumeInfo?.title ?? '',
+            authors: book.volumeInfo!.authors ?? [],
+            publisher: book.volumeInfo!.publisher ?? '',
+            title: book.volumeInfo!.title ?? '',
           ),
         )
         .toList();
 
     return bookList;
+  }
+
+  Future<BookDetail> getBook(String volume) async {
+    final book = await _googleBooksApiClient.getBook(volume);
+
+    return BookDetail(
+      id: book.id!,
+      thumbnail: book.volumeInfo!.imageLinks?.thumbnail ??
+          'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png',
+      authors: book.volumeInfo?.authors ?? [],
+      description: book.volumeInfo!.description!,
+      publisher: book.volumeInfo!.publisher ?? '',
+      title: book.volumeInfo!.title ?? '',
+    );
   }
 }
