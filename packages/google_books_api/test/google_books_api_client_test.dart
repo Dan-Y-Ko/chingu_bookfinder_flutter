@@ -29,7 +29,7 @@ void main() {
   });
 
   group('constructor', () {
-    test('instantiates internal MetaWeatherApiClient when not injected', () {
+    test('instantiates internal GoogleBooksApiClient when not injected', () {
       expect(GoogleBooksApiClient(), isNotNull);
     });
   });
