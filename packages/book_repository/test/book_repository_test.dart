@@ -1,6 +1,6 @@
 import 'package:base_api/base_api.dart' show AppException;
 import 'package:google_books_api/google_books_api.dart' as google_books_api;
-import 'package:google_books_api/src/models/book_volume.dart';
+import 'package:google_books_api/src/models/book_volume.dart' as book_volume;
 import 'package:test/test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -11,7 +11,7 @@ class MockGoogleApiClient extends Mock
 
 class MockBook extends Mock implements google_books_api.Book {}
 
-class MockBookDetail extends Mock implements BookVolume {}
+class MockBookDetail extends Mock implements book_volume.BookVolume {}
 
 void main() {
   group('Book Repository', () {
@@ -84,8 +84,8 @@ void main() {
         final book = MockBookDetail();
         when(() => book.id).thenReturn('kLAoswEACAAJ');
         when(() => book.volumeInfo).thenReturn(
-          VolumeInfo(
-            imageLinks: ImageLinks(
+          book_volume.VolumeInfo(
+            imageLinks: book_volume.ImageLinks(
               thumbnail:
                   'http://books.google.com/books/content?id=kLAoswEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api',
             ),
