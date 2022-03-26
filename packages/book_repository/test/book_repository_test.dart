@@ -12,13 +12,13 @@ class MockBook extends Mock implements google_books_api.Book {}
 
 void main() {
   group('Book Repository', () {
-    late google_books_api.GoogleBooksApiClient _googleBooksApiClient;
-    late BookRepository _bookRepository;
+    late google_books_api.GoogleBooksApiClient googleBooksApiClient;
+    late BookRepository bookRepository;
 
     setUp(() {
-      _googleBooksApiClient = MockGoogleApiClient();
-      _bookRepository =
-          BookRepository(googleBooksApiClient: _googleBooksApiClient);
+      googleBooksApiClient = MockGoogleApiClient();
+      bookRepository =
+          BookRepository(googleBooksApiClient: googleBooksApiClient);
     });
 
     group('constructor', () {
@@ -42,15 +42,15 @@ void main() {
             title: 'Harry Potter and the Cursed Child',
           ),
         );
-        when(() => _googleBooksApiClient.getBooks(any()))
+        when(() => googleBooksApiClient.getBooks(any()))
             .thenAnswer((_) async => books);
 
-        final actual = await _bookRepository.getBooks('harrypotter');
+        final actual = await bookRepository.getBooks('harrypotter');
 
         expect(
           actual,
           [
-            const Book(
+            Book(
               id: 'kLAoswEACAAJ',
               thumbnail:
                   'http://books.google.com/books/content?id=kLAoswEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api',
@@ -63,12 +63,12 @@ void main() {
       });
 
       test('properly throws when there is exception', () {
-        when(() => _googleBooksApiClient.getBooks(any())).thenThrow(
+        when(() => googleBooksApiClient.getBooks(any())).thenThrow(
           AppException('No Internet Connection'),
         );
 
         expect(
-          () async => _bookRepository.getBooks(''),
+          () async => bookRepository.getBooks(''),
           throwsA(
             isA<AppException>(),
           ),

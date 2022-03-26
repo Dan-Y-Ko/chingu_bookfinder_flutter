@@ -47,8 +47,6 @@ class _BookPageState extends State<BookPage> {
                       itemBuilder: (BuildContext context, int index) {
                         final snap = snapshot.data![index];
 
-                        print(books);
-
                         return Padding(
                           padding: const EdgeInsets.all(8),
                           child: Card(
