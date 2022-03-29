@@ -9,28 +9,23 @@ environment:
 dependencies:
   base_api:
     path: ./packages/base_api
-  bloc: ^8.0.3
   book_repository:
     path: ./packages/book_repository
+  equatable: ^2.0.3
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
   flutter_localizations:
     sdk: flutter
-  freezed_annotation: ^1.1.0
   google_books_api:
     path: ./packages/google_books_api
   http: ^0.13.4
   intl: ^0.17.0
-  json_annotation: ^4.4.0
 
 dev_dependencies:
   bloc_test: ^9.0.3
-  build_runner: ^2.1.7
   flutter_test:
     sdk: flutter
-  freezed: ^1.1.0
-  json_serializable: ^6.1.5
   mocktail: ^0.2.0
   very_good_analysis: ^2.4.0
 
