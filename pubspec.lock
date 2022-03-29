@@ -30,7 +30,7 @@ packages:
     source: hosted
     version: "2.8.2"
   base_api:
-    dependency: "direct main"
+    dependency: transitive
     description:
       path: "packages/base_api"
       relative: true
@@ -160,11 +160,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "8.0.1"
-  flutter_localizations:
-    dependency: "direct main"
-    description: flutter
-    source: sdk
-    version: "0.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -192,14 +187,14 @@ packages:
     source: hosted
     version: "2.0.2"
   google_books_api:
-    dependency: "direct main"
+    dependency: transitive
     description:
       path: "packages/google_books_api"
       relative: true
     source: path
     version: "1.0.0+1"
   http:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -219,13 +214,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
-  intl:
-    dependency: "direct main"
-    description:
-      name: intl
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.17.0"
   io:
     dependency: transitive
     description:

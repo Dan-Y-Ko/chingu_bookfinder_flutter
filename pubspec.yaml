@@ -7,20 +7,12 @@ environment:
   sdk: ">=2.14.0 <3.0.0"
 
 dependencies:
-  base_api:
-    path: ./packages/base_api
   book_repository:
     path: ./packages/book_repository
   equatable: ^2.0.3
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
-  flutter_localizations:
-    sdk: flutter
-  google_books_api:
-    path: ./packages/google_books_api
-  http: ^0.13.4
-  intl: ^0.17.0
 
 dev_dependencies:
   bloc_test: ^9.0.3
