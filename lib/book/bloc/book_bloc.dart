@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:base_api/base_api.dart';
 import 'package:bloc/bloc.dart';
 import 'package:book_repository/book_repository.dart';
 import 'package:equatable/equatable.dart';
@@ -11,6 +13,7 @@ class BookBloc extends Bloc<BookEvent, BookState> {
   })  : _bookRepository = bookRepository,
         super(const BookState()) {
     on<GetBooksEvent>(_getBooksEvent);
+
     // on<GetBookDetailEvent>(_getBookDetailEvent);
   }
 
@@ -26,14 +29,30 @@ class BookBloc extends Bloc<BookEvent, BookState> {
       ),
     );
 
-    final books = await _bookRepository.getBooks(event.query);
+    try {
+      final books = await _bookRepository.getBooks(event.query);
 
-    emit(
-      state.copyWith(
-        status: BookStateStatus.success,
-        books: books,
-      ),
-    );
+      emit(
+        state.copyWith(
+          status: BookStateStatus.success,
+          books: books,
+        ),
+      );
+    } on SocketException catch (e) {
+      emit(
+        state.copyWith(
+          status: BookStateStatus.failure,
+          error: e.toString(),
+        ),
+      );
+    } on AppException catch (e) {
+      emit(
+        state.copyWith(
+          status: BookStateStatus.failure,
+          error: e.toString(),
+        ),
+      );
+    }
   }
 
   // Future<void> _getBookDetailEvent() {}

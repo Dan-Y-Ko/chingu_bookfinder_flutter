@@ -3,3 +3,5 @@ linter:
   rules:
     public_member_api_docs: false
 analyzer:
+  errors:
+    always_use_package_imports: false

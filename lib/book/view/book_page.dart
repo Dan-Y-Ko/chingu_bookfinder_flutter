@@ -1,6 +1,7 @@
-import 'package:chingu_bookfinder_flutter/book/bloc/book_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/book_bloc.dart';
 
 class BookPage extends StatelessWidget {
   const BookPage({Key? key}) : super(key: key);
@@ -90,9 +91,11 @@ class BookPage extends StatelessWidget {
                         },
                       ),
                     );
+                  case BookStateStatus.failure:
+                    return Center(
+                      child: Text(state.error),
+                    );
                 }
-
-                return const SizedBox(width: 0, height: 0);
               },
             ),
           ],
