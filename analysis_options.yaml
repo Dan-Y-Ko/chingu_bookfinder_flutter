@@ -3,6 +3,3 @@ linter:
   rules:
     public_member_api_docs: false
 analyzer:
-  #errors:
-  # implicit_dynamic_map_literal: ignore
-  # implicit_dynamic_parameter: ignore
