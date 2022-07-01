@@ -29,30 +29,19 @@ class BookBloc extends Bloc<BookEvent, BookState> {
       ),
     );
 
-    try {
-      final books = await _bookRepository.getBooks(event.query);
-
-      emit(
-        state.copyWith(
-          status: BookStateStatus.success,
-          books: books,
-        ),
-      );
-    } on SocketException catch (e) {
-      emit(
-        state.copyWith(
-          status: BookStateStatus.failure,
-          error: e.toString(),
-        ),
-      );
-    } on AppException catch (e) {
-      emit(
-        state.copyWith(
-          status: BookStateStatus.failure,
-          error: e.toString(),
-        ),
-      );
-    }
+    await emit.forEach<List<Book>>(
+      Stream.fromFuture(
+        _bookRepository.getBooks(event.query),
+      ),
+      onData: (books) => state.copyWith(
+        status: BookStateStatus.success,
+        books: books,
+      ),
+      onError: (error, _) => state.copyWith(
+        status: BookStateStatus.failure,
+        error: error.toString(),
+      ),
+    );
   }
 
   // Future<void> _getBookDetailEvent() {}
