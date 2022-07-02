@@ -29,18 +29,14 @@ class BookPage extends StatelessWidget {
                   builder: (context, state) {
                     switch (state.status) {
                       case BookListStatus.initial:
-                        return const Center(
-                          child: Text('Search for a book!'),
-                        );
+                        return const BookListEmpty();
                       case BookListStatus.loading:
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
+                        return const Loading();
                       case BookListStatus.success:
                         return const BookList();
                       case BookListStatus.failure:
-                        return Center(
-                          child: Text(state.error),
+                        return ErrorScreen(
+                          error: state.error,
                         );
                     }
                   },
