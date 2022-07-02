@@ -17,23 +17,23 @@ class BookPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            BlocBuilder<BookBloc, BookState>(
+            BlocBuilder<BookListBloc, BookListState>(
               builder: (context, state) {
                 switch (state.status) {
-                  case BookStateStatus.initial:
-                    context.read<BookBloc>().add(
+                  case BookListStatus.initial:
+                    context.read<BookListBloc>().add(
                           const GetBooksEvent(
                             query: 'harrypotter',
                           ),
                         );
                     return const SizedBox(width: 0, height: 0);
-                  case BookStateStatus.loading:
+                  case BookListStatus.loading:
                     return const Center(
                       child: CircularProgressIndicator(),
                     );
-                  case BookStateStatus.success:
+                  case BookListStatus.success:
                     return const BookList();
-                  case BookStateStatus.failure:
+                  case BookListStatus.failure:
                     return Center(
                       child: Text(state.error),
                     );

@@ -10,7 +10,7 @@ class BookList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height * .8,
-      child: BlocBuilder<BookBloc, BookState>(
+      child: BlocBuilder<BookListBloc, BookListState>(
         builder: (context, state) {
           return ListView.builder(
             itemCount: state.books.length,

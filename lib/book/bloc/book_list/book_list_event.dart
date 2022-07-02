@@ -1,10 +1,10 @@
-part of 'book_bloc.dart';
+part of 'book_list_bloc.dart';
 
-abstract class BookEvent extends Equatable {
-  const BookEvent();
+abstract class BookListEvent extends Equatable {
+  const BookListEvent();
 }
 
-class GetBooksEvent extends BookEvent {
+class GetBooksEvent extends BookListEvent {
   const GetBooksEvent({
     required this.query,
   });
@@ -15,7 +15,7 @@ class GetBooksEvent extends BookEvent {
   List<Object> get props => [query];
 }
 
-class GetBookDetailEvent extends BookEvent {
+class GetBookDetailEvent extends BookListEvent {
   const GetBookDetailEvent({
     required this.id,
   });

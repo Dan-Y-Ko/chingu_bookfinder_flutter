@@ -19,7 +19,7 @@ class App extends StatelessWidget {
     return RepositoryProvider(
       create: (dynamic _) => BookRepository(),
       child: BlocProvider(
-        create: (context) => BookBloc(
+        create: (context) => BookListBloc(
           bookRepository: context.read<BookRepository>(),
         ),
         child: Builder(

@@ -14,13 +14,13 @@ void main() {
   final mockBooks = [mockBook];
 
   group('BookState', () {
-    BookState createSubject({
-      BookStateStatus? status,
+    BookListState createSubject({
+      BookListStatus? status,
       List<Book>? books,
       String? error,
     }) {
-      return BookState(
-        status: status ?? BookStateStatus.initial,
+      return BookListState(
+        status: status ?? BookListStatus.initial,
         books: books ?? mockBooks,
         error: error ?? '',
       );
@@ -38,12 +38,12 @@ void main() {
     test('Props are correct', () {
       expect(
         createSubject(
-          status: BookStateStatus.initial,
+          status: BookListStatus.initial,
           books: mockBooks,
           error: '',
         ).props,
         equals([
-          BookStateStatus.initial,
+          BookListStatus.initial,
           mockBooks,
           '',
         ]),

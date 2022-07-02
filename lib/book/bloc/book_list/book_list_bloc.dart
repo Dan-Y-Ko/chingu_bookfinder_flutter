@@ -1,31 +1,27 @@
-import 'dart:io';
-import 'package:base_api/base_api.dart';
 import 'package:bloc/bloc.dart';
 import 'package:book_repository/book_repository.dart';
 import 'package:equatable/equatable.dart';
 
-part 'book_event.dart';
-part 'book_state.dart';
+part 'book_list_event.dart';
+part 'book_list_state.dart';
 
-class BookBloc extends Bloc<BookEvent, BookState> {
-  BookBloc({
+class BookListBloc extends Bloc<BookListEvent, BookListState> {
+  BookListBloc({
     required BookRepository bookRepository,
   })  : _bookRepository = bookRepository,
-        super(const BookState()) {
+        super(const BookListState()) {
     on<GetBooksEvent>(_getBooksEvent);
-
-    // on<GetBookDetailEvent>(_getBookDetailEvent);
   }
 
   final BookRepository _bookRepository;
 
   Future<void> _getBooksEvent(
     GetBooksEvent event,
-    Emitter<BookState> emit,
+    Emitter<BookListState> emit,
   ) async {
     emit(
       state.copyWith(
-        status: BookStateStatus.loading,
+        status: BookListStatus.loading,
       ),
     );
 
@@ -34,15 +30,13 @@ class BookBloc extends Bloc<BookEvent, BookState> {
         _bookRepository.getBooks(event.query),
       ),
       onData: (books) => state.copyWith(
-        status: BookStateStatus.success,
+        status: BookListStatus.success,
         books: books,
       ),
       onError: (error, _) => state.copyWith(
-        status: BookStateStatus.failure,
+        status: BookListStatus.failure,
         error: error.toString(),
       ),
     );
   }
-
-  // Future<void> _getBookDetailEvent() {}
 }

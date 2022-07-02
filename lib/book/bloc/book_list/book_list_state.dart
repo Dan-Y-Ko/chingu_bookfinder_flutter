@@ -1,24 +1,24 @@
-part of 'book_bloc.dart';
+part of 'book_list_bloc.dart';
 
-enum BookStateStatus { initial, loading, success, failure }
+enum BookListStatus { initial, loading, success, failure }
 
-class BookState extends Equatable {
-  const BookState({
-    this.status = BookStateStatus.initial,
+class BookListState extends Equatable {
+  const BookListState({
+    this.status = BookListStatus.initial,
     this.books = const [],
     this.error = '',
   });
 
-  final BookStateStatus status;
+  final BookListStatus status;
   final List<Book> books;
   final String error;
 
-  BookState copyWith({
-    BookStateStatus? status,
+  BookListState copyWith({
+    BookListStatus? status,
     List<Book>? books,
     String? error,
   }) {
-    return BookState(
+    return BookListState(
       status: status ?? this.status,
       books: books ?? this.books,
       error: error ?? this.error,

@@ -13,7 +13,7 @@ void main() {
   group('book bloc', () {
     late book_repository.Book book;
     late book_repository.BookRepository bookRepository;
-    late BookBloc bookBloc;
+    late BookListBloc bookBloc;
 
     setUp(() {
       book = MockBook();
@@ -27,20 +27,20 @@ void main() {
         (_) async => [book],
       );
 
-      bookBloc = BookBloc(bookRepository: bookRepository);
+      bookBloc = BookListBloc(bookRepository: bookRepository);
     });
 
     group('constructor', () {
       test('has correct initial state', () {
         expect(
           bookBloc.state,
-          equals(const BookState()),
+          equals(const BookListState()),
         );
       });
     });
 
     group('GetBooksEvent', () {
-      blocTest<BookBloc, BookState>(
+      blocTest<BookListBloc, BookListState>(
         '''
           emits loading status when books are being fetchs 
           and success status upon successful fetch and books 
@@ -51,15 +51,15 @@ void main() {
           const GetBooksEvent(query: 'harrypotter'),
         ),
         expect: () => [
-          const BookState(status: BookStateStatus.loading),
-          BookState(
-            status: BookStateStatus.success,
+          const BookListState(status: BookListStatus.loading),
+          BookListState(
+            status: BookListStatus.success,
             books: [book],
           )
         ],
       );
 
-      blocTest<BookBloc, BookState>(
+      blocTest<BookListBloc, BookListState>(
         'emits failure status when error occurs',
         setUp: () {
           when(
@@ -75,9 +75,9 @@ void main() {
           const GetBooksEvent(query: 'harrypotter'),
         ),
         expect: () => [
-          const BookState(status: BookStateStatus.loading),
-          const BookState(
-            status: BookStateStatus.failure,
+          const BookListState(status: BookListStatus.loading),
+          const BookListState(
+            status: BookListStatus.failure,
             error: 'Status Code: 404 Resource not found',
           ),
         ],
