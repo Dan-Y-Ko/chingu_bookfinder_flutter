@@ -29,12 +29,9 @@ class BookPage extends StatelessWidget {
                   builder: (context, state) {
                     switch (state.status) {
                       case BookListStatus.initial:
-                        context.read<BookListBloc>().add(
-                              const GetBooksEvent(
-                                query: 'harrypotter',
-                              ),
-                            );
-                        return const SizedBox(width: 0, height: 0);
+                        return const Center(
+                          child: Text('Search for a book!'),
+                        );
                       case BookListStatus.loading:
                         return const Center(
                           child: CircularProgressIndicator(),

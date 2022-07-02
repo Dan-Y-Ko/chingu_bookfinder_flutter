@@ -43,10 +43,14 @@ class BookList extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                'By: ${book.authors[0]}',
+                                book.authors.isNotEmpty
+                                    ? 'By ${book.authors[0]}'
+                                    : 'No authors',
                               ),
                               Text(
-                                'Published by: ${book.publisher}',
+                                book.publisher.isNotEmpty
+                                    ? 'Published by: ${book.publisher}'
+                                    : '',
                               ),
                               ElevatedButton(
                                 onPressed: () {
