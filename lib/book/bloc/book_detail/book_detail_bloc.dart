@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:book_repository/book_repository.dart';
 import 'package:equatable/equatable.dart';
 
 part 'book_detail_event.dart';
