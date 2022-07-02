@@ -15,6 +15,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../helpers/helpers.dart';
+
 class MockBookRepository extends Mock implements BookRepository {}
 
 class MockBookListBloc extends MockBloc<BookListEvent, BookListState>
@@ -58,7 +60,7 @@ void main() {
     });
 
     testWidgets('renders Book Page', (tester) async {
-      await tester.pumpWidget(const App());
+      await tester.pumpApp(const App());
       expect(find.byType(BookPage), findsOneWidget);
     });
   });
