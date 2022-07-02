@@ -13,6 +13,7 @@ class BookDetailCard extends StatelessWidget {
 
         return SizedBox(
           width: double.infinity,
+          height: double.infinity,
           child: Card(
             child: SingleChildScrollView(
               child: Column(
