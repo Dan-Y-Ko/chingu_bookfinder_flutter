@@ -10,12 +10,12 @@ class BookDetailState extends Equatable {
   });
 
   final BookDetailStatus status;
-  final Book? book;
+  final BookDetail? book;
   final String error;
 
   BookDetailState copyWith({
     BookDetailStatus? status,
-    Book? book,
+    BookDetail? book,
     String? error,
   }) {
     return BookDetailState(
