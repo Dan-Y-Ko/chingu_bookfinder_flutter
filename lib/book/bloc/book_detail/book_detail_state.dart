@@ -2,7 +2,7 @@ part of 'book_detail_bloc.dart';
 
 enum BookDetailStatus { initial, loading, success, failure }
 
-abstract class BookDetailState extends Equatable {
+class BookDetailState extends Equatable {
   const BookDetailState({
     this.status = BookDetailStatus.initial,
     this.book,
@@ -12,6 +12,18 @@ abstract class BookDetailState extends Equatable {
   final BookDetailStatus status;
   final Book? book;
   final String error;
+
+  BookDetailState copyWith({
+    BookDetailStatus? status,
+    Book? book,
+    String? error,
+  }) {
+    return BookDetailState(
+      status: status ?? this.status,
+      book: book ?? this.book,
+      error: error ?? this.error,
+    );
+  }
 
   @override
   List<Object?> get props => [status, book, error];
