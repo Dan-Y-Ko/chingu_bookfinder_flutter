@@ -1,4 +1,5 @@
 import 'package:chingu_bookfinder_flutter/book/bloc/bloc.dart';
+import 'package:chingu_bookfinder_flutter/book/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,12 +11,21 @@ class BookDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(56),
+        child: BlocBuilder<BookDetailBloc, BookDetailState>(
+          builder: (context, state) {
+            return AppBar(
+              centerTitle: true,
+              title: Text(state.book?.title ?? ''),
+            );
+          },
+        ),
+      ),
       backgroundColor: Colors.blueGrey[50],
       body: SafeArea(
         child: BlocBuilder<BookDetailBloc, BookDetailState>(
           builder: (context, state) {
-            print(state.status);
             if (state.status == BookDetailStatus.loading) {
               return const Center(
                 child: CircularProgressIndicator(),
@@ -23,9 +33,7 @@ class BookDetailPage extends StatelessWidget {
             }
 
             if (state.status == BookDetailStatus.success) {
-              return Center(
-                child: Text(state.book!.title),
-              );
+              return const BookDetailCard();
             }
 
             if (state.status == BookDetailStatus.failure) {
