@@ -14,14 +14,3 @@ class GetBooksEvent extends BookListEvent {
   @override
   List<Object> get props => [query];
 }
-
-class GetBookDetailEvent extends BookListEvent {
-  const GetBookDetailEvent({
-    required this.id,
-  });
-
-  final String id;
-
-  @override
-  List<Object> get props => [id];
-}
