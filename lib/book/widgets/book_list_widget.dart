@@ -52,6 +52,12 @@ class BookList extends StatelessWidget {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
+                                    context.read<BookDetailBloc>().add(
+                                          GetBookDetailEvent(
+                                            id: book.id,
+                                          ),
+                                        );
+
                                     context.goNamed(
                                       'book_detail_route',
                                       params: {'id': book.id},
