@@ -15,7 +15,7 @@ void main() {
     late book_repository.BookRepository bookRepository;
     late BookBloc bookBloc;
 
-    setUp(() async {
+    setUp(() {
       book = MockBook();
       bookRepository = MockBookRepository();
       when(() => book.id).thenReturn('1');
