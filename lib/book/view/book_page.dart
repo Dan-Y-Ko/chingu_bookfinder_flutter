@@ -19,6 +19,7 @@ class BookPage extends StatelessWidget {
           children: [
             BlocBuilder<BookListBloc, BookListState>(
               builder: (context, state) {
+                print('state');
                 switch (state.status) {
                   case BookListStatus.initial:
                     context.read<BookListBloc>().add(

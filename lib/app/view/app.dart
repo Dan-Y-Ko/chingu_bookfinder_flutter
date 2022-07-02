@@ -18,10 +18,19 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider(
       create: (dynamic _) => BookRepository(),
-      child: BlocProvider(
-        create: (context) => BookListBloc(
-          bookRepository: context.read<BookRepository>(),
-        ),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => BookListBloc(
+              bookRepository: context.read<BookRepository>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => BookDetailBloc(
+              bookRepository: context.read<BookRepository>(),
+            ),
+          ),
+        ],
         child: Builder(
           builder: (context) {
             final _router = GoRouter(
@@ -34,7 +43,9 @@ class App extends StatelessWidget {
                     GoRoute(
                       name: 'book_detail_route',
                       path: 'book/:id',
-                      builder: (context, state) => const BookDetailPage(),
+                      builder: (context, state) => BookDetailPage(
+                        id: state.params['id']!,
+                      ),
                     )
                   ],
                 ),
