@@ -43,6 +43,7 @@ class _SearchInputState extends State<SearchInput> {
           borderSide: BorderSide.none,
         ),
       ),
+      textInputAction: TextInputAction.done,
       onSubmitted: (_) {
         context.read<BookListBloc>().add(
               GetBooksEvent(

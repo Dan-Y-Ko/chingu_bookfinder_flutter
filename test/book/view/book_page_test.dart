@@ -44,10 +44,8 @@ void main() {
       );
 
       await tester.pumpApp(
-        BlocProvider.value(
-          value: _bookListBloc,
-          child: const BookPage(),
-        ),
+        const BookPage(),
+        bookListBloc: _bookListBloc,
       );
 
       expect(find.byType(BookListEmpty), findsOneWidget);
