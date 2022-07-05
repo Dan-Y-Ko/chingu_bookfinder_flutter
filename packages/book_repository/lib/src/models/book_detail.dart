@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class BookDetail extends Equatable {
-  BookDetail({
+  const BookDetail({
     required this.id,
     required this.thumbnail,
     required this.authors,

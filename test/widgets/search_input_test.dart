@@ -1,5 +1,4 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:book_repository/book_repository.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart';
 import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +7,8 @@ import 'package:mocktail/mocktail.dart';
 
 import '../helpers/pump_app.dart';
 
-class MockBookRepository extends Mock implements BookRepository {}
-
 class MockBookListBloc extends MockBloc<BookListEvent, BookListState>
     implements BookListBloc {}
-
-class MockBookDetailBloc extends MockBloc<BookDetailEvent, BookDetailState>
-    implements BookDetailBloc {}
 
 void main() {
   group('search input', () {
