@@ -2,8 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:book_repository/book_repository.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart';
 import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -19,14 +17,17 @@ class MockBookDetailBloc extends MockBloc<BookDetailEvent, BookDetailState>
 
 void main() {
   group('Book List Page', () {
-    late BookRepository _bookRepository;
     late BookListBloc _bookListBloc;
-    late BookDetailBloc _bookDetailBloc;
+
+    Future<void> pumpBookPageWithBloc(WidgetTester tester) async {
+      await tester.pumpApp(
+        const BookPage(),
+        bookListBloc: _bookListBloc,
+      );
+    }
 
     setUp(() {
-      _bookRepository = MockBookRepository();
       _bookListBloc = MockBookListBloc();
-      _bookDetailBloc = MockBookDetailBloc();
     });
 
     testWidgets('search input is rendered', (tester) async {
@@ -43,10 +44,7 @@ void main() {
         const BookListState(),
       );
 
-      await tester.pumpApp(
-        const BookPage(),
-        bookListBloc: _bookListBloc,
-      );
+      await pumpBookPageWithBloc(tester);
 
       expect(find.byType(BookListEmpty), findsOneWidget);
     });
@@ -56,12 +54,7 @@ void main() {
         const BookListState(status: BookListStatus.loading),
       );
 
-      await tester.pumpApp(
-        BlocProvider.value(
-          value: _bookListBloc,
-          child: const BookPage(),
-        ),
-      );
+      await pumpBookPageWithBloc(tester);
 
       expect(
         find.byType(
@@ -76,12 +69,7 @@ void main() {
         const BookListState(status: BookListStatus.success),
       );
 
-      await tester.pumpApp(
-        BlocProvider.value(
-          value: _bookListBloc,
-          child: const BookPage(),
-        ),
-      );
+      await pumpBookPageWithBloc(tester);
 
       expect(
         find.byType(
@@ -96,12 +84,7 @@ void main() {
         const BookListState(status: BookListStatus.failure),
       );
 
-      await tester.pumpApp(
-        BlocProvider.value(
-          value: _bookListBloc,
-          child: const BookPage(),
-        ),
-      );
+      await pumpBookPageWithBloc(tester);
 
       expect(
         find.byType(
