@@ -7,9 +7,6 @@ import 'package:network_image_mock/network_image_mock.dart';
 
 import '../../helpers/helpers.dart';
 
-class MockBookListBloc extends MockBloc<BookListEvent, BookListState>
-    implements BookListBloc {}
-
 class MockBookDetailBloc extends MockBloc<BookDetailEvent, BookDetailState>
     implements BookDetailBloc {}
 
@@ -35,7 +32,7 @@ void main() {
       );
     }
 
-    setUp(() async {
+    setUp(() {
       _bookDetailBloc = MockBookDetailBloc();
 
       when(() => _bookDetailBloc.state).thenReturn(
