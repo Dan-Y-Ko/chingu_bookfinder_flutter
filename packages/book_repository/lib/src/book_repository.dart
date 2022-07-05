@@ -38,6 +38,10 @@ class BookRepository {
   }
 
   Future<BookDetail> getBook(String volume) async {
+    // final description = book.volumeInfo.description
+    //     ? parse(book.volumeInfo!.description!).body!.text
+    //     : '';
+
     try {
       final book = await _googleBooksApiClient.getBook(volume);
 
@@ -46,7 +50,9 @@ class BookRepository {
         thumbnail: book.volumeInfo!.imageLinks?.thumbnail ??
             'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png',
         authors: book.volumeInfo?.authors ?? [],
-        description: parse(book.volumeInfo!.description!).body!.text,
+        description: book.volumeInfo?.description != null
+            ? parse(book.volumeInfo!.description!).body!.text
+            : '',
         publisher: book.volumeInfo!.publisher ?? '',
         title: book.volumeInfo!.title ?? '',
       );

@@ -3,6 +3,8 @@ import 'package:chingu_bookfinder_flutter/book/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../widgets/widgets.dart';
+
 class BookDetailPage extends StatelessWidget {
   const BookDetailPage({required this.id, Key? key}) : super(key: key);
 
@@ -27,9 +29,7 @@ class BookDetailPage extends StatelessWidget {
         child: BlocBuilder<BookDetailBloc, BookDetailState>(
           builder: (context, state) {
             if (state.status == BookDetailStatus.loading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const Loading();
             }
 
             if (state.status == BookDetailStatus.success) {
@@ -37,8 +37,8 @@ class BookDetailPage extends StatelessWidget {
             }
 
             if (state.status == BookDetailStatus.failure) {
-              return Center(
-                child: Text(state.error),
+              return ErrorScreen(
+                error: state.error,
               );
             }
 
