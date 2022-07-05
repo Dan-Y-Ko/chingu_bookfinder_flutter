@@ -18,14 +18,10 @@ class MockBookDetailBloc extends MockBloc<BookDetailEvent, BookDetailState>
 
 void main() {
   group('search input', () {
-    late BookRepository _bookRepository;
     late BookListBloc _bookListBloc;
-    late BookDetailBloc _bookDetailBloc;
 
     setUp(() {
-      _bookRepository = MockBookRepository();
       _bookListBloc = MockBookListBloc();
-      _bookDetailBloc = MockBookDetailBloc();
     });
 
     testWidgets('triggeres fetch on submit', (tester) async {

@@ -5,25 +5,14 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-import 'package:bloc_test/bloc_test.dart';
-import 'package:book_repository/book_repository.dart';
 import 'package:chingu_bookfinder_flutter/app/app.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../helpers/helpers.dart';
-
-class MockBookRepository extends Mock implements BookRepository {}
-
-class MockBookListBloc extends MockBloc<BookListEvent, BookListState>
-    implements BookListBloc {}
-
-class MockBookDetailBloc extends MockBloc<BookDetailEvent, BookDetailState>
-    implements BookDetailBloc {}
 
 class MockGoRouter extends Mock implements GoRouter {}
 
@@ -49,15 +38,7 @@ class MockGoRouterProvider extends StatelessWidget {
 
 void main() {
   group('App', () {
-    late BookRepository _bookRepository;
-    late BookListBloc _bookListBloc;
-    late BookDetailBloc _bookDetailBloc;
-
-    setUp(() {
-      _bookRepository = MockBookRepository();
-      _bookListBloc = MockBookListBloc();
-      _bookDetailBloc = MockBookDetailBloc();
-    });
+    setUp(() {});
 
     testWidgets('renders Book Page', (tester) async {
       await tester.pumpApp(const App());
