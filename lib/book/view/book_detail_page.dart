@@ -30,6 +30,7 @@ class BookDetailPage extends StatelessWidget {
           builder: (context, state) {
             switch (state.status) {
               case BookDetailStatus.initial:
+                return const SizedBox(width: 0, height: 0);
               case BookDetailStatus.loading:
                 return const Loading();
               case BookDetailStatus.success:

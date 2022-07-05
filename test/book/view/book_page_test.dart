@@ -49,7 +49,7 @@ void main() {
       expect(find.byType(BookListEmpty), findsOneWidget);
     });
 
-    testWidgets('Book Loading is rendered on loading status', (tester) async {
+    testWidgets('Loading is rendered on loading status', (tester) async {
       when(() => _bookListBloc.state).thenReturn(
         const BookListState(status: BookListStatus.loading),
       );
