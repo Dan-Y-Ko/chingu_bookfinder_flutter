@@ -28,21 +28,17 @@ class BookDetailPage extends StatelessWidget {
       body: SafeArea(
         child: BlocBuilder<BookDetailBloc, BookDetailState>(
           builder: (context, state) {
-            if (state.status == BookDetailStatus.loading) {
-              return const Loading();
+            switch (state.status) {
+              case BookDetailStatus.initial:
+              case BookDetailStatus.loading:
+                return const Loading();
+              case BookDetailStatus.success:
+                return const BookDetailCard();
+              case BookDetailStatus.failure:
+                return ErrorScreen(
+                  error: state.error,
+                );
             }
-
-            if (state.status == BookDetailStatus.success) {
-              return const BookDetailCard();
-            }
-
-            if (state.status == BookDetailStatus.failure) {
-              return ErrorScreen(
-                error: state.error,
-              );
-            }
-
-            return const SizedBox(width: 0, height: 0);
           },
         ),
       ),
