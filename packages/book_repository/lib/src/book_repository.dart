@@ -38,10 +38,6 @@ class BookRepository {
   }
 
   Future<BookDetail> getBook(String volume) async {
-    // final description = book.volumeInfo.description
-    //     ? parse(book.volumeInfo!.description!).body!.text
-    //     : '';
-
     try {
       final book = await _googleBooksApiClient.getBook(volume);
 
