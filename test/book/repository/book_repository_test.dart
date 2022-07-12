@@ -1,5 +1,5 @@
 import 'package:base_api/base_api.dart' show AppException;
-import 'package:chingu_bookfinder_flutter/book/repository/main.dart';
+import 'package:chingu_bookfinder_flutter/book/repository/repository.dart';
 import 'package:google_books_api/google_books_api.dart' as google_books_api;
 import 'package:google_books_api/src/models/book_volume.dart' as book_volume;
 import 'package:mocktail/mocktail.dart';

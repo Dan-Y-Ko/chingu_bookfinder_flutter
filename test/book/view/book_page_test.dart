@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart';
-import 'package:chingu_bookfinder_flutter/book/repository/main.dart';
+import 'package:chingu_bookfinder_flutter/book/repository/repository.dart';
 import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

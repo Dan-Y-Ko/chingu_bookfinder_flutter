@@ -1,4 +1,4 @@
-import 'package:chingu_bookfinder_flutter/book/repository/main.dart';
+import 'package:chingu_bookfinder_flutter/book/repository/repository.dart';
 import 'package:test/test.dart';
 
 void main() {
