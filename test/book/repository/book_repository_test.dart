@@ -1,10 +1,9 @@
 import 'package:base_api/base_api.dart' show AppException;
+import 'package:chingu_bookfinder_flutter/book/repository/main.dart';
 import 'package:google_books_api/google_books_api.dart' as google_books_api;
 import 'package:google_books_api/src/models/book_volume.dart' as book_volume;
-import 'package:test/test.dart';
 import 'package:mocktail/mocktail.dart';
-
-import 'package:book_repository/book_repository.dart';
+import 'package:test/test.dart';
 
 class MockGoogleApiClient extends Mock
     implements google_books_api.GoogleBooksApiClient {}
@@ -53,7 +52,7 @@ void main() {
         expect(
           actual,
           [
-            Book(
+            const Book(
               id: 'kLAoswEACAAJ',
               thumbnail:
                   'http://books.google.com/books/content?id=kLAoswEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api',
@@ -102,7 +101,7 @@ void main() {
 
         expect(
           actual,
-          BookDetail(
+          const BookDetail(
             id: 'kLAoswEACAAJ',
             thumbnail:
                 'http://books.google.com/books/content?id=kLAoswEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api',

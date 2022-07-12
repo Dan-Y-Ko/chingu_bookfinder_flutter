@@ -50,13 +50,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "9.0.3"
-  book_repository:
-    dependency: "direct main"
-    description:
-      path: "packages/book_repository"
-      relative: true
-    source: path
-    version: "1.0.0+1"
   boolean_selector:
     dependency: transitive
     description:
@@ -241,14 +234,14 @@ packages:
     source: hosted
     version: "4.1.0"
   google_books_api:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "packages/google_books_api"
       relative: true
     source: path
     version: "1.0.0+1"
   html:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: html
       url: "https://pub.dartlang.org"

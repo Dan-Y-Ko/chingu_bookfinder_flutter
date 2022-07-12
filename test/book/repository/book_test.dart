@@ -1,13 +1,12 @@
+import 'package:chingu_bookfinder_flutter/book/repository/main.dart';
 import 'package:test/test.dart';
-
-import 'package:book_repository/book_repository.dart';
 
 void main() {
   group('Book model', () {
     late Book _book;
 
     setUp(() {
-      _book = Book(
+      _book = const Book(
         id: 'kLAoswEACAAJ',
         thumbnail:
             'http://books.google.com/books/content?id=kLAoswEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api',

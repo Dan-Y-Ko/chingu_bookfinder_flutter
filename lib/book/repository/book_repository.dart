@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:base_api/base_api.dart';
-import 'package:html/parser.dart' show parse;
+import 'package:chingu_bookfinder_flutter/book/repository/main.dart';
 import 'package:google_books_api/google_books_api.dart' hide Book;
-import 'package:book_repository/book_repository.dart';
+import 'package:html/parser.dart' show parse;
 
 class BookRepository {
   BookRepository({GoogleBooksApiClient? googleBooksApiClient})
@@ -47,7 +47,7 @@ class BookRepository {
             'https://wtwp.com/wp-content/uploads/2015/06/placeholder-image.png',
         authors: book.volumeInfo?.authors ?? [],
         description: book.volumeInfo?.description != null
-            ? parse(book.volumeInfo!.description!).body!.text
+            ? parse(book.volumeInfo!.description).body!.text
             : '',
         publisher: book.volumeInfo!.publisher ?? '',
         title: book.volumeInfo!.title ?? '',

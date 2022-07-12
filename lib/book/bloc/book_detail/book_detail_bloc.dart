@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:book_repository/book_repository.dart';
+import 'package:chingu_bookfinder_flutter/book/repository/main.dart';
 import 'package:equatable/equatable.dart';
 
 part 'book_detail_event.dart';

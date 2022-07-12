@@ -1,13 +1,12 @@
+import 'package:chingu_bookfinder_flutter/book/repository/main.dart';
 import 'package:test/test.dart';
-
-import 'package:book_repository/book_repository.dart';
 
 void main() {
   group('Book model', () {
     late BookDetail _bookDetail;
 
     setUp(() {
-      _bookDetail = BookDetail(
+      _bookDetail = const BookDetail(
         id: 'kLAoswEACAAJ',
         thumbnail:
             'http://books.google.com/books/content?id=kLAoswEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api',
@@ -22,8 +21,10 @@ void main() {
       expect(_bookDetail.id, 'kLAoswEACAAJ');
       expect(_bookDetail.thumbnail,
           'http://books.google.com/books/content?id=kLAoswEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api');
-      expect(_bookDetail.authors,
-          ['J. K. Rowling', 'Jack Thorne', 'John Tiffany']);
+      expect(
+        _bookDetail.authors,
+        ['J. K. Rowling', 'Jack Thorne', 'John Tiffany'],
+      );
       expect(_bookDetail.publisher, 'Sphere');
       expect(_bookDetail.title, 'Harry Potter and the Cursed Child');
       expect(_bookDetail.description, 'some description');

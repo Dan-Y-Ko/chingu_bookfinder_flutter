@@ -1,9 +1,8 @@
 import 'package:chingu_bookfinder_flutter/book/bloc/bloc.dart';
 import 'package:chingu_bookfinder_flutter/book/widgets/widgets.dart';
+import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../widgets/widgets.dart';
 
 class BookDetailPage extends StatelessWidget {
   const BookDetailPage({required this.id, Key? key}) : super(key: key);

@@ -1,12 +1,12 @@
-import 'package:book_repository/book_repository.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart';
+import 'package:chingu_bookfinder_flutter/book/repository/main.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final mockBook = BookDetail(
+  const mockBook = BookDetail(
     id: '1',
     thumbnail: 'testurl',
-    authors: const ['author'],
+    authors: ['author'],
     publisher: 'publisher',
     title: 'title',
     description: 'description',
