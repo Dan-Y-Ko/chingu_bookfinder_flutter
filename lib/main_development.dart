@@ -7,7 +7,17 @@
 
 import 'package:chingu_bookfinder_flutter/app/app.dart';
 import 'package:chingu_bookfinder_flutter/bootstrap.dart';
+import 'package:chingu_bookfinder_flutter/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
-  bootstrap(() => const App());
+  bootstrap(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+
+    return const App();
+  });
 }
