@@ -77,7 +77,75 @@ void main() {
         );
       });
 
-      test('throws app exception on any non-200 status code response', () {
+      test('throws app exception on 400 status code response', () {
+        final mockResponse = MockResponse();
+
+        when(() => mockResponse.statusCode).thenReturn(400);
+        when(() => mockResponse.body).thenReturn('');
+        when(() => httpClient.get(any())).thenAnswer(
+          (_) async => mockResponse,
+        );
+
+        expect(
+          () async => await baseApi.get(baseUrl, url, query),
+          throwsA(
+            isA<AppException>(),
+          ),
+        );
+      });
+
+      test('throws app exception on 401 status code response', () {
+        final mockResponse = MockResponse();
+
+        when(() => mockResponse.statusCode).thenReturn(401);
+        when(() => mockResponse.body).thenReturn('');
+        when(() => httpClient.get(any())).thenAnswer(
+          (_) async => mockResponse,
+        );
+
+        expect(
+          () async => await baseApi.get(baseUrl, url, query),
+          throwsA(
+            isA<AppException>(),
+          ),
+        );
+      });
+
+      test('throws app exception on 403 status code response', () {
+        final mockResponse = MockResponse();
+
+        when(() => mockResponse.statusCode).thenReturn(403);
+        when(() => mockResponse.body).thenReturn('');
+        when(() => httpClient.get(any())).thenAnswer(
+          (_) async => mockResponse,
+        );
+
+        expect(
+          () async => await baseApi.get(baseUrl, url, query),
+          throwsA(
+            isA<AppException>(),
+          ),
+        );
+      });
+
+      test('throws app exception on 404 status code response', () {
+        final mockResponse = MockResponse();
+
+        when(() => mockResponse.statusCode).thenReturn(404);
+        when(() => mockResponse.body).thenReturn('');
+        when(() => httpClient.get(any())).thenAnswer(
+          (_) async => mockResponse,
+        );
+
+        expect(
+          () async => await baseApi.get(baseUrl, url, query),
+          throwsA(
+            isA<AppException>(),
+          ),
+        );
+      });
+
+      test('throws app exception on any unhandled status code response', () {
         final mockResponse = MockResponse();
 
         when(() => mockResponse.statusCode).thenReturn(500);
