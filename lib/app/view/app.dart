@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../auth/auth.dart';
+
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
@@ -38,6 +40,10 @@ class App extends StatelessWidget {
               routes: [
                 GoRoute(
                   path: '/',
+                  builder: (context, state) => const SignInPage(),
+                ),
+                GoRoute(
+                  path: '/book',
                   builder: (context, state) => const BookPage(),
                   routes: [
                     GoRoute(
