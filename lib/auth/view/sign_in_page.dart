@@ -1,6 +1,7 @@
 import 'package:chingu_bookfinder_flutter/auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -20,17 +21,11 @@ class SignInPage extends StatelessWidget {
                   context.read<GoogleAuthBloc>().add(
                         GoogleSignInRequested(),
                       );
+
+                  context.go('/book');
                 },
                 child: const Text('Sign in with google'),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  context.read<GoogleAuthBloc>().add(
-                        SignOutRequested(),
-                      );
-                },
-                child: const Text('Sign Out'),
-              )
             ],
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:chingu_bookfinder_flutter/auth/auth.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart';
 import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,14 @@ class BookPage extends StatelessWidget {
                   },
                 ),
               ),
+              ElevatedButton(
+                onPressed: () async {
+                  context.read<GoogleAuthBloc>().add(
+                        SignOutRequested(),
+                      );
+                },
+                child: const Text('Sign Out'),
+              )
             ],
           ),
         ),
