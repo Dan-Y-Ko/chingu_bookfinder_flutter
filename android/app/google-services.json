@@ -14,41 +14,13 @@
       },
       "oauth_client": [
         {
-          "client_id": "546355457454-6hi8jknga03ddhsrkmsbqf4k4q9mi709.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCl0j2lz0VL9tWh8LUE1ugnPjej6785Af0"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "546355457454-6hi8jknga03ddhsrkmsbqf4k4q9mi709.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "546355457454-f00t6a41ogoqksb6o5159bjbmonv17nh.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.verygoodcore.chingu-bookfinder-flutter"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:546355457454:android:9e4653055985d6fe302c3f",
-        "android_client_info": {
-          "package_name": "com.example.verygoodcore.chingu_bookfinder_flutter.dev"
-        }
-      },
-      "oauth_client": [
+          "client_id": "546355457454-kdu9ik159vm0eitfgm9fsidou0ja1u0r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.verygoodcore.chingu_bookfinder_flutter",
+            "certificate_hash": "7783539012db9f4492422b7eb1eddd69a653fc6a"
+          }
+        },
         {
           "client_id": "546355457454-6hi8jknga03ddhsrkmsbqf4k4q9mi709.apps.googleusercontent.com",
           "client_type": 3
@@ -67,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "546355457454-f00t6a41ogoqksb6o5159bjbmonv17nh.apps.googleusercontent.com",
+              "client_id": "546355457454-7kh9vrmmso18ml9cfpqc5sq1mrova7og.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.verygoodcore.chingu-bookfinder-flutter"
+                "bundle_id": "c"
               }
             }
           ]

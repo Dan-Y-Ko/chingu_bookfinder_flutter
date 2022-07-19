@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>546355457454-f00t6a41ogoqksb6o5159bjbmonv17nh.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.546355457454-f00t6a41ogoqksb6o5159bjbmonv17nh</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>546355457454-kdu9ik159vm0eitfgm9fsidou0ja1u0r.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA0gt4q_pVC5kGcid4cMmdCoCCgKq--lvE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>546355457454</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.verygoodcore.chingu-bookfinder-flutter</string>
+	<key>PROJECT_ID</key>
+	<string>chingu-bookfinder-flutter</string>
+	<key>STORAGE_BUCKET</key>
+	<string>chingu-bookfinder-flutter.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:546355457454:ios:48d515e0ea4f7bba302c3f</string>
+</dict>
+</plist>

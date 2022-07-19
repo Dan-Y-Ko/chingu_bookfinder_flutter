@@ -17,6 +17,7 @@ dependencies:
   go_router: ^4.1.0
   google_books_api:
     path: ./packages/google_books_api
+  google_sign_in: ^5.4.0
   html: ^0.15.0
   network_image_mock: ^2.1.1
 
