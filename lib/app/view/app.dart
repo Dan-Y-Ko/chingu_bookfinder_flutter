@@ -5,23 +5,33 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+import 'package:chingu_bookfinder_flutter/auth/auth.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart';
-import 'package:chingu_bookfinder_flutter/book/repository/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../auth/auth.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (dynamic _) => BookRepository(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+          create: (dynamic _) => BookRepository(),
+        ),
+        RepositoryProvider(
+          create: (context) => GoogleAuthRepository(),
+        ),
+      ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider(
+            create: (context) => GoogleAuthBloc(
+              googleAuthRepository: context.read<GoogleAuthRepository>(),
+            ),
+          ),
           BlocProvider(
             create: (context) => BookListBloc(
               bookRepository: context.read<BookRepository>(),
