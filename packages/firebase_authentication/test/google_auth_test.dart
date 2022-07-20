@@ -1,16 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_authentication/firebase_authentication.dart';
-import 'package:firebase_authentication/src/firebase_error.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockFirebaseAuth extends Mock implements firebase_auth.FirebaseAuth {}
-
-class MockFirebaseUser extends Mock implements firebase_auth.User {}
 
 class MockGoogleSignIn extends Mock implements GoogleSignIn {}
 
@@ -22,8 +18,6 @@ class MockGoogleSignInAuthentication extends Mock
 class MockUserCredential extends Mock implements firebase_auth.UserCredential {}
 
 class FakeAuthCredential extends Fake implements firebase_auth.AuthCredential {}
-
-class FakeAuthProvider extends Fake implements AuthProvider {}
 
 void main() {
   late GoogleAuth googleAuth;
@@ -65,7 +59,6 @@ void main() {
 
   setUpAll(() {
     registerFallbackValue(FakeAuthCredential());
-    registerFallbackValue(FakeAuthProvider());
   });
 
   setUp(() {
