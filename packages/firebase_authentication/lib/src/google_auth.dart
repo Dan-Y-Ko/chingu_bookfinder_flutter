@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_authentication/src/firebase_error.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleAuth {
@@ -14,8 +15,8 @@ class GoogleAuth {
   Future<void> signOut() async {
     try {
       await _firebaseAuth.signOut();
-    } catch (e) {
-      throw Exception(e);
+    } catch (_) {
+      throw SignOutFailure;
     }
   }
 
@@ -29,8 +30,8 @@ class GoogleAuth {
       );
 
       await _firebaseAuth.signInWithCredential(credential);
-    } catch (e) {
-      throw Exception(e);
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      throw SignInWithGoogleFailure.fromCode(e.code);
     }
   }
 }

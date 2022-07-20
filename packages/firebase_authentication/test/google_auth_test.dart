@@ -1,12 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_authentication/firebase_authentication.dart';
+import 'package:firebase_authentication/src/firebase_error.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:google_sign_in_mocks/google_sign_in_mocks.dart';
-import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockFirebaseAuth extends Mock implements firebase_auth.FirebaseAuth {}
@@ -91,6 +90,7 @@ void main() {
     setUp(() {
       final googleSignInAuthentication = MockGoogleSignInAuthentication();
       final googleSignInAccount = MockGoogleSignInAccount();
+
       when(() => googleSignInAuthentication.accessToken)
           .thenReturn(accessToken);
       when(() => googleSignInAuthentication.idToken).thenReturn(idToken);
@@ -98,15 +98,37 @@ void main() {
           .thenAnswer((_) async => googleSignInAuthentication);
       when(() => googleSignIn.signIn())
           .thenAnswer((_) async => googleSignInAccount);
+    });
+
+    test('is called', () async {
       when(() => firebaseAuth.signInWithCredential(any()))
           .thenAnswer((_) => Future.value(MockUserCredential()));
-      when(() => firebaseAuth.signInWithPopup(any()))
-          .thenAnswer((_) => Future.value(MockUserCredential()));
-    });
-    test('is called', () async {
       await googleAuth.signIn();
       verify(() => googleSignIn.signIn()).called(1);
       verify(() => firebaseAuth.signInWithCredential(any())).called(1);
+    });
+
+    test('throws exception on error', () async {
+      when(() => firebaseAuth.signInWithCredential(any())).thenThrow(
+        firebase_auth.FirebaseAuthException(code: 'invalid-credential'),
+      );
+
+      expect(
+        () async => await googleAuth.signIn(),
+        throwsA(
+          isA<SignInWithGoogleFailure>(),
+        ),
+      );
+    });
+  });
+
+  group('sign out', () {
+    test('succeeds', () async {
+      when(() => firebaseAuth.signOut()).thenAnswer((_) async {});
+
+      await googleAuth.signOut();
+
+      verify(() => firebaseAuth.signOut()).called(1);
     });
   });
 }
