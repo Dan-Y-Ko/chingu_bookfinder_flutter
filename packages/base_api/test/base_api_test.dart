@@ -37,129 +37,75 @@ void main() {
       const url = '/mock';
       const query = {'q': 'mock-query'};
 
-      test('makes correct http request', () async {
-        final mockResponse = MockResponse();
+      group('success', () {
+        test('makes correct http request', () async {
+          final mockResponse = MockResponse();
 
-        when(() => mockResponse.statusCode).thenReturn(200);
-        when(() => mockResponse.body).thenReturn('''
+          when(() => mockResponse.statusCode).thenReturn(200);
+          when(() => mockResponse.body).thenReturn('''
           {
             "testkey": "testvalue"
           }
           ''');
 
-        when(() => httpClient.get(any())).thenAnswer(
-          (_) async => mockResponse,
-        );
+          when(() => httpClient.get(any())).thenAnswer(
+            (_) async => mockResponse,
+          );
 
-        try {
-          await baseApi.get(baseUrl, url, query);
-        } catch (_) {}
+          try {
+            await baseApi.get(baseUrl, url, query);
+          } catch (_) {}
 
-        verify(
-          () => httpClient.get(
-            Uri.https(baseUrl, url, query),
-          ),
-        ).called(1);
+          verify(
+            () => httpClient.get(
+              Uri.https(baseUrl, url, query),
+            ),
+          ).called(1);
+        });
       });
 
-      test('throws app exception on socket exception', () {
-        when(() => httpClient.get(any())).thenThrow(
-          const SocketException(
-            'No Internet connection',
-          ),
-        );
+      group('failure', () {
+        const statusCodes = [
+          400,
+          401,
+          403,
+          404,
+          500,
+        ];
 
-        expect(
-          () async => await baseApi.get(baseUrl, url, query),
-          throwsA(
-            isA<AppException>(),
-          ),
-        );
-      });
+        for (final statusCode in statusCodes) {
+          test('all error cases covered', () {
+            final mockResponse = MockResponse();
 
-      test('throws app exception on 400 status code response', () {
-        final mockResponse = MockResponse();
+            when(() => mockResponse.statusCode).thenReturn(statusCode);
+            when(() => mockResponse.body).thenReturn('');
+            when(() => httpClient.get(any())).thenAnswer(
+              (_) async => mockResponse,
+            );
 
-        when(() => mockResponse.statusCode).thenReturn(400);
-        when(() => mockResponse.body).thenReturn('');
-        when(() => httpClient.get(any())).thenAnswer(
-          (_) async => mockResponse,
-        );
+            expect(
+              () async => await baseApi.get(baseUrl, url, query),
+              throwsA(
+                isA<AppException>(),
+              ),
+            );
+          });
+        }
 
-        expect(
-          () async => await baseApi.get(baseUrl, url, query),
-          throwsA(
-            isA<AppException>(),
-          ),
-        );
-      });
+        test('throws app exception on socket exception', () {
+          when(() => httpClient.get(any())).thenThrow(
+            const SocketException(
+              'No Internet connection',
+            ),
+          );
 
-      test('throws app exception on 401 status code response', () {
-        final mockResponse = MockResponse();
-
-        when(() => mockResponse.statusCode).thenReturn(401);
-        when(() => mockResponse.body).thenReturn('');
-        when(() => httpClient.get(any())).thenAnswer(
-          (_) async => mockResponse,
-        );
-
-        expect(
-          () async => await baseApi.get(baseUrl, url, query),
-          throwsA(
-            isA<AppException>(),
-          ),
-        );
-      });
-
-      test('throws app exception on 403 status code response', () {
-        final mockResponse = MockResponse();
-
-        when(() => mockResponse.statusCode).thenReturn(403);
-        when(() => mockResponse.body).thenReturn('');
-        when(() => httpClient.get(any())).thenAnswer(
-          (_) async => mockResponse,
-        );
-
-        expect(
-          () async => await baseApi.get(baseUrl, url, query),
-          throwsA(
-            isA<AppException>(),
-          ),
-        );
-      });
-
-      test('throws app exception on 404 status code response', () {
-        final mockResponse = MockResponse();
-
-        when(() => mockResponse.statusCode).thenReturn(404);
-        when(() => mockResponse.body).thenReturn('');
-        when(() => httpClient.get(any())).thenAnswer(
-          (_) async => mockResponse,
-        );
-
-        expect(
-          () async => await baseApi.get(baseUrl, url, query),
-          throwsA(
-            isA<AppException>(),
-          ),
-        );
-      });
-
-      test('throws app exception on any unhandled status code response', () {
-        final mockResponse = MockResponse();
-
-        when(() => mockResponse.statusCode).thenReturn(500);
-        when(() => mockResponse.body).thenReturn('');
-        when(() => httpClient.get(any())).thenAnswer(
-          (_) async => mockResponse,
-        );
-
-        expect(
-          () async => await baseApi.get(baseUrl, url, query),
-          throwsA(
-            isA<AppException>(),
-          ),
-        );
+          expect(
+            () async => await baseApi.get(baseUrl, url, query),
+            throwsA(
+              isA<AppException>(),
+            ),
+          );
+        });
       });
     });
   });
