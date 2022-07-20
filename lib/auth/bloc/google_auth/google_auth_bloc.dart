@@ -54,12 +54,18 @@ class GoogleAuthBloc extends Bloc<GoogleAuthEvent, GoogleAuthState> {
       ),
     );
 
-    await _googleAuthRepository.signOut();
-
-    emit(
-      state.copyWith(
+    await emit.forEach(
+      Stream.fromFuture(
+        _googleAuthRepository.signOut(),
+      ),
+      onData: (_) => state.copyWith(
         status: GoogleAuthStatus.success,
         isAuthenticated: false,
+      ),
+      onError: (error, _) => state.copyWith(
+        status: GoogleAuthStatus.failure,
+        isAuthenticated: false,
+        error: error.toString(),
       ),
     );
   }

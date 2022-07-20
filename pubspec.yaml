@@ -18,13 +18,13 @@ dependencies:
   google_books_api:
     path: ./packages/google_books_api
   html: ^0.15.0
-  network_image_mock: ^2.1.1
 
 dev_dependencies:
   bloc_test: ^9.0.3
   flutter_test:
     sdk: flutter
   mocktail: ^0.2.0
+  network_image_mock: ^2.1.1
   very_good_analysis: ^2.4.0
 
 flutter:
