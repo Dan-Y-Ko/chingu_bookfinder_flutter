@@ -12,13 +12,13 @@ class GoogleAuthBloc extends Bloc<GoogleAuthEvent, GoogleAuthState> {
         super(
           const GoogleAuthState(),
         ) {
-    on<GoogleSignInRequested>(_googleSignInRequested);
-    on<SignOutRequested>(_signOutRequested);
+    on<GoogleSignInEvent>(_googleSignInEvent);
+    on<SignOutEvent>(_signOutEvent);
   }
 
   final GoogleAuthRepository _googleAuthRepository;
 
-  Future<void> _googleSignInRequested(
+  Future<void> _googleSignInEvent(
     GoogleAuthEvent event,
     Emitter<GoogleAuthState> emit,
   ) async {
@@ -44,7 +44,7 @@ class GoogleAuthBloc extends Bloc<GoogleAuthEvent, GoogleAuthState> {
     );
   }
 
-  Future<void> _signOutRequested(
+  Future<void> _signOutEvent(
     GoogleAuthEvent event,
     Emitter<GoogleAuthState> emit,
   ) async {

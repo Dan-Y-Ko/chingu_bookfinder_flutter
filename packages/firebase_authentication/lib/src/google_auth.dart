@@ -12,14 +12,18 @@ class GoogleAuth {
     }
   }
 
-  Future<UserCredential> signIn() async {
-    final googleUser = await GoogleSignIn().signIn();
-    final googleAuth = await googleUser?.authentication;
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
+  Future<void> signIn() async {
+    try {
+      final googleUser = await GoogleSignIn().signIn();
+      final googleAuth = await googleUser?.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
 
-    return FirebaseAuth.instance.signInWithCredential(credential);
+      await FirebaseAuth.instance.signInWithCredential(credential);
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 }

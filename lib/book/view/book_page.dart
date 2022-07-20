@@ -46,7 +46,7 @@ class BookPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () async {
                   context.read<GoogleAuthBloc>().add(
-                        SignOutRequested(),
+                        SignOutEvent(),
                       );
                 },
                 child: const Text('Sign Out'),

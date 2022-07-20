@@ -1,6 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_authentication/firebase_authentication.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleAuthRepository {
   GoogleAuthRepository({GoogleAuth? googleAuth})
@@ -12,11 +10,15 @@ class GoogleAuthRepository {
     try {
       await _googleAuth.signOut();
     } catch (e) {
-      throw Exception(e);
+      rethrow;
     }
   }
 
-  Future<UserCredential> signIn() async {
-    return _googleAuth.signIn();
+  Future<void> signIn() async {
+    try {
+      await _googleAuth.signIn();
+    } catch (e) {
+      rethrow;
+    }
   }
 }

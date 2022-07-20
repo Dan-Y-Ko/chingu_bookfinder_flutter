@@ -19,7 +19,7 @@ class SignInPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   context.read<GoogleAuthBloc>().add(
-                        GoogleSignInRequested(),
+                        GoogleSignInEvent(),
                       );
 
                   context.go('/book');
