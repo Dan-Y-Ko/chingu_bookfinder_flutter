@@ -30,7 +30,7 @@ class GoogleAuthBloc extends Bloc<GoogleAuthEvent, GoogleAuthState> {
 
     await emit.forEach(
       Stream.fromFuture(
-        _googleAuthRepository.signInWithGoogle(),
+        _googleAuthRepository.signIn(),
       ),
       onData: (_) => state.copyWith(
         status: GoogleAuthStatus.success,
