@@ -12,12 +12,12 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../helpers/helpers.dart';
 
 void main() {
-  group('App', () {
-    setUp(() {});
+  // group('App', () {
+  //   setUp(() {});
 
-    testWidgets('renders Book Page', (tester) async {
-      await tester.pumpApp(const App());
-      expect(find.byType(BookPage), findsOneWidget);
-    });
-  });
+  //   testWidgets('renders Book Page', (tester) async {
+  //     await tester.pumpApp(const App());
+  //     expect(find.byType(BookPage), findsOneWidget);
+  //   });
+  // });
 }
