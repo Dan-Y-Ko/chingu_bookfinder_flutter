@@ -8,10 +8,9 @@ environment:
 
 dependencies:
   bloc: ^8.0.3
-  cloud_firestore: ^3.3.0
   equatable: ^2.0.3
-  firebase_authentication:
-    path: ./packages/firebase_authentication
+  firebase_repository:
+    path: ./packages/firebase_repository
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1

@@ -1,5 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:firebase_authentication/src/firebase_error.dart';
+import 'package:firebase_repository/firebase_repository.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleAuth {
@@ -20,7 +21,7 @@ class GoogleAuth {
     }
   }
 
-  Future<void> signIn() async {
+  Future<String?> signIn() async {
     try {
       final googleUser = await _googleSignIn.signIn();
       final googleAuth = await googleUser?.authentication;
@@ -29,9 +30,34 @@ class GoogleAuth {
         idToken: googleAuth?.idToken,
       );
 
-      await _firebaseAuth.signInWithCredential(credential);
+      final user = await _firebaseAuth.signInWithCredential(credential);
+
+      await _createUser(user.user?.uid);
+
+      return user.user?.uid;
     } on firebase_auth.FirebaseAuthException catch (e) {
       throw SignInWithGoogleFailure.fromCode(e.code);
+    }
+  }
+
+  Future<void> _createUser(String? id) async {
+    try {
+      final db = FirebaseFirestore.instance;
+
+      final QuerySnapshot result = await FirebaseFirestore.instance
+          .collection('Users')
+          .where('id', isEqualTo: id)
+          .get();
+
+      if (result.docs.isEmpty) {
+        await db.collection("Users").add({
+          "id": id,
+        });
+      }
+
+      return;
+    } catch (e) {
+      throw Exception('Error');
     }
   }
 }

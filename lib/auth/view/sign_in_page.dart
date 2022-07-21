@@ -15,7 +15,15 @@ class SignInPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Sign in page'),
+              BlocBuilder<GoogleAuthBloc, GoogleAuthState>(
+                builder: (context, state) {
+                  if (state.status == GoogleAuthStatus.loading) {
+                    return const CircularProgressIndicator();
+                  }
+
+                  return const SizedBox();
+                },
+              ),
               ElevatedButton(
                 onPressed: () {
                   context.read<GoogleAuthBloc>().add(
