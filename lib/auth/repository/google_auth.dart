@@ -1,4 +1,4 @@
-import 'package:firebase_repository/firebase_repository.dart';
+import 'package:firebase_api/firebase_api.dart';
 
 class GoogleAuthRepository {
   GoogleAuthRepository({GoogleAuth? googleAuth})

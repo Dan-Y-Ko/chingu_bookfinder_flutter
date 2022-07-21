@@ -9,8 +9,8 @@ environment:
 dependencies:
   bloc: ^8.0.3
   equatable: ^2.0.3
-  firebase_repository:
-    path: ./packages/firebase_repository
+  firebase_api:
+    path: ./packages/firebase_api
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1

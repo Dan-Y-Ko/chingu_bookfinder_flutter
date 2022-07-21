@@ -20,6 +20,7 @@ class BookPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SearchInput(),
               const SizedBox(

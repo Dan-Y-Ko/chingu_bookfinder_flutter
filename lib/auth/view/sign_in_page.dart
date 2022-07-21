@@ -15,15 +15,6 @@ class SignInPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              BlocBuilder<GoogleAuthBloc, GoogleAuthState>(
-                builder: (context, state) {
-                  if (state.status == GoogleAuthStatus.loading) {
-                    return const CircularProgressIndicator();
-                  }
-
-                  return const SizedBox();
-                },
-              ),
               ElevatedButton(
                 onPressed: () {
                   context.read<GoogleAuthBloc>().add(
@@ -32,7 +23,20 @@ class SignInPage extends StatelessWidget {
 
                   context.go('/book');
                 },
-                child: const Text('Sign in with google'),
+                child: BlocBuilder<GoogleAuthBloc, GoogleAuthState>(
+                  builder: (context, state) {
+                    if (state.status == GoogleAuthStatus.loading) {
+                      return const Padding(
+                        padding: EdgeInsets.all(10),
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      );
+                    }
+
+                    return const Text('Sign in with google');
+                  },
+                ),
               ),
             ],
           ),
