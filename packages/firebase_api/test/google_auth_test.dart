@@ -113,6 +113,18 @@ void main() {
         ),
       );
     });
+
+    test('returns user', () async {
+      final mockUser = MockUserCredential();
+
+      when(() => firebaseAuth.signInWithCredential(any()))
+          .thenAnswer((_) => Future.value(mockUser));
+      final user = await googleAuth.signIn();
+
+      expect(user, mockUser);
+    });
+
+    test('creates new user in firestore if user exists already', () async {});
   });
 
   group('sign out', () {

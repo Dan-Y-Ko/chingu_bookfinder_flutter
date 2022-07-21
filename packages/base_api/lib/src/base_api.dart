@@ -17,8 +17,6 @@ class BaseApi {
     String url,
     Map<String, String>? query,
   ) async {
-    dynamic responseJson;
-
     try {
       final fullUrl = Uri.https(
         baseUrl,
@@ -28,12 +26,10 @@ class BaseApi {
 
       final response = await _httpClient.get(fullUrl);
 
-      responseJson = _returnResponse(response);
+      return _returnResponse(response);
     } on SocketException {
       throw AppException('No Internet connection');
     }
-
-    return responseJson;
   }
 
   dynamic _returnResponse(http.Response response) {
