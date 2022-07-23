@@ -42,6 +42,7 @@ class DefaultFirebaseOptions {
           'DefaultFirebaseOptions have not been configured for linux - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
+      // ignore: no_default_cases
       default:
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
@@ -63,8 +64,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '546355457454',
     projectId: 'chingu-bookfinder-flutter',
     storageBucket: 'chingu-bookfinder-flutter.appspot.com',
-    androidClientId: '546355457454-kdu9ik159vm0eitfgm9fsidou0ja1u0r.apps.googleusercontent.com',
-    iosClientId: '546355457454-f00t6a41ogoqksb6o5159bjbmonv17nh.apps.googleusercontent.com',
+    androidClientId:
+        '546355457454-kdu9ik159vm0eitfgm9fsidou0ja1u0r.apps.googleusercontent.com',
+    iosClientId:
+        '546355457454-f00t6a41ogoqksb6o5159bjbmonv17nh.apps.googleusercontent.com',
     iosBundleId: 'com.example.verygoodcore.chingu-bookfinder-flutter',
   );
 }

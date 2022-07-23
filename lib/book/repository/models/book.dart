@@ -26,6 +26,11 @@ class Book extends Equatable {
 
   @override
   String toString() {
-    return 'Book(id: $id, thumbnail: $thumbnail, authors: $authors, publisher: $publisher, title: $title)';
+    return '''
+      Book(
+        id: $id, thumbnail: $thumbnail, authors: $authors, 
+        publisher: $publisher, title: $title,
+      )
+    ''';
   }
 }

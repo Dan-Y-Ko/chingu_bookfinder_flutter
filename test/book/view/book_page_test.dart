@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart';
-import 'package:chingu_bookfinder_flutter/book/repository/repository.dart';
 import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -17,17 +16,17 @@ class MockBookDetailBloc extends MockBloc<BookDetailEvent, BookDetailState>
 
 void main() {
   group('Book List Page', () {
-    late BookListBloc _bookListBloc;
+    late BookListBloc bookListBloc;
 
     Future<void> pumpBookPageWithBloc(WidgetTester tester) async {
       await tester.pumpApp(
         const BookPage(),
-        bookListBloc: _bookListBloc,
+        bookListBloc: bookListBloc,
       );
     }
 
     setUp(() {
-      _bookListBloc = MockBookListBloc();
+      bookListBloc = MockBookListBloc();
     });
 
     testWidgets('search input is rendered', (tester) async {
@@ -40,7 +39,7 @@ void main() {
 
     testWidgets('Book List Empty is rendered on initial status',
         (tester) async {
-      when(() => _bookListBloc.state).thenReturn(
+      when(() => bookListBloc.state).thenReturn(
         const BookListState(),
       );
 
@@ -50,7 +49,7 @@ void main() {
     });
 
     testWidgets('Loading is rendered on loading status', (tester) async {
-      when(() => _bookListBloc.state).thenReturn(
+      when(() => bookListBloc.state).thenReturn(
         const BookListState(status: BookListStatus.loading),
       );
 
@@ -65,7 +64,7 @@ void main() {
     });
 
     testWidgets('Book List is rendered on success status', (tester) async {
-      when(() => _bookListBloc.state).thenReturn(
+      when(() => bookListBloc.state).thenReturn(
         const BookListState(status: BookListStatus.success),
       );
 
@@ -80,7 +79,7 @@ void main() {
     });
 
     testWidgets('Error Screen is rendered on error status', (tester) async {
-      when(() => _bookListBloc.state).thenReturn(
+      when(() => bookListBloc.state).thenReturn(
         const BookListState(status: BookListStatus.failure),
       );
 

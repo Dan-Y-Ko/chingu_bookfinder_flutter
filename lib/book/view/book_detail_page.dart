@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BookDetailPage extends StatelessWidget {
-  const BookDetailPage({required this.id, Key? key}) : super(key: key);
-
-  final String id;
+  const BookDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +27,7 @@ class BookDetailPage extends StatelessWidget {
           builder: (context, state) {
             switch (state.status) {
               case BookDetailStatus.initial:
-                return const SizedBox(width: 0, height: 0);
+                return const SizedBox();
               case BookDetailStatus.loading:
                 return const Loading();
               case BookDetailStatus.success:

@@ -12,21 +12,21 @@ class MockBookDetailBloc extends MockBloc<BookDetailEvent, BookDetailState>
 
 void main() {
   group('book detail page', () {
-    late BookDetailBloc _bookDetailBloc;
+    late BookDetailBloc bookDetailBloc;
 
     Future<void> pumpBookDetailPageWithBloc(WidgetTester tester) async {
       await tester.pumpApp(
-        const BookDetailPage(id: '1'),
-        bookDetailBloc: _bookDetailBloc,
+        const BookDetailPage(),
+        bookDetailBloc: bookDetailBloc,
       );
     }
 
     setUp(() {
-      _bookDetailBloc = MockBookDetailBloc();
+      bookDetailBloc = MockBookDetailBloc();
     });
 
     testWidgets('renders nothing on initial state', (tester) async {
-      when(() => _bookDetailBloc.state).thenReturn(
+      when(() => bookDetailBloc.state).thenReturn(
         const BookDetailState(),
       );
 
@@ -36,7 +36,7 @@ void main() {
     });
 
     testWidgets('Loading is rendered on loading status', (tester) async {
-      when(() => _bookDetailBloc.state).thenReturn(
+      when(() => bookDetailBloc.state).thenReturn(
         const BookDetailState(status: BookDetailStatus.loading),
       );
 
@@ -52,7 +52,7 @@ void main() {
 
     testWidgets('Book Detail Page is rendered on success status',
         (tester) async {
-      when(() => _bookDetailBloc.state).thenReturn(
+      when(() => bookDetailBloc.state).thenReturn(
         const BookDetailState(status: BookDetailStatus.success),
       );
 
@@ -67,7 +67,7 @@ void main() {
     });
 
     testWidgets('Error Screen is rendered on error status', (tester) async {
-      when(() => _bookDetailBloc.state).thenReturn(
+      when(() => bookDetailBloc.state).thenReturn(
         const BookDetailState(status: BookDetailStatus.failure),
       );
 

@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:base_api/base_api.dart';
 import 'package:http/http.dart' as http;
-
-import './custom_api_exception.dart';
 
 class BaseApi {
   BaseApi({

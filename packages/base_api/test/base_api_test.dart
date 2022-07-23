@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
-
 import 'package:base_api/base_api.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
@@ -27,7 +26,7 @@ void main() {
     });
 
     group('constructor', () {
-      test('does not require an httpClient', () {
+      test('instantiates internal httpClient when not injected', () {
         expect(BaseApi(), isNotNull);
       });
     });

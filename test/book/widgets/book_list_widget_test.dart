@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart';
-import 'package:chingu_bookfinder_flutter/book/repository/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -16,8 +15,8 @@ class MockBookDetailBloc extends MockBloc<BookDetailEvent, BookDetailState>
 
 void main() {
   group('book detail card', () {
-    late BookListBloc _bookListBloc;
-    late BookDetailBloc _bookDetailBloc;
+    late BookListBloc bookListBloc;
+    late BookDetailBloc bookDetailBloc;
 
     const mockBook = Book(
       id: '1',
@@ -31,16 +30,16 @@ void main() {
       await mockNetworkImagesFor(
         () => tester.pumpApp(
           const BookList(),
-          bookListBloc: _bookListBloc,
+          bookListBloc: bookListBloc,
         ),
       );
     }
 
     setUp(() {
-      _bookListBloc = MockBookListBloc();
-      _bookDetailBloc = MockBookDetailBloc();
+      bookListBloc = MockBookListBloc();
+      bookDetailBloc = MockBookDetailBloc();
 
-      when(() => _bookListBloc.state).thenReturn(
+      when(() => bookListBloc.state).thenReturn(
         const BookListState(
           status: BookListStatus.success,
           books: [mockBook],
@@ -59,12 +58,12 @@ void main() {
       (tester) async {
         final mockGoRouter = MockGoRouter();
 
-        when(() => _bookDetailBloc.state).thenReturn(
+        when(() => bookDetailBloc.state).thenReturn(
           const BookDetailState(),
         );
 
         when(
-          () => _bookDetailBloc.add(
+          () => bookDetailBloc.add(
             const GetBookDetailEvent(
               id: '1',
             ),
@@ -73,8 +72,8 @@ void main() {
 
         await tester.pumpWithRoute(
           const BookList(),
-          bookListBloc: _bookListBloc,
-          bookDetailBloc: _bookDetailBloc,
+          bookListBloc: bookListBloc,
+          bookDetailBloc: bookDetailBloc,
           mockGoRouter: mockGoRouter,
         );
 

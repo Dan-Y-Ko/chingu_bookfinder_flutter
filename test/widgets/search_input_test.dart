@@ -12,26 +12,26 @@ class MockBookListBloc extends MockBloc<BookListEvent, BookListState>
 
 void main() {
   group('search input', () {
-    late BookListBloc _bookListBloc;
+    late BookListBloc bookListBloc;
 
     setUp(() {
-      _bookListBloc = MockBookListBloc();
+      bookListBloc = MockBookListBloc();
     });
 
     testWidgets('triggeres fetch on submit', (tester) async {
-      when(() => _bookListBloc.state).thenReturn(
+      when(() => bookListBloc.state).thenReturn(
         const BookListState(),
       );
 
       when(
-        () => _bookListBloc.add(
+        () => bookListBloc.add(
           const GetBooksEvent(query: 'asd'),
         ),
       ).thenAnswer((_) async {});
 
       await tester.pumpApp(
         const SearchInput(),
-        bookListBloc: _bookListBloc,
+        bookListBloc: bookListBloc,
       );
 
       final input = find.byType(TextField);
@@ -45,7 +45,7 @@ void main() {
       await tester.pumpAndSettle();
 
       verify(
-        () => _bookListBloc.add(
+        () => bookListBloc.add(
           const GetBooksEvent(query: 'asd'),
         ),
       ).called(1);

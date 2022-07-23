@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart';
-import 'package:chingu_bookfinder_flutter/book/repository/repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:network_image_mock/network_image_mock.dart';
@@ -12,7 +11,7 @@ class MockBookDetailBloc extends MockBloc<BookDetailEvent, BookDetailState>
 
 void main() {
   group('book detail card', () {
-    late BookDetailBloc _bookDetailBloc;
+    late BookDetailBloc bookDetailBloc;
 
     const mockBook = BookDetail(
       id: '1',
@@ -27,15 +26,15 @@ void main() {
       await mockNetworkImagesFor(
         () => tester.pumpApp(
           const BookDetailCard(),
-          bookDetailBloc: _bookDetailBloc,
+          bookDetailBloc: bookDetailBloc,
         ),
       );
     }
 
     setUp(() {
-      _bookDetailBloc = MockBookDetailBloc();
+      bookDetailBloc = MockBookDetailBloc();
 
-      when(() => _bookDetailBloc.state).thenReturn(
+      when(() => bookDetailBloc.state).thenReturn(
         const BookDetailState(
           status: BookDetailStatus.success,
           book: mockBook,

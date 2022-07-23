@@ -17,27 +17,31 @@ class GoogleAuth {
     try {
       await _firebaseAuth.signOut();
     } catch (_) {
-      throw SignOutFailure;
+      throw SignOutFailure();
     }
   }
 
   Future<String?> signIn() async {
     try {
-      final googleUser = await _googleSignIn.signIn();
-      final googleAuth = await googleUser?.authentication;
-      final credential = firebase_auth.GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
-
-      final user = await _firebaseAuth.signInWithCredential(credential);
-
-      await _createUser(user.user?.uid);
-
-      return user.user?.uid;
+      return await _callGoogleSignIn();
     } on firebase_auth.FirebaseAuthException catch (e) {
       throw SignInWithGoogleFailure.fromCode(e.code);
     }
+  }
+
+  Future<String?> _callGoogleSignIn() async {
+    final googleUser = await _googleSignIn.signIn();
+    final googleAuth = await googleUser?.authentication;
+    final credential = firebase_auth.GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    final user = await _firebaseAuth.signInWithCredential(credential);
+
+    await _createUser(user.user?.uid);
+
+    return user.user?.uid;
   }
 
   Future<void> _createUser(String? id) async {

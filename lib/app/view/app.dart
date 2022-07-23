@@ -46,7 +46,7 @@ class App extends StatelessWidget {
         child: Builder(
           builder: (context) {
             final authState = context.read<GoogleAuthBloc>();
-            final _router = GoRouter(
+            final router = GoRouter(
               urlPathStrategy: UrlPathStrategy.path,
               routes: [
                 GoRoute(
@@ -61,9 +61,7 @@ class App extends StatelessWidget {
                     GoRoute(
                       name: 'book_detail_route',
                       path: 'book/:id',
-                      builder: (context, state) => BookDetailPage(
-                        id: state.params['id']!,
-                      ),
+                      builder: (context, state) => const BookDetailPage(),
                     )
                   ],
                 ),
@@ -87,9 +85,9 @@ class App extends StatelessWidget {
 
             return MaterialApp.router(
               debugShowCheckedModeBanner: false,
-              routeInformationProvider: _router.routeInformationProvider,
-              routeInformationParser: _router.routeInformationParser,
-              routerDelegate: _router.routerDelegate,
+              routeInformationProvider: router.routeInformationProvider,
+              routeInformationParser: router.routeInformationParser,
+              routerDelegate: router.routerDelegate,
               title: 'Chingu Bookfinder',
             );
           },
