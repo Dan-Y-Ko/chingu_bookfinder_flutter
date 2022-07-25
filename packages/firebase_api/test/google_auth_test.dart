@@ -81,9 +81,9 @@ void main() {
     test('succeeds', () async {
       await firebaseAuth.signInWithCredential(credential!);
 
-      expect(
+      expectLater(
         await googleAuth.signIn(),
-        isNot(SignInWithGoogleFailure),
+        'some_random_id',
       );
     });
 
@@ -113,7 +113,7 @@ void main() {
 
       expect(
         firebaseAuth.signOut(),
-        isNot(SignInWithGoogleFailure),
+        completes,
       );
     });
   });
