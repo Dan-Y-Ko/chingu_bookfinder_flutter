@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:google_books_api/google_books_api.dart';
 import 'package:google_books_api/src/models/book_volume.dart';
@@ -35,9 +34,7 @@ class GoogleBooksApiClient {
           .toList();
 
       return books;
-    } on SocketException {
-      rethrow;
-    } on AppException {
+    } catch (_) {
       rethrow;
     }
   }
@@ -53,9 +50,7 @@ class GoogleBooksApiClient {
       final responseJson = jsonDecode(response.body) as Map<String, dynamic>;
 
       return BookVolume.fromJson(responseJson);
-    } on SocketException {
-      rethrow;
-    } on AppException {
+    } catch (_) {
       rethrow;
     }
   }

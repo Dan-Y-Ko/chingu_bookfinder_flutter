@@ -1,12 +1,12 @@
 class AppException implements Exception {
   AppException(
-    this.message,
-  );
+    String message,
+  ) : _message = message;
 
-  final String message;
+  final String _message;
 
   @override
   String toString() {
-    return '$message';
+    return _message;
   }
 }

@@ -16,11 +16,13 @@ dependencies:
 
 dev_dependencies:
   coverage: ^1.0.3
-  firebase_auth_platform_interface: ^6.3.2
+  fake_cloud_firestore: ^1.2.4
+  firebase_auth_mocks: ^0.8.4
   firebase_core_platform_interface: ^4.4.1
   flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
+  google_sign_in_mocks: ^0.2.1
   mocktail: ^0.3.0
 
 dependency_overrides:

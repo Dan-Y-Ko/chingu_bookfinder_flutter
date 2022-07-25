@@ -7,18 +7,17 @@ class GoogleAuth {
   GoogleAuth({
     firebase_auth.FirebaseAuth? firebaseAuth,
     GoogleSignIn? googleSignIn,
+    FirebaseFirestore? db,
   })  : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
-        _googleSignIn = googleSignIn ?? GoogleSignIn();
+        _googleSignIn = googleSignIn ?? GoogleSignIn(),
+        _db = db ?? FirebaseFirestore.instance;
 
   final firebase_auth.FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
+  final FirebaseFirestore _db;
 
   Future<void> signOut() async {
-    try {
-      await _firebaseAuth.signOut();
-    } catch (_) {
-      throw SignOutFailure();
-    }
+    await _firebaseAuth.signOut();
   }
 
   Future<String?> signIn() async {
@@ -45,23 +44,13 @@ class GoogleAuth {
   }
 
   Future<void> _createUser(String? id) async {
-    try {
-      final db = FirebaseFirestore.instance;
+    final QuerySnapshot result =
+        await _db.collection('Users').where('id', isEqualTo: id).get();
 
-      final QuerySnapshot result = await FirebaseFirestore.instance
-          .collection('Users')
-          .where('id', isEqualTo: id)
-          .get();
-
-      if (result.docs.isEmpty) {
-        await db.collection("Users").add({
-          "id": id,
-        });
-      }
-
-      return;
-    } catch (e) {
-      throw Exception('Error');
+    if (result.docs.isEmpty) {
+      await _db.collection("Users").add({
+        "id": id,
+      });
     }
   }
 }

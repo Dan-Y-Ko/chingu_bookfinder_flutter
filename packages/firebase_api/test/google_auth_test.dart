@@ -1,28 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_api/firebase_api.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:mocktail/mocktail.dart';
-
-class MockFirebaseAuth extends Mock implements firebase_auth.FirebaseAuth {}
-
-class MockGoogleSignIn extends Mock implements GoogleSignIn {}
-
-class MockGoogleSignInAccount extends Mock implements GoogleSignInAccount {}
-
-class MockGoogleSignInAuthentication extends Mock
-    implements GoogleSignInAuthentication {}
-
-class MockUserCredential extends Mock implements firebase_auth.UserCredential {}
-
-class FakeAuthCredential extends Fake implements firebase_auth.AuthCredential {}
+import 'package:google_sign_in_mocks/google_sign_in_mocks.dart';
 
 void main() {
   late GoogleAuth googleAuth;
   late firebase_auth.FirebaseAuth firebaseAuth;
+  late firebase_auth.FirebaseAuth authWithException;
   late GoogleSignIn googleSignIn;
+  late FirebaseFirestore instance;
 
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -57,16 +49,14 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
 
-  setUpAll(() {
-    registerFallbackValue(FakeAuthCredential());
-  });
-
   setUp(() {
+    instance = FakeFirebaseFirestore();
     firebaseAuth = MockFirebaseAuth();
     googleSignIn = MockGoogleSignIn();
     googleAuth = GoogleAuth(
       firebaseAuth: firebaseAuth,
       googleSignIn: googleSignIn,
+      db: instance,
     );
   });
 
@@ -77,63 +67,54 @@ void main() {
   });
 
   group('sign in', () {
-    const accessToken = 'access-token';
-    const idToken = 'id-token';
+    firebase_auth.AuthCredential? credential;
 
-    setUp(() {
-      final googleSignInAuthentication = MockGoogleSignInAuthentication();
-      final googleSignInAccount = MockGoogleSignInAccount();
-
-      when(() => googleSignInAuthentication.accessToken)
-          .thenReturn(accessToken);
-      when(() => googleSignInAuthentication.idToken).thenReturn(idToken);
-      when(() => googleSignInAccount.authentication)
-          .thenAnswer((_) async => googleSignInAuthentication);
-      when(() => googleSignIn.signIn())
-          .thenAnswer((_) async => googleSignInAccount);
+    setUp(() async {
+      final signinAccount = await googleSignIn.signIn();
+      final fakeGoogleAuth = await signinAccount?.authentication;
+      credential = firebase_auth.GoogleAuthProvider.credential(
+        accessToken: fakeGoogleAuth?.accessToken,
+        idToken: fakeGoogleAuth?.idToken,
+      );
     });
 
-    test('is called', () async {
-      when(() => firebaseAuth.signInWithCredential(any()))
-          .thenAnswer((_) => Future.value(MockUserCredential()));
-      await googleAuth.signIn();
-      verify(() => googleSignIn.signIn()).called(1);
-      verify(() => firebaseAuth.signInWithCredential(any())).called(1);
+    test('succeeds', () async {
+      await firebaseAuth.signInWithCredential(credential!);
+
+      expect(
+        await googleAuth.signIn(),
+        isNot(SignInWithGoogleFailure),
+      );
     });
 
     test('throws exception on error', () async {
-      when(() => firebaseAuth.signInWithCredential(any())).thenThrow(
-        firebase_auth.FirebaseAuthException(code: 'invalid-credential'),
+      authWithException = MockFirebaseAuth(
+        authExceptions: AuthExceptions(
+          signInWithCredential:
+              firebase_auth.FirebaseAuthException(code: 'invalid-credential'),
+        ),
+      );
+
+      final googleAuthWithError = GoogleAuth(
+        firebaseAuth: authWithException,
+        googleSignIn: googleSignIn,
       );
 
       expect(
-        () async => await googleAuth.signIn(),
-        throwsA(
-          isA<SignInWithGoogleFailure>(),
-        ),
+        () async => await googleAuthWithError.signIn(),
+        throwsA(isA<SignInWithGoogleFailure>()),
       );
     });
-
-    test('returns user', () async {
-      final mockUser = MockUserCredential();
-
-      when(() => firebaseAuth.signInWithCredential(any()))
-          .thenAnswer((_) => Future.value(mockUser));
-      final user = await googleAuth.signIn();
-
-      expect(user, mockUser);
-    });
-
-    test('creates new user in firestore if user exists already', () async {});
   });
 
   group('sign out', () {
     test('succeeds', () async {
-      when(() => firebaseAuth.signOut()).thenAnswer((_) async {});
-
       await googleAuth.signOut();
 
-      verify(() => firebaseAuth.signOut()).called(1);
+      expect(
+        firebaseAuth.signOut(),
+        isNot(SignInWithGoogleFailure),
+      );
     });
   });
 }
