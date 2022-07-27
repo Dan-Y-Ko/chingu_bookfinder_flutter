@@ -6,7 +6,7 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../helpers/helpers.dart';
 
-class MockBookRepository extends Mock implements BookRepository {}
+class MockBookRepository extends Mock implements BookService {}
 
 class MockBookListBloc extends MockBloc<BookListEvent, BookListState>
     implements BookListBloc {}

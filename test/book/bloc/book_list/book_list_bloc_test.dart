@@ -1,34 +1,33 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart';
-import 'package:chingu_bookfinder_flutter/book/repository/repository.dart'
-    as book_repository;
+import 'package:chingu_bookfinder_flutter/book/service/service.dart'
+    as book_service;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockBookRepository extends Mock
-    implements book_repository.BookRepository {}
+class MockBookService extends Mock implements book_service.BookService {}
 
-class MockBook extends Mock implements book_repository.Book {}
+class MockBook extends Mock implements Book {}
 
 void main() {
   group('book bloc', () {
-    late book_repository.Book book;
-    late book_repository.BookRepository bookRepository;
+    late Book book;
+    late book_service.BookService bookService;
     late BookListBloc bookBloc;
 
     setUp(() {
       book = MockBook();
-      bookRepository = MockBookRepository();
+      bookService = MockBookService();
       when(() => book.id).thenReturn('1');
       when(() => book.authors).thenReturn(['author 1', 'author 2']);
       when(() => book.publisher).thenReturn('publisher');
       when(() => book.thumbnail).thenReturn('image');
       when(() => book.title).thenReturn('title');
-      when(() => bookRepository.getBooks(any())).thenAnswer(
+      when(() => bookService.getBooks(any())).thenAnswer(
         (_) async => [book],
       );
 
-      bookBloc = BookListBloc(bookRepository: bookRepository);
+      bookBloc = BookListBloc(bookService: bookService);
     });
 
     group('constructor', () {
@@ -64,7 +63,7 @@ void main() {
         'emits failure status when error occurs',
         setUp: () {
           when(
-            () => bookRepository.getBooks(any()),
+            () => bookService.getBooks(any()),
           ).thenAnswer(
             (_) => Future.error(
               'Status Code: 404 Resource not found',

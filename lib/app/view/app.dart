@@ -19,27 +19,27 @@ class App extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-          create: (dynamic _) => BookRepository(),
+          create: (dynamic _) => BookService(),
         ),
         RepositoryProvider(
-          create: (context) => GoogleAuthRepository(),
+          create: (context) => GoogleAuthService(),
         ),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
             create: (context) => GoogleAuthBloc(
-              googleAuthRepository: context.read<GoogleAuthRepository>(),
+              googleAuthService: context.read<GoogleAuthService>(),
             ),
           ),
           BlocProvider(
             create: (context) => BookListBloc(
-              bookRepository: context.read<BookRepository>(),
+              bookService: context.read<BookService>(),
             ),
           ),
           BlocProvider(
             create: (context) => BookDetailBloc(
-              bookRepository: context.read<BookRepository>(),
+              bookService: context.read<BookService>(),
             ),
           ),
         ],

@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:base_api/base_api.dart';
-import 'package:chingu_bookfinder_flutter/book/repository/repository.dart';
+import 'package:chingu_bookfinder_flutter/book/book.dart';
 import 'package:google_books_api/google_books_api.dart' hide Book;
 import 'package:html/parser.dart' show parse;
 
-class BookRepository {
-  BookRepository({GoogleBooksApiClient? googleBooksApiClient})
+class BookService {
+  BookService({GoogleBooksApiClient? googleBooksApiClient})
       : _googleBooksApiClient = googleBooksApiClient ?? GoogleBooksApiClient();
 
   final GoogleBooksApiClient _googleBooksApiClient;

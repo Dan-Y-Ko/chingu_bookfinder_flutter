@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:chingu_bookfinder_flutter/book/repository/repository.dart';
+import 'package:chingu_bookfinder_flutter/book/book.dart';
 import 'package:equatable/equatable.dart';
 
 part 'book_detail_event.dart';
@@ -7,15 +7,15 @@ part 'book_detail_state.dart';
 
 class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
   BookDetailBloc({
-    required BookRepository bookRepository,
-  })  : _bookRepository = bookRepository,
+    required BookService bookService,
+  })  : _bookService = bookService,
         super(
           const BookDetailState(),
         ) {
     on<GetBookDetailEvent>(_getBookDetailEvent);
   }
 
-  final BookRepository _bookRepository;
+  final BookService _bookService;
 
   Future<void> _getBookDetailEvent(
     GetBookDetailEvent event,
@@ -29,7 +29,7 @@ class BookDetailBloc extends Bloc<BookDetailEvent, BookDetailState> {
 
     await emit.forEach<BookDetail>(
       Stream.fromFuture(
-        _bookRepository.getBook(event.id),
+        _bookService.getBook(event.id),
       ),
       onData: (book) => state.copyWith(
         status: BookDetailStatus.success,

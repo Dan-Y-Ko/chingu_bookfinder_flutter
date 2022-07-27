@@ -1,7 +1,7 @@
 import 'package:firebase_api/firebase_api.dart';
 
-class GoogleAuthRepository {
-  GoogleAuthRepository({GoogleAuth? googleAuth})
+class GoogleAuthService {
+  GoogleAuthService({GoogleAuth? googleAuth})
       : _googleAuth = googleAuth ?? GoogleAuth();
 
   final GoogleAuth _googleAuth;

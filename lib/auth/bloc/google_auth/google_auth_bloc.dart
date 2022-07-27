@@ -7,8 +7,8 @@ part 'google_auth_state.dart';
 
 class GoogleAuthBloc extends Bloc<GoogleAuthEvent, GoogleAuthState> {
   GoogleAuthBloc({
-    required GoogleAuthRepository googleAuthRepository,
-  })  : _googleAuthRepository = googleAuthRepository,
+    required GoogleAuthService googleAuthService,
+  })  : _googleAuthService = googleAuthService,
         super(
           const GoogleAuthState(),
         ) {
@@ -16,7 +16,7 @@ class GoogleAuthBloc extends Bloc<GoogleAuthEvent, GoogleAuthState> {
     on<SignOutEvent>(_signOutEvent);
   }
 
-  final GoogleAuthRepository _googleAuthRepository;
+  final GoogleAuthService _googleAuthService;
 
   Future<void> _googleSignInEvent(
     GoogleAuthEvent event,
@@ -30,7 +30,7 @@ class GoogleAuthBloc extends Bloc<GoogleAuthEvent, GoogleAuthState> {
 
     await emit.forEach(
       Stream.fromFuture(
-        _googleAuthRepository.signIn(),
+        _googleAuthService.signIn(),
       ),
       onData: (_) => state.copyWith(
         status: GoogleAuthStatus.success,
@@ -56,7 +56,7 @@ class GoogleAuthBloc extends Bloc<GoogleAuthEvent, GoogleAuthState> {
 
     await emit.forEach(
       Stream.fromFuture(
-        _googleAuthRepository.signOut(),
+        _googleAuthService.signOut(),
       ),
       onData: (_) => state.copyWith(
         status: GoogleAuthStatus.success,

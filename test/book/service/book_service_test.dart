@@ -1,5 +1,5 @@
 import 'package:base_api/base_api.dart' show AppException;
-import 'package:chingu_bookfinder_flutter/book/repository/repository.dart';
+import 'package:chingu_bookfinder_flutter/book/book.dart';
 import 'package:google_books_api/google_books_api.dart' as google_books_api;
 import 'package:google_books_api/src/models/book_volume.dart' as book_volume;
 import 'package:mocktail/mocktail.dart';
@@ -13,19 +13,18 @@ class MockBook extends Mock implements google_books_api.Book {}
 class MockBookDetail extends Mock implements book_volume.BookVolume {}
 
 void main() {
-  group('Book Repository', () {
+  group('Book Service', () {
     late google_books_api.GoogleBooksApiClient googleBooksApiClient;
-    late BookRepository bookRepository;
+    late BookService bookService;
 
     setUp(() {
       googleBooksApiClient = MockGoogleApiClient();
-      bookRepository =
-          BookRepository(googleBooksApiClient: googleBooksApiClient);
+      bookService = BookService(googleBooksApiClient: googleBooksApiClient);
     });
 
     group('constructor', () {
       test('instantiates internal GoogleApiClient when not injected', () {
-        expect(BookRepository(), isNotNull);
+        expect(BookService(), isNotNull);
       });
     });
 
@@ -47,7 +46,7 @@ void main() {
         when(() => googleBooksApiClient.getBooks(any()))
             .thenAnswer((_) async => books);
 
-        final actual = await bookRepository.getBooks('harrypotter');
+        final actual = await bookService.getBooks('harrypotter');
 
         expect(
           actual,
@@ -70,7 +69,7 @@ void main() {
         );
 
         expect(
-          () async => bookRepository.getBooks(''),
+          () async => bookService.getBooks(''),
           throwsA(
             isA<AppException>(),
           ),
@@ -97,7 +96,7 @@ void main() {
         when(() => googleBooksApiClient.getBook(any()))
             .thenAnswer((_) async => book);
 
-        final actual = await bookRepository.getBook('kLAoswEACAAJ');
+        final actual = await bookService.getBook('kLAoswEACAAJ');
 
         expect(
           actual,
@@ -119,7 +118,7 @@ void main() {
         );
 
         expect(
-          () async => bookRepository.getBook(''),
+          () async => bookService.getBook(''),
           throwsA(
             isA<AppException>(),
           ),

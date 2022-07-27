@@ -1,45 +1,40 @@
-import 'package:chingu_bookfinder_flutter/book/repository/repository.dart';
+import 'package:chingu_bookfinder_flutter/book/book.dart';
 import 'package:test/test.dart';
 
 void main() {
   group('Book model', () {
-    late BookDetail bookDetail;
+    late Book book;
 
     setUp(() {
-      bookDetail = const BookDetail(
+      book = const Book(
         id: 'kLAoswEACAAJ',
         thumbnail:
             'http://books.google.com/books/content?id=kLAoswEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api',
         authors: ['J. K. Rowling', 'Jack Thorne', 'John Tiffany'],
         publisher: 'Sphere',
         title: 'Harry Potter and the Cursed Child',
-        description: 'some description',
       );
     });
 
     test('instantiates properly', () {
-      expect(bookDetail.id, 'kLAoswEACAAJ');
+      expect(book.id, 'kLAoswEACAAJ');
       expect(
-        bookDetail.thumbnail,
+        book.thumbnail,
         'http://books.google.com/books/content?id=kLAoswEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api',
       );
-      expect(
-        bookDetail.authors,
-        ['J. K. Rowling', 'Jack Thorne', 'John Tiffany'],
-      );
-      expect(bookDetail.publisher, 'Sphere');
-      expect(bookDetail.title, 'Harry Potter and the Cursed Child');
-      expect(bookDetail.description, 'some description');
+      expect(book.authors, ['J. K. Rowling', 'Jack Thorne', 'John Tiffany']);
+      expect(book.publisher, 'Sphere');
+      expect(book.title, 'Harry Potter and the Cursed Child');
     });
 
     test('object comparison is supported', () {
-      expect(bookDetail, equals(bookDetail));
+      expect(book, equals(book));
     });
 
     test('toString returns expected string', () {
       expect(
-        bookDetail.toString(),
-        bookDetail.toString(),
+        book.toString(),
+        book.toString(),
       );
     });
   });

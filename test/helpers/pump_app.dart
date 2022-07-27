@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockBookRepository extends Mock implements BookRepository {}
+class MockBookRepository extends Mock implements BookService {}
 
 class MockBookListBloc extends MockBloc<BookListEvent, BookListState>
     implements BookListBloc {}
@@ -37,13 +37,13 @@ class MockGoRouterProvider extends StatelessWidget {
 extension PumpApp on WidgetTester {
   Future<void> pumpApp(
     Widget widget, {
-    BookRepository? bookRepository,
+    BookService? bookService,
     BookListBloc? bookListBloc,
     BookDetailBloc? bookDetailBloc,
   }) {
     return pumpWidget(
       RepositoryProvider.value(
-        value: bookRepository,
+        value: bookService,
         child: MultiBlocProvider(
           providers: [
             BlocProvider.value(
@@ -63,14 +63,14 @@ extension PumpApp on WidgetTester {
 
   Future<void> pumpWithRoute(
     Widget widget, {
-    BookRepository? bookRepository,
+    BookService? bookService,
     BookListBloc? bookListBloc,
     BookDetailBloc? bookDetailBloc,
     required MockGoRouter mockGoRouter,
   }) {
     return pumpWidget(
       RepositoryProvider.value(
-        value: bookRepository,
+        value: bookService,
         child: MultiBlocProvider(
           providers: [
             BlocProvider.value(
