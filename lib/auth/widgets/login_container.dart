@@ -16,12 +16,25 @@ class LoginContainer extends StatelessWidget {
       child: CustomPaint(
         painter: CustomLoginContainerPainter(),
         child: Stack(
-          children: const [
-            LoginForm(),
+          children: [
+            const LoginForm(),
             Positioned(
               right: 3,
               bottom: 15,
-              child: CustomCircularButton(),
+              child: CustomCircularButton(
+                icon: const Icon(
+                  Icons.arrow_upward,
+                  color: Colors.white,
+                ),
+                height: 30,
+                width: 30,
+                gradient: RadialGradient(
+                  colors: [
+                    Theme.of(context).colorScheme.secondary,
+                    Theme.of(context).colorScheme.primary,
+                  ],
+                ),
+              ),
             ),
           ],
         ),

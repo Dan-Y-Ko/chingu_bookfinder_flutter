@@ -7,3 +7,4 @@ export 'login_form.dart';
 export 'password_input.dart';
 export 'signup_container.dart';
 export 'signup_form.dart';
+export 'social_login.dart';

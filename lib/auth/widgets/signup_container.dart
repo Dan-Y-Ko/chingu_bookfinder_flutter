@@ -16,15 +16,28 @@ class SignUpContainer extends StatelessWidget {
       child: CustomPaint(
         painter: CustomSignUpContainerPainter(),
         child: Stack(
-          children: const [
-            Padding(
+          children: [
+            const Padding(
               padding: EdgeInsets.only(top: 100),
               child: SignUpForm(),
             ),
             Positioned(
               top: 14,
               left: 3,
-              child: CustomCircularButton(),
+              child: CustomCircularButton(
+                icon: const Icon(
+                  Icons.arrow_upward,
+                  color: Colors.white,
+                ),
+                height: 30,
+                width: 30,
+                gradient: RadialGradient(
+                  colors: [
+                    Theme.of(context).colorScheme.secondary,
+                    Theme.of(context).colorScheme.primary,
+                  ],
+                ),
+              ),
             ),
           ],
         ),

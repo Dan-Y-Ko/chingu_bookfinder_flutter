@@ -19,6 +19,7 @@ class SignInPage extends StatelessWidget {
                 child: Column(
                   children: const [
                     LoginContainer(),
+                    SocialLogin(),
                     SignUpContainer(),
                   ],
                 ),
