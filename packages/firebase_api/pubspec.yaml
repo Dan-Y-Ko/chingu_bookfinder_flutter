@@ -18,7 +18,7 @@ dev_dependencies:
   coverage: ^1.0.3
   fake_cloud_firestore: ^1.2.4
   firebase_auth_mocks: ^0.8.4
-  firebase_core_platform_interface: ^4.4.1
+  firebase_core_platform_interface: 4.4.3
   flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
