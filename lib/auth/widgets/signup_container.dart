@@ -1,3 +1,5 @@
+import 'package:chingu_bookfinder_flutter/auth/auth.dart';
+import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class SignUpContainer extends StatelessWidget {
@@ -13,7 +15,19 @@ class SignUpContainer extends StatelessWidget {
       height: height * .85,
       child: CustomPaint(
         painter: CustomSignUpContainerPainter(),
-        child: const Center(child: Text('asdasd')),
+        child: Stack(
+          children: const [
+            Padding(
+              padding: EdgeInsets.only(top: 100),
+              child: SignUpForm(),
+            ),
+            Positioned(
+              top: 14,
+              left: 3,
+              child: CustomCircularButton(),
+            ),
+          ],
+        ),
       ),
     );
   }

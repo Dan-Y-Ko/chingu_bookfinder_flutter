@@ -35,7 +35,7 @@ class _LoginFormState extends State<LoginForm> {
           const SizedBox(
             height: 30,
           ),
-          EmailInput(
+          Input(
             controller: emailInputController,
             icon: Icons.email_rounded,
             hintText: 'Email',
@@ -43,7 +43,7 @@ class _LoginFormState extends State<LoginForm> {
           const SizedBox(
             height: 30,
           ),
-          EmailInput(
+          Input(
             controller: passwordInputController,
             icon: Icons.key,
             hintText: 'Password',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EmailInput extends StatelessWidget {
-  const EmailInput({
+class Input extends StatelessWidget {
+  const Input({
     Key? key,
     required TextEditingController controller,
     required IconData icon,
