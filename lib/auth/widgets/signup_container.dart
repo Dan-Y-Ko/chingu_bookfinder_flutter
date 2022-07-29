@@ -23,19 +23,24 @@ class CustomSignUpContainerPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.red
+      ..color = Colors.white
       ..style = PaintingStyle.fill;
 
     final path = Path()
-      ..lineTo(0, size.height - 30)
+      ..lineTo(0, size.height * .96)
       ..quadraticBezierTo(0, size.height, size.width * 0.076, size.height)
-      ..lineTo(size.width - 30, size.height)
-      ..quadraticBezierTo(size.width, size.height, size.width, size.height - 30)
+      ..lineTo(size.width * 0.92, size.height)
+      ..quadraticBezierTo(
+        size.width,
+        size.height,
+        size.width,
+        size.height * 0.96,
+      )
       ..lineTo(size.width, size.height * 0.3)
       ..quadraticBezierTo(
         size.width,
         size.height * 0.28,
-        size.width - 20,
+        size.width * 0.95,
         size.height * 0.265,
       )
       ..lineTo(size.width * 0.05, size.height * 0.011)

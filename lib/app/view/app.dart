@@ -89,6 +89,9 @@ class App extends StatelessWidget {
               routeInformationParser: router.routeInformationParser,
               routerDelegate: router.routerDelegate,
               title: 'Chingu Bookfinder',
+              theme: ThemeData(
+                scaffoldBackgroundColor: const Color(0xFFece8e3),
+              ),
             );
           },
         ),

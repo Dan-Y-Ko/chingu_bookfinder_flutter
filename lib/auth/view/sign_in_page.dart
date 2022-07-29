@@ -15,7 +15,7 @@ class SignInPage extends StatelessWidget {
               // controller: controller,
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 child: Column(
                   children: const [
                     LoginContainer(),
