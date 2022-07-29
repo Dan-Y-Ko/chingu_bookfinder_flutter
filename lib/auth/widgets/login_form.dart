@@ -21,24 +21,39 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        EmailInput(
-          controller: emailInputController,
-          icon: Icons.email_rounded,
-          hintText: 'Email',
-        ),
-        EmailInput(
-          controller: passwordInputController,
-          icon: Icons.key,
-          hintText: 'Password',
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        const GradientButton(text: 'Login'),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Center(
+            child: SizedBox(
+              height: 200,
+              child: Image.asset('assets/images/chingu_logo.jpeg'),
+            ),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          EmailInput(
+            controller: emailInputController,
+            icon: Icons.email_rounded,
+            hintText: 'Email',
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          EmailInput(
+            controller: passwordInputController,
+            icon: Icons.key,
+            hintText: 'Password',
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          const GradientButton(text: 'Login'),
+        ],
+      ),
     );
   }
 }

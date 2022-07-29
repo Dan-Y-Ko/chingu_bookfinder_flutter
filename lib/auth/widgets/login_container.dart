@@ -1,4 +1,5 @@
 import 'package:chingu_bookfinder_flutter/auth/auth.dart';
+import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class LoginContainer extends StatelessWidget {
@@ -14,13 +15,15 @@ class LoginContainer extends StatelessWidget {
       height: height * .75,
       child: CustomPaint(
         painter: CustomLoginContainerPainter(),
-        child: Padding(
-          padding: const EdgeInsets.all(18),
-          child: Column(
-            children: const [
-              LoginForm(),
-            ],
-          ),
+        child: Stack(
+          children: const [
+            LoginForm(),
+            Positioned(
+              right: 3,
+              bottom: 15,
+              child: CustomCircularButton(),
+            ),
+          ],
         ),
       ),
     );
