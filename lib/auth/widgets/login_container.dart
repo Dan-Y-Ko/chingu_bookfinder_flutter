@@ -1,3 +1,4 @@
+import 'package:chingu_bookfinder_flutter/auth/auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginContainer extends StatelessWidget {
@@ -13,7 +14,14 @@ class LoginContainer extends StatelessWidget {
       height: height * .75,
       child: CustomPaint(
         painter: CustomLoginContainerPainter(),
-        child: const Center(child: Text('asdasd')),
+        child: Padding(
+          padding: const EdgeInsets.all(18),
+          child: Column(
+            children: const [
+              LoginForm(),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -27,40 +35,23 @@ class CustomLoginContainerPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     final path = Path()
-      ..lineTo(
-        0,
-        size.height * 0.68,
-      )
+      ..lineTo(0, size.height * 0.68)
       ..quadraticBezierTo(
         0,
         size.height * 0.699,
         size.width * 0.05,
         size.height * 0.715,
       )
-      ..lineTo(
-        size.width * 0.92,
-        size.height * 0.98,
-      )
+      ..lineTo(size.width * 0.92, size.height * 0.98)
       ..quadraticBezierTo(
         size.width,
         size.height,
         size.width,
         size.height * 0.95,
       )
-      ..lineTo(
-        size.width,
-        size.height * 0.04,
-      )
-      ..quadraticBezierTo(
-        size.width,
-        0,
-        size.width * 0.92,
-        0,
-      )
-      ..lineTo(
-        size.width * 0.07,
-        0,
-      )
+      ..lineTo(size.width, size.height * 0.04)
+      ..quadraticBezierTo(size.width, 0, size.width * 0.92, 0)
+      ..lineTo(size.width * 0.07, 0)
       ..quadraticBezierTo(
         0,
         0,

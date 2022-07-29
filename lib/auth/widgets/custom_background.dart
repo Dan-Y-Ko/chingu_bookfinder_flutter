@@ -8,9 +8,6 @@ class CustomBackground extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
-    // print(width);
-    // print(height);
-
     return CustomPaint(
       size: Size(width, height),
       painter: CustomBackgroundPainter(context: context),
@@ -30,10 +27,10 @@ class CustomBackgroundPainter extends CustomPainter {
     final rect = Offset.zero & size;
 
     final paint = Paint()
-      ..shader = const LinearGradient(
+      ..shader = LinearGradient(
         colors: [
-          Color(0xFF23d9ac),
-          Color(0xFF00ff08),
+          Theme.of(context).colorScheme.primary,
+          Theme.of(context).colorScheme.secondary,
         ],
       ).createShader(rect)
       ..style = PaintingStyle.fill;

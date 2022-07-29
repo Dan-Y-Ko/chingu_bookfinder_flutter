@@ -91,6 +91,10 @@ class App extends StatelessWidget {
               title: 'Chingu Bookfinder',
               theme: ThemeData(
                 scaffoldBackgroundColor: const Color(0xFFece8e3),
+                colorScheme: ColorScheme.fromSwatch().copyWith(
+                  primary: const Color(0xFF23d9ac),
+                  secondary: const Color(0xFF00ff08),
+                ),
               ),
             );
           },

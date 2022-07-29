@@ -1,48 +1,43 @@
 import 'package:flutter/material.dart';
 
-class EmailInput extends StatefulWidget {
-  const EmailInput({Key? key}) : super(key: key);
+class EmailInput extends StatelessWidget {
+  const EmailInput({
+    Key? key,
+    required TextEditingController controller,
+    required IconData icon,
+    required String hintText,
+  })  : _controller = controller,
+        _icon = icon,
+        _hintText = hintText,
+        super(
+          key: key,
+        );
 
-  @override
-  State<EmailInput> createState() => _EmailInputState();
-}
-
-class _EmailInputState extends State<EmailInput> {
-  final TextEditingController emailInputController = TextEditingController();
-
-  @override
-  void dispose() {
-    emailInputController.dispose();
-    super.dispose();
-  }
+  final TextEditingController _controller;
+  final IconData _icon;
+  final String _hintText;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: emailInputController,
-      style: const TextStyle(
-        color: Colors.black,
+    return Theme(
+      data: ThemeData().copyWith(
+        hintColor: const Color(0xFFE1E0E0),
       ),
-      decoration: const InputDecoration(
-        prefixIcon: Padding(
-          padding: EdgeInsets.all(17),
-          child: Icon(Icons.search),
+      child: TextField(
+        controller: _controller,
+        style: const TextStyle(
+          color: Colors.black,
         ),
-        filled: true,
-        fillColor: Colors.white,
-        hintText: 'Email',
-        hintStyle: TextStyle(
-          color: Color.fromRGBO(87, 94, 131, 0.5),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(15),
+        decoration: InputDecoration(
+          suffixIcon: Icon(_icon),
+          hintText: _hintText,
+          hintStyle: const TextStyle(
+            color: Color(0xFF7A7675),
           ),
-          borderSide: BorderSide.none,
         ),
+        textInputAction: TextInputAction.next,
+        onSubmitted: (_) {},
       ),
-      textInputAction: TextInputAction.done,
-      onSubmitted: (_) {},
     );
   }
 }

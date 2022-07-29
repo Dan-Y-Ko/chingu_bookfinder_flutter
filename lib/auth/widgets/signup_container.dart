@@ -28,7 +28,12 @@ class CustomSignUpContainerPainter extends CustomPainter {
 
     final path = Path()
       ..lineTo(0, size.height * .96)
-      ..quadraticBezierTo(0, size.height, size.width * 0.076, size.height)
+      ..quadraticBezierTo(
+        0,
+        size.height,
+        size.width * 0.076,
+        size.height,
+      )
       ..lineTo(size.width * 0.92, size.height)
       ..quadraticBezierTo(
         size.width,
