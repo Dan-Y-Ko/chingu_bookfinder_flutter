@@ -23,18 +23,23 @@ class SignInPage extends StatelessWidget {
                     const CustomBackground(),
                     SingleChildScrollView(
                       // controller: controller,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 15,
-                          vertical: 15,
-                        ),
-                        child: Column(
-                          children: const [
-                            LoginContainer(),
-                            SocialLogin(),
-                            SignUpContainer(),
-                          ],
-                        ),
+                      child: Stack(
+                        children: [
+                          Column(
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.only(top: 10),
+                                child: LoginContainer(),
+                              ),
+                              SignUpContainer(),
+                            ],
+                          ),
+                          const Positioned(
+                            top: 590,
+                            left: 20,
+                            child: SocialLogin(),
+                          ),
+                        ],
                       ),
                     ),
                   ],

@@ -13,8 +13,9 @@ class SocialLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Transform.rotate(
       angle: pi / 6,
-      child: Padding(
-        padding: const EdgeInsets.only(right: 60),
+      child: SizedBox(
+        height: 100,
+        width: 300,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

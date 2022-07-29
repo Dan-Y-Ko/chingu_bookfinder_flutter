@@ -13,31 +13,34 @@ class LoginContainer extends StatelessWidget {
     return SizedBox(
       width: width,
       height: height * .75,
-      child: CustomPaint(
-        painter: CustomLoginContainerPainter(),
-        child: Stack(
-          children: [
-            const LoginForm(),
-            Positioned(
-              right: 3,
-              bottom: 15,
-              child: CustomCircularButton(
-                icon: const Icon(
-                  Icons.arrow_upward,
-                  color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18),
+        child: CustomPaint(
+          painter: CustomLoginContainerPainter(),
+          child: Stack(
+            children: [
+              const LoginForm(),
+              Positioned(
+                right: 3,
+                bottom: 15,
+                child: CustomCircularButton(
+                  icon: const Icon(
+                    Icons.arrow_upward,
+                    color: Colors.white,
+                  ),
+                  height: 30,
+                  width: 30,
+                  gradient: RadialGradient(
+                    colors: [
+                      Theme.of(context).colorScheme.secondary,
+                      Theme.of(context).colorScheme.primary,
+                    ],
+                  ),
+                  onTap: () {},
                 ),
-                height: 30,
-                width: 30,
-                gradient: RadialGradient(
-                  colors: [
-                    Theme.of(context).colorScheme.secondary,
-                    Theme.of(context).colorScheme.primary,
-                  ],
-                ),
-                onTap: () {},
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
