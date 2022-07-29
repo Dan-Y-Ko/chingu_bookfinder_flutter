@@ -8,6 +8,9 @@ class CustomBackground extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
 
+    // print(width);
+    // print(height);
+
     return CustomPaint(
       size: Size(width, height),
       painter: CustomBackgroundPainter(context: context),

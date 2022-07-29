@@ -6,9 +6,26 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
-        child: CustomBackground(),
+        child: Stack(
+          children: [
+            const CustomBackground(),
+            SingleChildScrollView(
+              // controller: controller,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Column(
+                  children: const [
+                    LoginContainer(),
+                    SignUpContainer(),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
