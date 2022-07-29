@@ -34,6 +34,7 @@ class LoginContainer extends StatelessWidget {
                     Theme.of(context).colorScheme.primary,
                   ],
                 ),
+                onTap: () {},
               ),
             ),
           ],

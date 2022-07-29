@@ -1,6 +1,7 @@
 import 'package:chingu_bookfinder_flutter/auth/auth.dart';
 import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -59,7 +60,7 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           Input(
             controller: passwordInputController,
-            icon: Icons.key,
+            icon: FontAwesomeIcons.key,
             hintText: 'Password',
           ),
           const SizedBox(
@@ -67,7 +68,7 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           Input(
             controller: passwordConfirmInputController,
-            icon: Icons.key,
+            icon: FontAwesomeIcons.key,
             hintText: 'Confirm Password',
           ),
           const SizedBox(

@@ -37,6 +37,7 @@ class SignUpContainer extends StatelessWidget {
                     Theme.of(context).colorScheme.primary,
                   ],
                 ),
+                onTap: () {},
               ),
             ),
           ],

@@ -25,6 +25,10 @@ class GoogleAuth {
       return await _callGoogleSignIn();
     } on firebase_auth.FirebaseAuthException catch (e) {
       throw SignInWithGoogleFailure.fromCode(e.code);
+    } catch (_) {
+      SignInWithGoogleFailure.fromCode('');
+
+      return null;
     }
   }
 

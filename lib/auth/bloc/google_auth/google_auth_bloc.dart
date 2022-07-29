@@ -59,7 +59,7 @@ class GoogleAuthBloc extends Bloc<GoogleAuthEvent, GoogleAuthState> {
         _googleAuthService.signOut(),
       ),
       onData: (_) => state.copyWith(
-        status: GoogleAuthStatus.success,
+        status: GoogleAuthStatus.initial,
         isAuthenticated: false,
       ),
       onError: (error, _) => state.copyWith(

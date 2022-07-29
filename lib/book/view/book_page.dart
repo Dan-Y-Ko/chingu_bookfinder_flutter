@@ -15,7 +15,6 @@ class BookPage extends StatelessWidget {
         toolbarHeight: 0,
         backgroundColor: Colors.white,
       ),
-      backgroundColor: Colors.blueGrey[50],
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8),

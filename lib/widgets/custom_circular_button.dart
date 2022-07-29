@@ -7,12 +7,14 @@ class CustomCircularButton extends StatelessWidget {
     required double height,
     required double width,
     RadialGradient? gradient,
+    required void Function() onTap,
     Color? color,
   })  : _icon = icon,
         _height = height,
         _width = width,
         _gradient = gradient,
         _color = color,
+        _onTap = onTap,
         super(key: key);
 
   final Icon _icon;
@@ -20,6 +22,7 @@ class CustomCircularButton extends StatelessWidget {
   final double _width;
   final RadialGradient? _gradient;
   final Color? _color;
+  final void Function() _onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,7 @@ class CustomCircularButton extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             color: Colors.transparent,
             child: InkWell(
-              onTap: () {},
+              onTap: _onTap,
             ),
           ),
         )

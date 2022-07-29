@@ -1,6 +1,7 @@
 import 'package:chingu_bookfinder_flutter/auth/auth.dart';
 import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ class _LoginFormState extends State<LoginForm> {
           ),
           Input(
             controller: passwordInputController,
-            icon: Icons.key,
+            icon: FontAwesomeIcons.key,
             hintText: 'Password',
           ),
           const SizedBox(
