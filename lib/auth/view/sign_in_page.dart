@@ -3,6 +3,9 @@ import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+final key1 = GlobalKey();
+final key2 = GlobalKey();
+
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
 
@@ -24,16 +27,15 @@ class SignInPage extends StatelessWidget {
                   children: [
                     const CustomBackground(),
                     SingleChildScrollView(
-                      // controller: controller,
                       child: Stack(
                         children: [
                           Column(
-                            children: const [
+                            children: [
                               Padding(
-                                padding: EdgeInsets.only(top: 10),
-                                child: LoginContainer(),
+                                padding: const EdgeInsets.only(top: 10),
+                                child: LoginContainer(key: key1),
                               ),
-                              SignUpContainer(),
+                              SignUpContainer(key: key2),
                             ],
                           ),
                           Positioned(

@@ -44,7 +44,12 @@ class SignUpContainer extends StatelessWidget {
                       Theme.of(context).colorScheme.primary,
                     ],
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Scrollable.ensureVisible(
+                      key2.currentContext!,
+                      duration: const Duration(milliseconds: 500),
+                    );
+                  },
                 ),
               ),
             ],

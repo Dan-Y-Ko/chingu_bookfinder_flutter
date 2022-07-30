@@ -36,7 +36,13 @@ class LoginContainer extends StatelessWidget {
                       Theme.of(context).colorScheme.primary,
                     ],
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Scrollable.ensureVisible(
+                      key1.currentContext!,
+                      alignment: 5,
+                      duration: const Duration(milliseconds: 500),
+                    );
+                  },
                 ),
               ),
             ],
