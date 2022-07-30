@@ -28,6 +28,8 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+
     return Padding(
       padding: const EdgeInsets.all(18),
       child: Column(
@@ -71,8 +73,8 @@ class _SignUpFormState extends State<SignUpForm> {
             icon: FontAwesomeIcons.key,
             hintText: 'Confirm Password',
           ),
-          const SizedBox(
-            height: 50,
+          SizedBox(
+            height: height * 0.05,
           ),
           const GradientButton(text: 'Sign Up'),
         ],

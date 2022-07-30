@@ -11,6 +11,7 @@ class SocialLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print(key1.currentContext!.findRenderObject());
     return Transform.rotate(
       angle: pi / 6,
       child: SizedBox(
