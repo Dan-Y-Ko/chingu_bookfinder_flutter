@@ -8,6 +8,8 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
@@ -34,10 +36,10 @@ class SignInPage extends StatelessWidget {
                               SignUpContainer(),
                             ],
                           ),
-                          const Positioned(
-                            top: 590,
+                          Positioned(
+                            top: height * 0.7,
                             left: 20,
-                            child: SocialLogin(),
+                            child: const SocialLogin(),
                           ),
                           // const Positioned(
                           //   top: 640,

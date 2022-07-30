@@ -72,7 +72,7 @@ class _SignUpFormState extends State<SignUpForm> {
             hintText: 'Confirm Password',
           ),
           const SizedBox(
-            height: 60,
+            height: 50,
           ),
           const GradientButton(text: 'Sign Up'),
         ],
