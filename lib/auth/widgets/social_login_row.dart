@@ -6,12 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
-class SocialLogin extends StatelessWidget {
-  const SocialLogin({Key? key}) : super(key: key);
+class SocialLoginRow extends StatelessWidget {
+  const SocialLoginRow({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // print(key1.currentContext!.findRenderObject());
     return Transform.rotate(
       angle: pi / 6,
       child: SizedBox(
