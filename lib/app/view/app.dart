@@ -55,7 +55,7 @@ class App extends StatelessWidget {
                 ),
                 GoRoute(
                   name: 'book_route',
-                  path: '/books',
+                  path: '/book',
                   builder: (context, state) => const BookPage(),
                   routes: [
                     GoRoute(

@@ -39,6 +39,11 @@ class SignInPage extends StatelessWidget {
                             left: 20,
                             child: SocialLogin(),
                           ),
+                          // const Positioned(
+                          //   top: 640,
+                          //   right: 0,
+                          //   child: SocialLogin(),
+                          // ),
                         ],
                       ),
                     ),
