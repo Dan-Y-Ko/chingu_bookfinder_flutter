@@ -6,12 +6,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 final key1 = GlobalKey();
 final key2 = GlobalKey();
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
+
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  bool signInScreenVisible = false;
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+
+    void toggleSignInContainerIsVisible() {
+      setState(() {
+        signInScreenVisible = !signInScreenVisible;
+      });
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -27,15 +40,26 @@ class SignInPage extends StatelessWidget {
                   children: [
                     const CustomBackground(),
                     SingleChildScrollView(
+                      physics: const NeverScrollableScrollPhysics(),
                       child: Stack(
                         children: [
                           Column(
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
-                                child: LoginContainer(key: key1),
+                                child: LoginContainer(
+                                  key: key1,
+                                  toggleSignInContainerIsVisible:
+                                      toggleSignInContainerIsVisible,
+                                  signInScreenVisible: signInScreenVisible,
+                                ),
                               ),
-                              SignUpContainer(key: key2),
+                              SignUpContainer(
+                                key: key2,
+                                toggleSignInContainerIsVisible:
+                                    toggleSignInContainerIsVisible,
+                                signInScreenVisible: signInScreenVisible,
+                              ),
                             ],
                           ),
                           Positioned(

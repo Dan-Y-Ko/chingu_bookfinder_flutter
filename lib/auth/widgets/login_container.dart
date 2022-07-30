@@ -3,7 +3,14 @@ import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class LoginContainer extends StatelessWidget {
-  const LoginContainer({Key? key}) : super(key: key);
+  const LoginContainer({
+    Key? key,
+    required this.toggleSignInContainerIsVisible,
+    required this.signInScreenVisible,
+  }) : super(key: key);
+
+  final void Function() toggleSignInContainerIsVisible;
+  final bool signInScreenVisible;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +31,10 @@ class LoginContainer extends StatelessWidget {
                 right: 3,
                 bottom: 15,
                 child: CustomCircularButton(
-                  icon: const Icon(
-                    Icons.arrow_upward,
+                  icon: Icon(
+                    signInScreenVisible == true
+                        ? Icons.arrow_downward
+                        : Icons.arrow_upward,
                     color: Colors.white,
                   ),
                   height: 30,
@@ -37,11 +46,18 @@ class LoginContainer extends StatelessWidget {
                     ],
                   ),
                   onTap: () {
-                    Scrollable.ensureVisible(
-                      key1.currentContext!,
-                      alignment: 5,
-                      duration: const Duration(milliseconds: 500),
-                    );
+                    signInScreenVisible == false
+                        ? Scrollable.ensureVisible(
+                            key2.currentContext!,
+                            duration: const Duration(milliseconds: 500),
+                          )
+                        : Scrollable.ensureVisible(
+                            key1.currentContext!,
+                            alignment: 5,
+                            duration: const Duration(milliseconds: 500),
+                          );
+
+                    toggleSignInContainerIsVisible();
                   },
                 ),
               ),
