@@ -2,6 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:chingu_bookfinder_flutter/auth/auth.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart';
 import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -24,7 +25,7 @@ class MockGoogleAuthBloc extends MockBloc<GoogleAuthEvent, GoogleAuthState>
 void main() {
   group('Book List Page', () {
     late BookListBloc bookListBloc;
-    // late GoogleAuthBloc googleAuthBloc;
+    late GoogleAuthBloc googleAuthBloc;
 
     Future<void> pumpBookPageWithBloc(WidgetTester tester) async {
       await tester.pumpApp(
@@ -37,6 +38,7 @@ void main() {
 
     setUp(() {
       bookListBloc = MockBookListBloc();
+      googleAuthBloc = MockGoogleAuthBloc();
     });
 
     testWidgets('search input is rendered', (tester) async {
@@ -101,6 +103,42 @@ void main() {
         ),
         findsOneWidget,
       );
+    });
+
+    testWidgets('Clicking on sign out button logs user out', (tester) async {
+      when(() => bookListBloc.state).thenReturn(
+        const BookListState(),
+      );
+
+      when(
+        () => googleAuthBloc.add(
+          SignOutEvent(),
+        ),
+      ).thenAnswer((_) async {});
+
+      await tester.pumpApp(
+        MultiBlocProvider(
+          providers: [
+            BlocProvider.value(
+              value: googleAuthBloc,
+            ),
+            BlocProvider.value(
+              value: bookListBloc,
+            ),
+          ],
+          child: const BookPage(),
+        ),
+      );
+
+      final button = find.byType(ElevatedButton);
+      await tester.tap(button);
+      await tester.pumpAndSettle();
+
+      verify(
+        () => googleAuthBloc.add(
+          SignOutEvent(),
+        ),
+      ).called(1);
     });
   });
 }
