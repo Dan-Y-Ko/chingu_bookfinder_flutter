@@ -1,10 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../helpers/pump_app.dart';
+import '../../helpers/pump_app.dart';
 
 class MockBookListBloc extends MockBloc<BookListEvent, BookListState>
     implements BookListBloc {}
@@ -29,8 +30,10 @@ void main() {
       ).thenAnswer((_) async {});
 
       await tester.pumpApp(
-        const SearchInput(),
-        bookListBloc: bookListBloc,
+        BlocProvider.value(
+          value: bookListBloc,
+          child: const SearchInput(),
+        ),
       );
 
       final input = find.byType(TextField);

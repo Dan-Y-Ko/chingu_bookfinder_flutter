@@ -1,6 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:chingu_bookfinder_flutter/auth/auth.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart';
 import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -14,14 +16,22 @@ class MockBookListBloc extends MockBloc<BookListEvent, BookListState>
 class MockBookDetailBloc extends MockBloc<BookDetailEvent, BookDetailState>
     implements BookDetailBloc {}
 
+class GoogleAuthRepository extends Mock implements GoogleAuthService {}
+
+class MockGoogleAuthBloc extends MockBloc<GoogleAuthEvent, GoogleAuthState>
+    implements GoogleAuthBloc {}
+
 void main() {
   group('Book List Page', () {
     late BookListBloc bookListBloc;
+    // late GoogleAuthBloc googleAuthBloc;
 
     Future<void> pumpBookPageWithBloc(WidgetTester tester) async {
       await tester.pumpApp(
-        const BookPage(),
-        bookListBloc: bookListBloc,
+        BlocProvider.value(
+          value: bookListBloc,
+          child: const BookPage(),
+        ),
       );
     }
 

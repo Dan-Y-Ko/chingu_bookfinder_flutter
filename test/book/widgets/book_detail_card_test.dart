@@ -1,5 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:network_image_mock/network_image_mock.dart';
@@ -25,8 +26,10 @@ void main() {
     Future<void> pumpBookDetailCard(WidgetTester tester) async {
       await mockNetworkImagesFor(
         () => tester.pumpApp(
-          const BookDetailCard(),
-          bookDetailBloc: bookDetailBloc,
+          BlocProvider.value(
+            value: bookDetailBloc,
+            child: const BookDetailCard(),
+          ),
         ),
       );
     }
