@@ -5,11 +5,9 @@ import 'package:flutter/material.dart';
 class SignUpContainer extends StatelessWidget {
   const SignUpContainer({
     Key? key,
-    required this.toggleSignInContainerIsVisible,
     required this.signInScreenVisible,
   }) : super(key: key);
 
-  final void Function() toggleSignInContainerIsVisible;
   final bool signInScreenVisible;
 
   @override
@@ -64,8 +62,6 @@ class SignUpContainer extends StatelessWidget {
                             alignment: 5,
                             duration: const Duration(milliseconds: 500),
                           );
-
-                    toggleSignInContainerIsVisible();
                   },
                 ),
               ),
