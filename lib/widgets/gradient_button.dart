@@ -10,7 +10,7 @@ class GradientButton extends StatelessWidget {
 
   final String text;
   final EdgeInsetsGeometry? padding;
-  final void Function(BuildContext, int?)? onPress;
+  final void Function()? onPress;
 
   @override
   Widget build(BuildContext context) {
