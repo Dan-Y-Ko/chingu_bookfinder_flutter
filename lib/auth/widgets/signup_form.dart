@@ -32,52 +32,57 @@ class _SignUpFormState extends State<SignUpForm> {
 
     return Padding(
       padding: const EdgeInsets.all(18),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            height: 100,
-            child: Image.asset('assets/images/chingu_logo.jpeg'),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Input(
-            controller: nameInputController,
-            icon: Icons.person,
-            hintText: 'Name',
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Input(
-            controller: emailInputController,
-            icon: Icons.email_rounded,
-            hintText: 'Email',
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Input(
-            controller: passwordInputController,
-            icon: FontAwesomeIcons.key,
-            hintText: 'Password',
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Input(
-            controller: passwordConfirmInputController,
-            icon: FontAwesomeIcons.key,
-            hintText: 'Confirm Password',
-          ),
-          SizedBox(
-            height: height * 0.05,
-          ),
-          const GradientButton(text: 'Sign Up'),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              height: 100,
+              child: Image.asset('assets/images/chingu_logo.jpeg'),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Input(
+              controller: nameInputController,
+              icon: Icons.person,
+              hintText: 'Name',
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Input(
+              controller: emailInputController,
+              icon: Icons.email_rounded,
+              hintText: 'Email',
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Input(
+              controller: passwordInputController,
+              icon: FontAwesomeIcons.key,
+              hintText: 'Password',
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Input(
+              controller: passwordConfirmInputController,
+              icon: FontAwesomeIcons.key,
+              hintText: 'Confirm Password',
+            ),
+            SizedBox(
+              height: height * 0.05,
+            ),
+            const GradientButton(text: 'Sign Up'),
+            const SizedBox(
+              height: 6,
+            ),
+          ],
+        ),
       ),
     );
   }
