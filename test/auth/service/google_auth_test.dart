@@ -6,19 +6,19 @@ import 'package:mocktail/mocktail.dart';
 class MockGoogleAuth extends Mock implements GoogleAuth {}
 
 void main() {
-  group('google auth service', () {});
   late GoogleAuthService googleAuthService;
   late GoogleAuth googleAuth;
 
   setUp(() {
     googleAuth = MockGoogleAuth();
     googleAuthService = GoogleAuthService(googleAuth: googleAuth);
-
-    when(() => googleAuth.signOut()).thenAnswer((_) async => _);
   });
 
+  // cant get test to pass without putting in all the firebase initialization
+  // again, which I did already in firebase api tests. Not sure why it's
+  // needed here again
   // group('constructor', () {
-  //   test('instantiates internal GoogleApiClient when not injected', () {
+  //   test('instantiates internal google auth when not injected', () {
   //     expect(GoogleAuthService(), isNotNull);
   //   });
   // });

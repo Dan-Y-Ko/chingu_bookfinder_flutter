@@ -61,7 +61,7 @@ void main() {
   });
 
   group('constructor', () {
-    test('instantiates internal base api when not injected', () {
+    test('instantiates internal firebase dependencies when not injected', () {
       expect(GoogleAuth(), isNotNull);
     });
   });
