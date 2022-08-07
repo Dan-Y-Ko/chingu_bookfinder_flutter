@@ -9,7 +9,7 @@ class GoogleAuthService {
   Future<void> signOut() async {
     try {
       await _googleAuth.signOut();
-    } catch (e) {
+    } catch (_) {
       rethrow;
     }
   }
@@ -17,7 +17,7 @@ class GoogleAuthService {
   Future<void> signIn() async {
     try {
       await _googleAuth.signIn();
-    } catch (e) {
+    } catch (_) {
       rethrow;
     }
   }
