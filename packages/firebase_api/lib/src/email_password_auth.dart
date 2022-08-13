@@ -1,3 +1,4 @@
+import 'package:firebase_api/firebase_api.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -15,26 +16,36 @@ class EmailPasswordAuth {
     await _firebaseAuth.signOut();
   }
 
-  Future<void> signIn({required String email, required String password}) async {
+  Future<String> signIn({
+    required String email,
+    required String password,
+  }) async {
     try {
       final user = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      await _createUser(user.user?.uid);
+      await _createUser(
+        id: user.user!.uid,
+        createdAt: user.user!.metadata.creationTime!,
+      );
+
+      return user.user!.uid;
     } on firebase_auth.FirebaseAuthException catch (e) {
-      if (e.code == 'email-already-in-use') {
-        return;
-      }
+      throw SignInWithEmailPasswordFailure.fromCode(e.code);
     } catch (_) {
-      return;
+      throw SignInWithEmailPasswordFailure.fromCode('');
     }
   }
 
-  Future<void> _createUser(String? id) async {
+  Future<void> _createUser({
+    required String id,
+    required DateTime createdAt,
+  }) async {
     await _db.collection("Users").add({
       "id": id,
+      "createdAt": createdAt,
     });
   }
 }
