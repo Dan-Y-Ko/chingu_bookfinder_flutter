@@ -9,4 +9,4 @@ jobs:
       flutter_channel: stable
       flutter_version: 3.0.4
       min_coverage: 50
-      runs-on: macos-latest
+      runs_on: macos-latest
