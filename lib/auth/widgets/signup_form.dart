@@ -1,5 +1,6 @@
 import 'package:chingu_bookfinder_flutter/auth/auth.dart';
 import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
+import 'package:firebase_api/firebase_api.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -76,7 +77,15 @@ class _SignUpFormState extends State<SignUpForm> {
           SizedBox(
             height: height * 0.05,
           ),
-          const GradientButton(text: 'Sign Up'),
+          GradientButton(
+            text: 'Sign Up',
+            onPress: () {
+              EmailPasswordAuth().signIn(
+                email: emailInputController.text,
+                password: passwordInputController.text,
+              );
+            },
+          ),
         ],
       ),
     );
