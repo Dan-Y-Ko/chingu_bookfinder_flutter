@@ -1,7 +1,7 @@
-import 'package:chingu_bookfinder_flutter/auth/auth.dart';
+// import 'package:chingu_bookfinder_flutter/auth/auth.dart';
 import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -36,19 +36,19 @@ class _LoginFormState extends State<LoginForm> {
           const SizedBox(
             height: 30,
           ),
-          Input(
-            controller: emailInputController,
-            icon: Icons.email_rounded,
-            hintText: 'Email',
-          ),
+          // Input(
+          //   controller: emailInputController,
+          //   icon: Icons.email_rounded,
+          //   hintText: 'Email',
+          // ),
           const SizedBox(
             height: 30,
           ),
-          Input(
-            controller: passwordInputController,
-            icon: FontAwesomeIcons.key,
-            hintText: 'Password',
-          ),
+          // Input(
+          //   controller: passwordInputController,
+          //   icon: FontAwesomeIcons.key,
+          //   hintText: 'Password',
+          // ),
           const SizedBox(
             height: 30,
           ),

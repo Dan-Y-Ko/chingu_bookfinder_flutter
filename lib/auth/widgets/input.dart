@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class Input extends StatelessWidget {
   const Input({
     Key? key,
-    required TextEditingController controller,
+    required String controller,
     required IconData icon,
     required String hintText,
+    required Map<String, String> validationMessages,
+    bool obscureText = false,
   })  : _controller = controller,
         _icon = icon,
         _hintText = hintText,
+        _validationMessages = validationMessages,
+        _obscureText = obscureText,
         super(
           key: key,
         );
 
-  final TextEditingController _controller;
+  final String _controller;
   final IconData _icon;
   final String _hintText;
+  final Map<String, String> _validationMessages;
+  final bool _obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +30,8 @@ class Input extends StatelessWidget {
       data: ThemeData().copyWith(
         hintColor: const Color(0xFFE1E0E0),
       ),
-      child: TextField(
-        controller: _controller,
+      child: ReactiveTextField<dynamic>(
+        formControlName: _controller,
         style: const TextStyle(
           color: Colors.black,
         ),
@@ -35,8 +42,9 @@ class Input extends StatelessWidget {
             color: Color(0xFF7A7675),
           ),
         ),
+        obscureText: _obscureText,
         textInputAction: TextInputAction.next,
-        onSubmitted: (_) {},
+        validationMessages: (control) => _validationMessages,
       ),
     );
   }

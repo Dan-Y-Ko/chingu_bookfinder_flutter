@@ -1,31 +1,11 @@
 import 'package:chingu_bookfinder_flutter/auth/auth.dart';
 import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
-import 'package:firebase_api/firebase_api.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
-class SignUpForm extends StatefulWidget {
+class SignUpForm extends StatelessWidget {
   const SignUpForm({Key? key}) : super(key: key);
-
-  @override
-  State<SignUpForm> createState() => _SignUpFormState();
-}
-
-class _SignUpFormState extends State<SignUpForm> {
-  final TextEditingController nameInputController = TextEditingController();
-  final TextEditingController emailInputController = TextEditingController();
-  final TextEditingController passwordInputController = TextEditingController();
-  final TextEditingController passwordConfirmInputController =
-      TextEditingController();
-
-  @override
-  void dispose() {
-    nameInputController.dispose();
-    emailInputController.dispose();
-    passwordInputController.dispose();
-    passwordConfirmInputController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,47 +25,100 @@ class _SignUpFormState extends State<SignUpForm> {
           const SizedBox(
             height: 30,
           ),
-          Input(
-            controller: nameInputController,
-            icon: Icons.person,
-            hintText: 'Name',
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Input(
-            controller: emailInputController,
-            icon: Icons.email_rounded,
-            hintText: 'Email',
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Input(
-            controller: passwordInputController,
-            icon: FontAwesomeIcons.key,
-            hintText: 'Password',
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Input(
-            controller: passwordConfirmInputController,
-            icon: FontAwesomeIcons.key,
-            hintText: 'Confirm Password',
-          ),
-          SizedBox(
-            height: height * 0.05,
-          ),
-          GradientButton(
-            text: 'Sign Up',
-            onPress: () {
-              EmailPasswordAuth().signIn(
-                email: emailInputController.text,
-                password: passwordInputController.text,
+          ReactiveFormBuilder(
+            form: () => EmailPasswordAuthService().form,
+            builder: (context, form, child) {
+              return Column(
+                children: [
+                  const Input(
+                    controller: 'name',
+                    icon: Icons.person,
+                    hintText: 'Name',
+                    validationMessages: {
+                      'required': 'Name is required',
+                    },
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const Input(
+                    controller: 'email',
+                    icon: Icons.email_rounded,
+                    hintText: 'Email',
+                    validationMessages: {
+                      'required': 'Email is required',
+                      'email': 'Email must be formatted correctly'
+                    },
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const Input(
+                    controller: 'password',
+                    icon: FontAwesomeIcons.key,
+                    hintText: 'Password',
+                    validationMessages: {
+                      'required': 'Password is required',
+                    },
+                    obscureText: true,
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const Input(
+                    controller: 'confirmPassword',
+                    icon: FontAwesomeIcons.key,
+                    hintText: 'Confirm Password',
+                    validationMessages: {
+                      'mustMatch': 'Password must match',
+                    },
+                    obscureText: true,
+                  ),
+                  SizedBox(
+                    height: height * 0.03,
+                  ),
+                  ReactiveFormConsumer(
+                    builder: (buildContext, form, child) {
+                      return GradientButton(
+                        text: 'Sign Up',
+                        onPress: () {
+                          form.markAllAsTouched();
+
+                          form.valid
+                              ? EmailPasswordAuthService().signIn(
+                                  email: form.control('email').value as String,
+                                  password:
+                                      form.control('password').value as String,
+                                )
+                              : ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Text(
+                                          'Please fill out required fields',
+                                        ),
+                                        IconButton(
+                                          icon: const Icon(Icons.cancel),
+                                          color: Colors.white,
+                                          onPressed: () {
+                                            ScaffoldMessenger.of(context)
+                                                .hideCurrentSnackBar();
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                        },
+                      );
+                    },
+                  )
+                ],
               );
             },
-          ),
+          )
         ],
       ),
     );
