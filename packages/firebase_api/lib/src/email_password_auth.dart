@@ -16,7 +16,7 @@ class EmailPasswordAuth {
     await _firebaseAuth.signOut();
   }
 
-  Future<String> signIn({
+  Future<String> signUp({
     required String email,
     required String password,
   }) async {

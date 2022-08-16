@@ -29,8 +29,8 @@ class SignUpContainer extends StatelessWidget {
           painter: CustomSignUpContainerPainter(),
           child: Stack(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 100),
+              Padding(
+                padding: const EdgeInsets.only(top: 100),
                 child: SignUpForm(),
               ),
               Positioned(

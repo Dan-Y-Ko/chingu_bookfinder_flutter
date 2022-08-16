@@ -5,7 +5,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class SignUpForm extends StatelessWidget {
-  const SignUpForm({Key? key}) : super(key: key);
+  SignUpForm({Key? key}) : super(key: key);
+
+  final form = fb.group(
+    {
+      'name': [Validators.required],
+      'email': [Validators.required, Validators.email],
+      'password': [Validators.required],
+      'confirmPassword': [Validators.required],
+    },
+    [
+      Validators.mustMatch('password', 'confirmPassword'),
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +38,7 @@ class SignUpForm extends StatelessWidget {
             height: 30,
           ),
           ReactiveFormBuilder(
-            form: () => EmailPasswordAuthService().form,
+            form: () => form,
             builder: (context, form, child) {
               return Column(
                 children: [
