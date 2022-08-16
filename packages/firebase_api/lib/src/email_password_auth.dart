@@ -12,29 +12,42 @@ class EmailPasswordAuth {
   final firebase_auth.FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _db;
 
+  CollectionReference<User> get passwordAuthRef =>
+      _db.collection('Users').withConverter<User>(
+            fromFirestore: (snapshot, _) => User.fromMap(snapshot.data()!),
+            toFirestore: (auth, _) => auth.toMap(),
+          );
+
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
   }
 
-  Future<String> signUp({
+  Future<User> signUp({
     required String email,
     required String password,
     required String displayName,
   }) async {
     try {
-      final user = await _firebaseAuth.createUserWithEmailAndPassword(
+      final firebaseUser = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      await _createUser(
-        id: user.user!.uid,
+      final user = User(
+        id: firebaseUser.user!.uid,
         displayName: displayName,
-        email: user.user!.email!,
-        providerId: user.user!.providerData[0].providerId,
+        email: firebaseUser.user!.email!,
+        providerId: firebaseUser.user!.providerData[0].providerId,
       );
 
-      return user.user!.uid;
+      await _createUser(
+        id: user.id,
+        displayName: user.displayName,
+        email: user.email,
+        providerId: user.providerId,
+      );
+
+      return user;
     } on firebase_auth.FirebaseAuthException catch (e) {
       throw SignUpWithEmailPasswordFailure.fromCode(e.code);
     } catch (_) {
@@ -48,11 +61,13 @@ class EmailPasswordAuth {
     required String email,
     required String providerId,
   }) async {
-    await _db.collection("Users").add({
-      "id": id,
-      "displayName": displayName,
-      "email": email,
-      "providerId": providerId,
-    });
+    await passwordAuthRef.add(
+      User(
+        id: id,
+        displayName: displayName,
+        email: email,
+        providerId: providerId,
+      ),
+    );
   }
 }
