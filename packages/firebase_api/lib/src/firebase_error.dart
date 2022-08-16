@@ -48,33 +48,33 @@ class SignInWithGoogleFailure implements Exception {
 
 class SignOutFailure implements Exception {}
 
-class SignInWithEmailPasswordFailure implements Exception {
+class SignUpWithEmailPasswordFailure implements Exception {
   final String message;
 
-  const SignInWithEmailPasswordFailure._({
+  const SignUpWithEmailPasswordFailure._({
     this.message = "An unknown error has occurred",
   });
 
-  factory SignInWithEmailPasswordFailure.fromCode(String code) {
+  factory SignUpWithEmailPasswordFailure.fromCode(String code) {
     switch (code) {
       case 'email-already-in-use':
-        return const SignInWithEmailPasswordFailure._(
+        return const SignUpWithEmailPasswordFailure._(
           message: 'Email is already in use. Please try another email.',
         );
       case 'invalid-email':
-        return const SignInWithEmailPasswordFailure._(
+        return const SignUpWithEmailPasswordFailure._(
           message: 'Invalid email. Please make sure email is valid',
         );
       case 'operation-not-allowed':
-        return const SignInWithEmailPasswordFailure._(
+        return const SignUpWithEmailPasswordFailure._(
           message: 'Operation is not allowed.  Please contact support.',
         );
       case 'weak-password':
-        return const SignInWithEmailPasswordFailure._(
+        return const SignUpWithEmailPasswordFailure._(
           message: 'Password is too weak. Please try a stronger password',
         );
       default:
-        return const SignInWithEmailPasswordFailure._();
+        return const SignUpWithEmailPasswordFailure._();
     }
   }
 }

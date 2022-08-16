@@ -36,9 +36,9 @@ class EmailPasswordAuth {
 
       return user.user!.uid;
     } on firebase_auth.FirebaseAuthException catch (e) {
-      throw SignInWithEmailPasswordFailure.fromCode(e.code);
+      throw SignUpWithEmailPasswordFailure.fromCode(e.code);
     } catch (_) {
-      throw SignInWithEmailPasswordFailure.fromCode('');
+      throw SignUpWithEmailPasswordFailure.fromCode('');
     }
   }
 
