@@ -19,6 +19,7 @@ class EmailPasswordAuth {
   Future<String> signUp({
     required String email,
     required String password,
+    required String displayName,
   }) async {
     try {
       final user = await _firebaseAuth.createUserWithEmailAndPassword(
@@ -28,7 +29,9 @@ class EmailPasswordAuth {
 
       await _createUser(
         id: user.user!.uid,
-        createdAt: user.user!.metadata.creationTime!,
+        displayName: displayName,
+        email: user.user!.email!,
+        providerId: user.user!.providerData[0].providerId,
       );
 
       return user.user!.uid;
@@ -41,11 +44,15 @@ class EmailPasswordAuth {
 
   Future<void> _createUser({
     required String id,
-    required DateTime createdAt,
+    required String displayName,
+    required String email,
+    required String providerId,
   }) async {
     await _db.collection("Users").add({
       "id": id,
-      "createdAt": createdAt,
+      "displayName": displayName,
+      "email": email,
+      "providerId": providerId,
     });
   }
 }

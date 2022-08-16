@@ -97,10 +97,12 @@ class SignUpForm extends StatelessWidget {
                           form.markAllAsTouched();
 
                           form.valid
-                              ? EmailPasswordAuthService().signIn(
+                              ? EmailPasswordAuthService().signUp(
                                   email: form.control('email').value as String,
                                   password:
                                       form.control('password').value as String,
+                                  displayName:
+                                      form.control('name').value as String,
                                 )
                               : ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(

@@ -15,9 +15,17 @@ class EmailPasswordAuthService {
     }
   }
 
-  Future<void> signIn({required String email, required String password}) async {
+  Future<void> signUp({
+    required String email,
+    required String password,
+    required String displayName,
+  }) async {
     try {
-      await _emailPasswordAuth.signUp(email: email, password: password);
+      await _emailPasswordAuth.signUp(
+        email: email,
+        password: password,
+        displayName: displayName,
+      );
     } catch (_) {
       rethrow;
     }
