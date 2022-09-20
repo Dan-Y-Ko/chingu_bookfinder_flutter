@@ -7,14 +7,14 @@ class GoogleAuth {
   GoogleAuth({
     firebase_auth.FirebaseAuth? firebaseAuth,
     GoogleSignIn? googleSignIn,
-    FirebaseFirestore? db,
+    FirestoreCrud? db,
   })  : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
         _googleSignIn = googleSignIn ?? GoogleSignIn(),
-        _db = db ?? FirebaseFirestore.instance;
+        _db = db ?? FirestoreCrud();
 
   final firebase_auth.FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
-  final FirebaseFirestore _db;
+  final FirestoreCrud _db;
 
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
@@ -40,21 +40,22 @@ class GoogleAuth {
       idToken: googleAuth?.idToken,
     );
 
-    final user = await _firebaseAuth.signInWithCredential(credential);
+    final firebaseUser = await _firebaseAuth.signInWithCredential(credential);
 
-    await _createUser(user.user?.uid);
+    final user = User(
+      id: firebaseUser.user!.uid,
+      displayName: firebaseUser.user!.displayName!,
+      email: firebaseUser.user!.email!,
+      providerId: firebaseUser.user!.providerData[0].providerId,
+    );
 
-    return user.user?.uid;
-  }
+    await _db.createUser(
+      id: user.id,
+      displayName: user.displayName,
+      email: user.email,
+      providerId: user.providerId,
+    );
 
-  Future<void> _createUser(String? id) async {
-    final QuerySnapshot result =
-        await _db.collection('Users').where('id', isEqualTo: id).get();
-
-    if (result.docs.isEmpty) {
-      await _db.collection("Users").add({
-        "id": id,
-      });
-    }
+    return user.id;
   }
 }

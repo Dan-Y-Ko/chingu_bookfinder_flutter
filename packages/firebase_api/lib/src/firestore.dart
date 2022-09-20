@@ -23,6 +23,24 @@ class FirestoreCrud {
   }) async {
     final userRef = _getPasswordAuthRef();
 
+    if (providerId != "password") {
+      final QuerySnapshot result =
+          await _db.collection('Users').where('id', isEqualTo: id).get();
+
+      if (result.docs.isEmpty) {
+        await userRef.add(
+          User(
+            id: id,
+            displayName: displayName,
+            email: email,
+            providerId: providerId,
+          ),
+        );
+      }
+
+      return;
+    }
+
     await userRef.add(
       User(
         id: id,
