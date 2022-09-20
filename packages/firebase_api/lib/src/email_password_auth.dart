@@ -1,22 +1,15 @@
 import 'package:firebase_api/firebase_api.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class EmailPasswordAuth {
   EmailPasswordAuth({
     firebase_auth.FirebaseAuth? firebaseAuth,
-    FirebaseFirestore? db,
+    FirestoreCrud? db,
   })  : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
-        _db = db ?? FirebaseFirestore.instance;
+        _db = db ?? FirestoreCrud();
 
   final firebase_auth.FirebaseAuth _firebaseAuth;
-  final FirebaseFirestore _db;
-
-  CollectionReference<User> get passwordAuthRef =>
-      _db.collection('Users').withConverter<User>(
-            fromFirestore: (snapshot, _) => User.fromMap(snapshot.data()!),
-            toFirestore: (auth, _) => auth.toMap(),
-          );
+  final FirestoreCrud _db;
 
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
@@ -40,7 +33,7 @@ class EmailPasswordAuth {
         providerId: firebaseUser.user!.providerData[0].providerId,
       );
 
-      await _createUser(
+      await _db.createUser(
         id: user.id,
         displayName: user.displayName,
         email: user.email,
@@ -53,21 +46,5 @@ class EmailPasswordAuth {
     } catch (_) {
       throw SignUpWithEmailPasswordFailure.fromCode('');
     }
-  }
-
-  Future<void> _createUser({
-    required String id,
-    required String displayName,
-    required String email,
-    required String providerId,
-  }) async {
-    await passwordAuthRef.add(
-      User(
-        id: id,
-        displayName: displayName,
-        email: email,
-        providerId: providerId,
-      ),
-    );
   }
 }
