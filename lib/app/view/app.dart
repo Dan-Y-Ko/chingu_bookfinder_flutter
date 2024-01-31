@@ -45,9 +45,8 @@ class App extends StatelessWidget {
         ],
         child: Builder(
           builder: (context) {
-            final authState = context.read<GoogleAuthBloc>();
+            // final authState = context.read<GoogleAuthBloc>();
             final router = GoRouter(
-              urlPathStrategy: UrlPathStrategy.path,
               routes: [
                 GoRoute(
                   path: '/',
@@ -62,25 +61,25 @@ class App extends StatelessWidget {
                       name: 'book_detail_route',
                       path: 'book/:id',
                       builder: (context, state) => const BookDetailPage(),
-                    )
+                    ),
                   ],
                 ),
               ],
-              redirect: (state) {
-                final loggedIn = authState.state.isAuthenticated;
-                final loggingIn = state.location == '/';
+              // redirect: (state) {
+              //   final loggedIn = authState.state.isAuthenticated;
+              //   final loggingIn = state.location == '/';
 
-                if (loggedIn == false) {
-                  return loggingIn ? null : '/';
-                }
+              //   if (loggedIn == false) {
+              //     return loggingIn ? null : '/';
+              //   }
 
-                if (loggedIn == true && loggingIn) return '/book';
+              //   if (loggedIn == true && loggingIn) return '/book';
 
-                return null;
-              },
-              refreshListenable: GoRouterRefreshStream(
-                authState.stream,
-              ),
+              //   return null;
+              // },
+              // refreshListenable: GoRouterRefreshStream(
+              //   authState.stream,
+              // ),
             );
 
             return MaterialApp.router(
