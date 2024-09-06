@@ -62,7 +62,9 @@ class BookList extends StatelessWidget {
 
                                   context.goNamed(
                                     'book_detail_route',
-                                    queryParameters: {'id': book.id},
+                                    queryParameters: <String, String>{
+                                      'id': book.id
+                                    },
                                   );
                                 },
                                 child: const Text('View Details'),
