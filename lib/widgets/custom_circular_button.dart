@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class CustomCircularButton extends StatelessWidget {
   const CustomCircularButton({
-    Key? key,
     required Icon icon,
     required double height,
     required double width,
-    RadialGradient? gradient,
     required void Function() onTap,
+    Key? key,
+    RadialGradient? gradient,
     Color? color,
   })  : _icon = icon,
         _height = height,

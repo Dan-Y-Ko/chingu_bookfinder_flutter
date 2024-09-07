@@ -3,12 +3,12 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 class Input extends StatelessWidget {
   const Input({
-    Key? key,
     required String controller,
     required IconData icon,
     required String hintText,
     required Map<String, String> validationMessages,
     bool obscureText = false,
+    Key? key,
   })  : _controller = controller,
         _icon = icon,
         _hintText = hintText,

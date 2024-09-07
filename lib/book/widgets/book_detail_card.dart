@@ -12,9 +12,7 @@ class BookDetailCard extends StatelessWidget {
         final book = state.book;
 
         if (state.book != null) {
-          return SizedBox(
-            width: double.infinity,
-            height: double.infinity,
+          return SizedBox.expand(
             child: Card(
               child: SingleChildScrollView(
                 child: Column(
@@ -41,7 +39,7 @@ class BookDetailCard extends StatelessWidget {
           );
         }
 
-        return const SizedBox(width: 0, height: 0);
+        return const SizedBox.shrink();
       },
     );
   }

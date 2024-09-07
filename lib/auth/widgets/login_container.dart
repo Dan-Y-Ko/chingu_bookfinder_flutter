@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class LoginContainer extends StatelessWidget {
   const LoginContainer({
-    Key? key,
     required this.signInScreenVisible,
     required this.loginScreenVisible,
+    Key? key,
   }) : super(key: key);
 
   final bool signInScreenVisible;

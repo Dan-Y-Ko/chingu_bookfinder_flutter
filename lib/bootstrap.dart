@@ -19,6 +19,12 @@ class AppBlocObserver extends BlocObserver {
   }
 
   @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    log('${bloc.runtimeType} $transition');
+  }
+
+  @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
     log('onError(${bloc.runtimeType}, $error, $stackTrace)');
     super.onError(bloc, error, stackTrace);
@@ -32,7 +38,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
   await runZonedGuarded(
     () async {
-      await BlocOverrides.runZoned(
+      await Bloc.observer(
         () async => runApp(await builder()),
         blocObserver: AppBlocObserver(),
       );
