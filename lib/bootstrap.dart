@@ -12,6 +12,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 
 class AppBlocObserver extends BlocObserver {
+  const AppBlocObserver();
+
   @override
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
@@ -35,14 +37,4 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
-
-  await runZonedGuarded(
-    () async {
-      await Bloc.observer(
-        () async => runApp(await builder()),
-        blocObserver: AppBlocObserver(),
-      );
-    },
-    (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
-  );
 }
