@@ -11,6 +11,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+class BlocListenable<T> extends ChangeNotifier implements Listenable {
+  BlocListenable(this.bloc) {
+    bloc.stream.listen((state) {
+      notifyListeners();
+    });
+  }
+  final BlocBase<T> bloc;
+
+  @override
+  void dispose() {
+    bloc.close();
+    super.dispose();
+  }
+}
+
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
@@ -45,48 +60,12 @@ class App extends StatelessWidget {
         ],
         child: Builder(
           builder: (context) {
-            // final authState = context.read<GoogleAuthBloc>();
-            final router = GoRouter(
-              routes: [
-                GoRoute(
-                  path: '/',
-                  builder: (context, state) => const SignInPage(),
-                ),
-                GoRoute(
-                  name: 'book_route',
-                  path: '/book',
-                  builder: (context, state) => const BookPage(),
-                  routes: [
-                    GoRoute(
-                      name: 'book_detail_route',
-                      path: 'book/:id',
-                      builder: (context, state) => const BookDetailPage(),
-                    ),
-                  ],
-                ),
-              ],
-              // redirect: (state) {
-              //   final loggedIn = authState.state.isAuthenticated;
-              //   final loggingIn = state.location == '/';
-
-              //   if (loggedIn == false) {
-              //     return loggingIn ? null : '/';
-              //   }
-
-              //   if (loggedIn == true && loggingIn) return '/book';
-
-              //   return null;
-              // },
-              // refreshListenable: GoRouterRefreshStream(
-              //   authState.stream,
-              // ),
-            );
+            final googleAuthBloc = context.read<GoogleAuthBloc>();
+            final router = createRouter(googleAuthBloc);
 
             return MaterialApp.router(
               debugShowCheckedModeBanner: false,
-              routeInformationProvider: router.routeInformationProvider,
-              routeInformationParser: router.routeInformationParser,
-              routerDelegate: router.routerDelegate,
+              routerConfig: router,
               title: 'Chingu Bookfinder',
               theme: ThemeData(
                 scaffoldBackgroundColor: const Color(0xFFece8e3),
@@ -101,4 +80,37 @@ class App extends StatelessWidget {
       ),
     );
   }
+}
+
+GoRouter createRouter(GoogleAuthBloc googleAuthBloc) {
+  return GoRouter(
+    routes: [
+      GoRoute(
+        name: 'sign_in_route',
+        path: '/',
+        builder: (context, state) => const SignInPage(),
+      ),
+      GoRoute(
+        name: 'book_route',
+        path: '/book',
+        builder: (context, state) => const BookPage(),
+        routes: [
+          GoRoute(
+            name: 'book_detail_route',
+            path: 'book/:id',
+            builder: (context, state) => const BookDetailPage(),
+          ),
+        ],
+      ),
+    ],
+    redirect: (BuildContext context, GoRouterState state) {
+      final authState = googleAuthBloc.state;
+      final loggedIn = authState.isAuthenticated;
+
+      if (loggedIn) return '/book';
+
+      return '/';
+    },
+    refreshListenable: BlocListenable(googleAuthBloc),
+  );
 }
