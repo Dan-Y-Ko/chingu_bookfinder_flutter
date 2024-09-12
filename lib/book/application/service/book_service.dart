@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:base_api/base_api.dart';
-import 'package:chingu_bookfinder_flutter/book/book.dart';
+import 'package:chingu_bookfinder_flutter/book/book.dart' show Book, BookDetail;
 import 'package:google_books_api/google_books_api.dart' hide Book;
 import 'package:html/parser.dart' show parse;
 

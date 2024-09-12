@@ -1,6 +1,8 @@
 import 'dart:math';
-import 'package:chingu_bookfinder_flutter/auth/auth.dart';
-import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
+import 'package:chingu_bookfinder_flutter/auth/auth.dart'
+    show GoogleAuthBloc, GoogleSignInEvent;
+import 'package:chingu_bookfinder_flutter/widgets/widgets.dart'
+    show CustomCircularButton;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

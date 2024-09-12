@@ -1,14 +1,18 @@
-import 'package:chingu_bookfinder_flutter/auth/auth.dart';
-import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
+import 'package:chingu_bookfinder_flutter/auth/auth.dart'
+    show LoginForm, key1, key2;
+import 'package:chingu_bookfinder_flutter/widgets/widgets.dart'
+    show CustomCircularButton;
 import 'package:flutter/material.dart';
 
-class SignUpContainer extends StatelessWidget {
-  const SignUpContainer({
+class LoginContainer extends StatelessWidget {
+  const LoginContainer({
     required this.signInScreenVisible,
+    required this.loginScreenVisible,
     Key? key,
   }) : super(key: key);
 
   final bool signInScreenVisible;
+  final bool loginScreenVisible;
 
   @override
   Widget build(BuildContext context) {
@@ -17,25 +21,17 @@ class SignUpContainer extends StatelessWidget {
 
     return SizedBox(
       width: width,
-      height: height * .85,
+      height: height * .75,
       child: Padding(
-        padding: const EdgeInsets.only(
-          left: 18,
-          right: 18,
-          bottom: 10,
-          top: 2,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 18),
         child: CustomPaint(
-          painter: CustomSignUpContainerPainter(),
+          painter: CustomLoginContainerPainter(),
           child: Stack(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 100),
-                child: SignUpForm(),
-              ),
+              const LoginForm(),
               Positioned(
-                top: 14,
-                left: 3,
+                right: 3,
+                bottom: 15,
                 child: CustomCircularButton(
                   icon: Icon(
                     signInScreenVisible == true
@@ -52,7 +48,7 @@ class SignUpContainer extends StatelessWidget {
                     ],
                   ),
                   onTap: () {
-                    signInScreenVisible == false
+                    signInScreenVisible == false && loginScreenVisible == true
                         ? Scrollable.ensureVisible(
                             key2.currentContext!,
                             duration: const Duration(milliseconds: 500),
@@ -73,7 +69,7 @@ class SignUpContainer extends StatelessWidget {
   }
 }
 
-class CustomSignUpContainerPainter extends CustomPainter {
+class CustomLoginContainerPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
@@ -81,29 +77,29 @@ class CustomSignUpContainerPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     final path = Path()
-      ..lineTo(0, size.height * .96)
+      ..lineTo(0, size.height * 0.68)
       ..quadraticBezierTo(
         0,
-        size.height,
-        size.width * 0.076,
-        size.height,
+        size.height * 0.699,
+        size.width * 0.05,
+        size.height * 0.715,
       )
-      ..lineTo(size.width * 0.92, size.height)
+      ..lineTo(size.width * 0.92, size.height * 0.98)
       ..quadraticBezierTo(
         size.width,
         size.height,
         size.width,
-        size.height * 0.96,
+        size.height * 0.95,
       )
-      ..lineTo(size.width, size.height * 0.3)
+      ..lineTo(size.width, size.height * 0.04)
+      ..quadraticBezierTo(size.width, 0, size.width * 0.92, 0)
+      ..lineTo(size.width * 0.07, 0)
       ..quadraticBezierTo(
-        size.width,
-        size.height * 0.28,
-        size.width * 0.95,
-        size.height * 0.265,
-      )
-      ..lineTo(size.width * 0.05, size.height * 0.011)
-      ..quadraticBezierTo(0, 0, 0, size.height * 0.027);
+        0,
+        0,
+        0,
+        size.height * 0.04,
+      );
 
     canvas.drawPath(path, paint);
   }

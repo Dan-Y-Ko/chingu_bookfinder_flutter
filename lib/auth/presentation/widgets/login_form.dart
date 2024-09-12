@@ -1,5 +1,6 @@
 // import 'package:chingu_bookfinder_flutter/auth/auth.dart';
-import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
+import 'package:chingu_bookfinder_flutter/widgets/widgets.dart'
+    show GradientButton;
 import 'package:flutter/material.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

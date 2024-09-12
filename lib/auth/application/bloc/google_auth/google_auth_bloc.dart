@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:chingu_bookfinder_flutter/auth/auth.dart';
+import 'package:chingu_bookfinder_flutter/auth/auth.dart'
+    show GoogleAuthService;
 import 'package:equatable/equatable.dart';
 
 part 'google_auth_event.dart';

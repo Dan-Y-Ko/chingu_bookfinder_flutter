@@ -1,4 +1,5 @@
-import 'package:chingu_bookfinder_flutter/book/book.dart';
+import 'package:chingu_bookfinder_flutter/book/book.dart'
+    show BookDetailBloc, BookDetailState;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

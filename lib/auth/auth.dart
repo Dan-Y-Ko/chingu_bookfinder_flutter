@@ -1,4 +1,4 @@
-export 'bloc/bloc.dart';
-export 'service/service.dart';
-export 'view/view.dart';
-export 'widgets/widgets.dart';
+export 'application/bloc/bloc.dart';
+export 'application/service/service.dart';
+export 'presentation/screens/screens.dart';
+export 'presentation/widgets/widgets.dart';

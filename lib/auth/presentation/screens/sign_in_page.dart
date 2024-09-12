@@ -1,5 +1,14 @@
-import 'package:chingu_bookfinder_flutter/auth/auth.dart';
-import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
+import 'package:chingu_bookfinder_flutter/auth/auth.dart'
+    show
+        CustomBackground,
+        GoogleAuthBloc,
+        GoogleAuthState,
+        GoogleAuthStatus,
+        LoginContainer,
+        SignUpContainer,
+        SocialLoginRow;
+import 'package:chingu_bookfinder_flutter/widgets/widgets.dart'
+    show ErrorScreen, Loading;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

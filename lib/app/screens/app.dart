@@ -5,8 +5,10 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-import 'package:chingu_bookfinder_flutter/auth/auth.dart';
-import 'package:chingu_bookfinder_flutter/book/book.dart';
+import 'package:chingu_bookfinder_flutter/auth/auth.dart'
+    show GoogleAuthBloc, GoogleAuthService, SignInPage;
+import 'package:chingu_bookfinder_flutter/book/book.dart'
+    show BookDetailBloc, BookDetailPage, BookListBloc, BookPage, BookService;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

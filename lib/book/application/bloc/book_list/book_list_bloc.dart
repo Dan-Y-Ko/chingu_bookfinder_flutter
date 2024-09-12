@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:chingu_bookfinder_flutter/book/book.dart';
+import 'package:chingu_bookfinder_flutter/book/book.dart'
+    show Book, BookService;
 import 'package:equatable/equatable.dart';
 
 part 'book_list_event.dart';
