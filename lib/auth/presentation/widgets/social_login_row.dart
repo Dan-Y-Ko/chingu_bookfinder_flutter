@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:chingu_bookfinder_flutter/app/routes.dart';
 import 'package:chingu_bookfinder_flutter/auth/auth.dart'
     show GoogleAuthBloc, GoogleSignInEvent;
 import 'package:chingu_bookfinder_flutter/widgets/widgets.dart'
@@ -6,7 +7,6 @@ import 'package:chingu_bookfinder_flutter/widgets/widgets.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
 
 class SocialLoginRow extends StatelessWidget {
   const SocialLoginRow({Key? key}) : super(key: key);
@@ -36,7 +36,7 @@ class SocialLoginRow extends StatelessWidget {
                         GoogleSignInEvent(),
                       );
 
-                  context.goNamed('book_route');
+                  BookPageRoute().go(context);
                 },
               ),
             ),

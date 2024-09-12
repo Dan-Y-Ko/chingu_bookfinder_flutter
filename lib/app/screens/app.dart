@@ -5,10 +5,11 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+import 'package:chingu_bookfinder_flutter/app/routes.dart';
 import 'package:chingu_bookfinder_flutter/auth/auth.dart'
-    show GoogleAuthBloc, GoogleAuthService, SignInPage;
+    show GoogleAuthBloc, GoogleAuthService;
 import 'package:chingu_bookfinder_flutter/book/book.dart'
-    show BookDetailBloc, BookDetailPage, BookListBloc, BookPage, BookService;
+    show BookDetailBloc, BookListBloc, BookService;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -86,35 +87,17 @@ class App extends StatelessWidget {
 
 GoRouter createRouter(GoogleAuthBloc googleAuthBloc) {
   return GoRouter(
-    routes: [
-      GoRoute(
-        name: 'sign_in_route',
-        path: '/',
-        builder: (context, state) => const SignInPage(),
-      ),
-      GoRoute(
-        name: 'book_route',
-        path: '/book',
-        builder: (context, state) => const BookPage(),
-        routes: [
-          GoRoute(
-            name: 'book_detail_route',
-            path: 'book/:id',
-            builder: (context, state) => const BookDetailPage(),
-          ),
-        ],
-      ),
-    ],
+    routes: $appRoutes,
     redirect: (BuildContext context, GoRouterState state) {
       final authState = googleAuthBloc.state;
       final loggedIn = authState.isAuthenticated;
-      final loggingIn = state.path == '/';
+      final loggingIn = state.path == AppRoutes.signInRoute;
 
       if (!loggedIn) {
-        return loggingIn ? null : '/';
+        return loggingIn ? null : AppRoutes.signInRoute;
       }
 
-      if (loggedIn && loggingIn) return '/book';
+      if (loggedIn && loggingIn) return AppRoutes.bookRoute;
 
       return null;
     },

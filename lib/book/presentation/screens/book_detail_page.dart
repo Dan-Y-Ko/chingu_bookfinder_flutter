@@ -1,5 +1,5 @@
 import 'package:chingu_bookfinder_flutter/book/book.dart'
-    show BookDetailBloc, BookDetailCard, BookDetailState, BookDetailStatus;
+    show BookDetailBloc, BookDetailState, BookDetailStatus, BookDetailCard;
 import 'package:chingu_bookfinder_flutter/widgets/widgets.dart'
     show ErrorScreen, Loading;
 import 'package:flutter/material.dart';

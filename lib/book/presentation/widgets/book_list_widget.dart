@@ -1,3 +1,4 @@
+import 'package:chingu_bookfinder_flutter/app/routes.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart'
     show BookDetailBloc, BookListBloc, BookListState, GetBookDetailEvent;
 import 'package:flutter/material.dart';
@@ -60,10 +61,8 @@ class BookList extends StatelessWidget {
                                           id: book.id,
                                         ),
                                       );
-                                  context.goNamed(
-                                    'book_detail_route',
-                                    pathParameters: {'id': book.id},
-                                  );
+
+                                  BookDetailRoute(id: book.id).go(context);
                                 },
                                 child: const Text('View Details'),
                               ),
