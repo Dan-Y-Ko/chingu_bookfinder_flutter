@@ -34,7 +34,7 @@ class SocialLoginRow extends StatelessWidget {
                         GoogleSignInEvent(),
                       );
 
-                  context.go('/book');
+                  context.goNamed('book_route');
                 },
               ),
             ),

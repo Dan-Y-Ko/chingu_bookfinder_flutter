@@ -106,10 +106,15 @@ GoRouter createRouter(GoogleAuthBloc googleAuthBloc) {
     redirect: (BuildContext context, GoRouterState state) {
       final authState = googleAuthBloc.state;
       final loggedIn = authState.isAuthenticated;
+      final loggingIn = state.path == '/';
 
-      if (loggedIn) return '/book';
+      if (!loggedIn) {
+        return loggingIn ? null : '/';
+      }
 
-      return '/';
+      if (loggedIn && loggingIn) return '/book';
+
+      return null;
     },
     refreshListenable: BlocListenable(googleAuthBloc),
   );
