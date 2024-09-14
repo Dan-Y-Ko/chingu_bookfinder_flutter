@@ -22,7 +22,7 @@ class SignInRoute extends GoRouteData {
   routes: [
     TypedGoRoute<BookDetailRoute>(
       path: AppRoutes.bookDetailRoute,
-    )
+    ),
   ],
 )
 @immutable

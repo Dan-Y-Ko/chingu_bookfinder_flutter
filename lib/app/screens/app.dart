@@ -91,14 +91,22 @@ GoRouter createRouter(GoogleAuthBloc googleAuthBloc) {
     redirect: (BuildContext context, GoRouterState state) {
       final authState = googleAuthBloc.state;
       final loggedIn = authState.isAuthenticated;
-      final loggingIn = state.path == AppRoutes.signInRoute;
+      final currentPath = state.uri.toString();
+      final signInRoute = currentPath == AppRoutes.signInRoute;
 
-      if (!loggedIn) {
-        return loggingIn ? null : AppRoutes.signInRoute;
+      // If the user is not authenticated and they're not on the sign-in page,
+      //redirect them to the sign-in page.
+      if (!loggedIn && !signInRoute) {
+        return AppRoutes.signInRoute;
       }
 
-      if (loggedIn && loggingIn) return AppRoutes.bookRoute;
+      // If the user is authenticated and they're trying to access the sign-in
+      //page, redirect them to the book route.
+      if (loggedIn && signInRoute) {
+        return AppRoutes.bookRoute;
+      }
 
+      // no redirection
       return null;
     },
     refreshListenable: BlocListenable(googleAuthBloc),

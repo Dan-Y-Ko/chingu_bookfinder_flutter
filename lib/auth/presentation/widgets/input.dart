@@ -6,22 +6,19 @@ class Input extends StatelessWidget {
     required String controller,
     required IconData icon,
     required String hintText,
-    required Map<String, String> validationMessages,
+    required Map<String, ValidationMessageFunction> validationMessages,
     bool obscureText = false,
-    Key? key,
+    super.key,
   })  : _controller = controller,
         _icon = icon,
         _hintText = hintText,
         _validationMessages = validationMessages,
-        _obscureText = obscureText,
-        super(
-          key: key,
-        );
+        _obscureText = obscureText;
 
   final String _controller;
   final IconData _icon;
   final String _hintText;
-  final Map<String, String> _validationMessages;
+  final Map<String, ValidationMessageFunction> _validationMessages;
   final bool _obscureText;
 
   @override
@@ -44,7 +41,7 @@ class Input extends StatelessWidget {
         ),
         obscureText: _obscureText,
         textInputAction: TextInputAction.next,
-        validationMessages: (control) => _validationMessages,
+        validationMessages: _validationMessages,
       ),
     );
   }

@@ -44,47 +44,51 @@ class SignUpForm extends StatelessWidget {
             builder: (context, form, child) {
               return Column(
                 children: [
-                  const Input(
+                  Input(
                     controller: 'name',
                     icon: Icons.person,
                     hintText: 'Name',
                     validationMessages: {
-                      'required': 'Name is required',
+                      ValidationMessage.required: (error) => 'Name is required',
                     },
                   ),
                   const SizedBox(
                     height: 30,
                   ),
-                  const Input(
+                  Input(
                     controller: 'email',
                     icon: Icons.email_rounded,
                     hintText: 'Email',
                     validationMessages: {
-                      'required': 'Email is required',
-                      'email': 'Email must be formatted correctly'
+                      ValidationMessage.required: (error) =>
+                          'Email is required',
+                      ValidationMessage.email: (error) =>
+                          'Email must be formatted correctly',
                     },
                   ),
                   const SizedBox(
                     height: 30,
                   ),
-                  const Input(
+                  Input(
                     controller: 'password',
                     icon: FontAwesomeIcons.key,
                     hintText: 'Password',
                     validationMessages: {
-                      'required': 'Password is required',
+                      ValidationMessage.required: (error) =>
+                          'Password is required',
                     },
                     obscureText: true,
                   ),
                   const SizedBox(
                     height: 30,
                   ),
-                  const Input(
+                  Input(
                     controller: 'confirmPassword',
                     icon: FontAwesomeIcons.key,
                     hintText: 'Confirm Password',
                     validationMessages: {
-                      'mustMatch': 'Password must match',
+                      ValidationMessage.mustMatch: (error) =>
+                          'Password must match',
                     },
                     obscureText: true,
                   ),
@@ -130,11 +134,11 @@ class SignUpForm extends StatelessWidget {
                         },
                       );
                     },
-                  )
+                  ),
                 ],
               );
             },
-          )
+          ),
         ],
       ),
     );
