@@ -1,11 +1,16 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:chingu_bookfinder_flutter/book/book.dart';
-import 'package:chingu_bookfinder_flutter/book/service/service.dart'
-    as book_service;
+import 'package:chingu_bookfinder_flutter/book/book.dart'
+    show
+        BookDetail,
+        BookDetailBloc,
+        BookDetailState,
+        BookDetailStatus,
+        BookService,
+        GetBookDetailEvent;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockBookService extends Mock implements book_service.BookService {}
+class MockBookService extends Mock implements BookService {}
 
 class MockBookDetail extends Mock implements BookDetail {}
 
@@ -13,7 +18,7 @@ void main() {
   group('book detail bloc', () {
     group('book bloc', () {
       late BookDetail book;
-      late book_service.BookService bookService;
+      late BookService bookService;
       late BookDetailBloc bookDetailBloc;
 
       setUp(() {
@@ -57,7 +62,7 @@ void main() {
             BookDetailState(
               status: BookDetailStatus.success,
               book: book,
-            )
+            ),
           ],
         );
 
