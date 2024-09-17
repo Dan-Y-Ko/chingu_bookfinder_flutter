@@ -59,7 +59,7 @@ class BookPage extends StatelessWidget {
                       );
                 },
                 child: const Text('Sign Out'),
-              )
+              ),
             ],
           ),
         ),

@@ -42,7 +42,7 @@ void main() {
         const GoogleAuthState(
           status: GoogleAuthStatus.success,
           isAuthenticated: true,
-        )
+        ),
       ],
     );
 
@@ -66,7 +66,7 @@ void main() {
         const GoogleAuthState(
           status: GoogleAuthStatus.failure,
           error: 'An error has occurred',
-        )
+        ),
       ],
     );
   });
@@ -107,7 +107,7 @@ void main() {
         const GoogleAuthState(
           status: GoogleAuthStatus.failure,
           error: 'An error has occurred',
-        )
+        ),
       ],
     );
   });

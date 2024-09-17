@@ -50,7 +50,7 @@ class CustomCircularButton extends StatelessWidget {
               onTap: _onTap,
             ),
           ),
-        )
+        ),
       ],
     );
   }
