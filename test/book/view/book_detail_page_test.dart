@@ -7,7 +7,8 @@ import 'package:chingu_bookfinder_flutter/book/book.dart'
         BookDetailPage,
         BookDetailState,
         BookDetailStatus;
-import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
+import 'package:chingu_bookfinder_flutter/widgets/widgets.dart'
+    show ErrorScreen, Loading;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

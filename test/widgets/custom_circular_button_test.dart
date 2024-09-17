@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:chingu_bookfinder_flutter/widgets/widgets.dart';
+import 'package:chingu_bookfinder_flutter/widgets/widgets.dart'
+    show CustomCircularButton;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
