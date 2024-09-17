@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:chingu_bookfinder_flutter/app/routes.dart';
 import 'package:chingu_bookfinder_flutter/book/book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -93,10 +94,7 @@ void main() {
         await tester.pumpAndSettle();
 
         verify(
-          () => mockGoRouter.goNamed(
-            'book_detail_route',
-            params: {'id': '1'},
-          ),
+          () => mockGoRouter.go(const BookDetailRoute(id: '1').location),
         ).called(1);
       },
     );

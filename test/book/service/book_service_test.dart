@@ -58,7 +58,7 @@ void main() {
               authors: ['J. K. Rowling', 'Jack Thorne', 'John Tiffany'],
               publisher: 'Sphere',
               title: 'Harry Potter and the Cursed Child',
-            )
+            ),
           ],
         );
       });
