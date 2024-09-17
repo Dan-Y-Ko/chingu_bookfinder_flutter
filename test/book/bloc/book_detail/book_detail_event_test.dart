@@ -1,4 +1,5 @@
-import 'package:chingu_bookfinder_flutter/book/book.dart';
+import 'package:chingu_bookfinder_flutter/book/book.dart'
+    show GetBookDetailEvent;
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
