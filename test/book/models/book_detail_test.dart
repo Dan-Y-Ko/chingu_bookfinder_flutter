@@ -1,4 +1,4 @@
-import 'package:chingu_bookfinder_flutter/book/book.dart';
+import 'package:chingu_bookfinder_flutter/book/book.dart' show BookDetail;
 import 'package:test/test.dart';
 
 void main() {
