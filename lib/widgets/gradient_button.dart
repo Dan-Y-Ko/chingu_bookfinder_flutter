@@ -5,8 +5,8 @@ class GradientButton extends StatelessWidget {
     required this.text,
     this.padding,
     this.onPress,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String text;
   final EdgeInsetsGeometry? padding;

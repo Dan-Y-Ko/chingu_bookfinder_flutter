@@ -8,8 +8,8 @@ class LoginContainer extends StatelessWidget {
   const LoginContainer({
     required this.signInScreenVisible,
     required this.loginScreenVisible,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final bool signInScreenVisible;
   final bool loginScreenVisible;

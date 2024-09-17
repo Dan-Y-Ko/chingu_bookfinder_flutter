@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomBackground extends StatelessWidget {
-  const CustomBackground({Key? key}) : super(key: key);
+  const CustomBackground({super.key});
 
   @override
   Widget build(BuildContext context) {

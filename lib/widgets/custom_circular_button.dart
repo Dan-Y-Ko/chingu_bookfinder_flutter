@@ -6,7 +6,7 @@ class CustomCircularButton extends StatelessWidget {
     required double height,
     required double width,
     required void Function() onTap,
-    Key? key,
+    super.key,
     RadialGradient? gradient,
     Color? color,
   })  : _icon = icon,
@@ -14,8 +14,7 @@ class CustomCircularButton extends StatelessWidget {
         _width = width,
         _gradient = gradient,
         _color = color,
-        _onTap = onTap,
-        super(key: key);
+        _onTap = onTap;
 
   final Icon _icon;
   final double _height;

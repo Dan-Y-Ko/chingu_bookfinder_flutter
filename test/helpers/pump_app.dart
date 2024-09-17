@@ -9,8 +9,8 @@ class MockGoRouterProvider extends StatelessWidget {
   const MockGoRouterProvider({
     required this.goRouter,
     required this.child,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final MockGoRouter goRouter;
 

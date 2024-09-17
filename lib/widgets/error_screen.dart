@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 class ErrorScreen extends StatelessWidget {
   const ErrorScreen({
     required String error,
-    Key? key,
-  })  : _error = error,
-        super(key: key);
+    super.key,
+  }) : _error = error;
 
   final String _error;
 

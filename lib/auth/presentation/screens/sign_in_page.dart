@@ -16,7 +16,7 @@ final key1 = GlobalKey();
 final key2 = GlobalKey();
 
 class SignInPage extends StatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({super.key});
 
   @override
   State<SignInPage> createState() => _SignInPageState();

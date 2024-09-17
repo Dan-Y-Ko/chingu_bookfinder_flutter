@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchInput extends StatefulWidget {
-  const SearchInput({Key? key}) : super(key: key);
+  const SearchInput({super.key});
 
   @override
   State<SearchInput> createState() => _SearchInputState();

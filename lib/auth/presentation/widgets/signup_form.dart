@@ -7,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class SignUpForm extends StatelessWidget {
-  SignUpForm({Key? key}) : super(key: key);
+  SignUpForm({super.key});
 
   final form = fb.group(
     {

@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 class SignUpContainer extends StatelessWidget {
   const SignUpContainer({
     required this.signInScreenVisible,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final bool signInScreenVisible;
 

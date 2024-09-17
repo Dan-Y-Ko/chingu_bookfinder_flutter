@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SocialLoginRow extends StatelessWidget {
-  const SocialLoginRow({Key? key}) : super(key: key);
+  const SocialLoginRow({super.key});
 
   @override
   Widget build(BuildContext context) {

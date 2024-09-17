@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ConfirmPasswordInput extends StatefulWidget {
-  const ConfirmPasswordInput({Key? key}) : super(key: key);
+  const ConfirmPasswordInput({super.key});
 
   @override
   State<ConfirmPasswordInput> createState() => _ConfirmPasswordInputState();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BookListEmpty extends StatelessWidget {
-  const BookListEmpty({Key? key}) : super(key: key);
+  const BookListEmpty({super.key});
 
   @override
   Widget build(BuildContext context) {
